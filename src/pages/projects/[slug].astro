@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => data.status === 'published');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<BaseLayout
+  title={`${project.data.title} | Advanced Grid Co., Ltd.`}
+  description={project.data.title}
+  ogType="article"
+>
+  <article class="max-w-3xl mx-auto px-5 py-16 lg:py-24">
+    <a href="/projects" class="text-sm font-semibold text-accent hover:text-accent-deep">← โครงการทั้งหมด</a>
+    <div class="mt-6 flex flex-wrap gap-4 text-sm text-ink-3">
+      <span>{project.data.location}</span>
+      <span>{project.data.capacity}</span>
+    </div>
+    <h1 class="mt-2 font-display text-3xl sm:text-4xl font-bold text-ink">{project.data.title}</h1>
+
+    {project.data.stats && (
+      <div class="mt-8 grid grid-cols-3 gap-4 rounded-lg bg-surface border border-line p-6">
+        {project.data.stats.map((s) => (
+          <div class="text-center">
+            <div class="font-display font-bold text-2xl text-ink">{s.value}</div>
+            <div class="text-xs text-ink-3 mt-1">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <div class="mt-10 prose prose-neutral max-w-none text-ink-2 leading-relaxed">
+      <Content />
+    </div>
+
+    <div class="mt-12 rounded-lg bg-surface border border-line p-8 text-center">
+      <h2 class="font-display text-xl font-bold text-ink">มีโครงการแบบนี้อยู่ในมือคุณ?</h2>
+      <p class="mt-2 text-ink-2">พูดคุยกับวิศวกรของ Advanced Grid ฟรี เราจะช่วยประเมินขอบเขตงาน เลือกอุปกรณ์ และเสนอราคาภายใน 2 วันทำการ</p>
+      <a href="/contact" class="mt-5 inline-flex items-center rounded-md bg-accent px-6 py-3 font-semibold text-white hover:bg-accent-deep transition-colors">ปรึกษาวิศวกร →</a>
+    </div>
+  </article>
+</BaseLayout>

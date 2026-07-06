@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="th" data-palette="cream">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO -->
+<title>Solar Smart Bill — ระบบมอนิเตอร์โซลาร์ + คิดเงินอัตโนมัติ | Advanced Grid</title>
+<meta name="description" content="Solar Smart Bill — แพลตฟอร์มสำหรับบริษัท Solar Developer และ Solar PPA Operator รวมระบบ Real-time Solar Monitoring + Automated PPA Billing สำหรับบริหารพอร์ตโฟลิโอหลายไซต์ ติดตามผลผลิต สร้างบิล PPA อัตโนมัติ ยืนยันการประหยัด (M&V) และติดตาม ESG / Carbon Saving ได้ในแพลตฟอร์มเดียว">
+<meta name="keywords" content="Solar Smart Bill, Solar Developer, Solar PPA, PPA Billing, EPC Solar, Solar Real-time Monitoring, M&V Solar, Performance Ratio, Tariff Billing, Multi-site Solar Portfolio, Carbon Saving Report, ESG, Advanced Grid">
+<link rel="canonical" href="https://www.advancedgrid.co.th/solar-smart-bill">
+<meta property="og:title" content="Solar Smart Bill — ผลิต มอนิเตอร์ คิดเงิน ครบจบในแพลตฟอร์มเดียว">
+<meta property="og:description" content="แพลตฟอร์ม All-in-One รวม Solar Monitoring + Automated Billing สำหรับธุรกิจ B2B">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="solar-smart-bill.css">
+</head>
+<body>
+
+<!-- ====================================================
+     Top utility strip
+     ==================================================== -->
+<div class="utility">
+  <div class="container">
+    <div class="utility-left">
+      <a href="tel:+66992268000"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>099-226-8000</a>
+      <a href="mailto:advancedgrid@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>advancedgrid@gmail.com</a>
+    </div>
+    <div class="utility-right">
+      <div class="lang-toggle">
+        <button class="active" data-lang="th">TH</button>
+        <button data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================
+     Header
+     ==================================================== -->
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="brand" aria-label="Advanced Grid home">
+      <img class="brand-wordmark" src="assets/advancedgrid-wordmark.png" alt="Advanced Grid">
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#about" data-th="เกี่ยวกับเรา" data-en="About">เกี่ยวกับเรา</a>
+      <a href="index.html#services" data-th="บริการ" data-en="Services">บริการ</a>
+      <a href="index.html#products" data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</a>
+      <a href="solar-smart-bill.html" data-th="Solar Smart Bill" data-en="Solar Smart Bill" style="color:var(--accent);font-weight:600;">Solar Smart Bill</a>
+      <a href="index.html#projects" data-th="โครงการ" data-en="Projects">โครงการ</a>
+      <a href="index.html#contact" data-th="ติดต่อ" data-en="Contact">ติดต่อ</a>
+    </nav>
+    <a href="#quote" class="btn btn-primary header-cta" data-th="ขอใบเสนอราคา" data-en="Get a Quote">ขอใบเสนอราคา</a>
+    <button class="menu-btn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ====================================================
+     1. Hero
+     ==================================================== -->
+<section class="ssb-hero">
+  <div class="container ssb-hero-grid">
+    <div class="ssb-hero-copy">
+      <a href="index.html" class="ssb-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <span data-th="กลับสู่ผลิตภัณฑ์ทั้งหมด" data-en="Back to all products">กลับสู่ผลิตภัณฑ์ทั้งหมด</span>
+      </a>
+
+      <div class="ssb-product-tag">
+        <span class="pulse"></span>
+        <span class="lab" data-th="ผลิตภัณฑ์ใหม่ · 2026" data-en="New product · 2026">ผลิตภัณฑ์ใหม่ · 2026</span>
+        <span class="new">NEW</span>
+      </div>
+
+      <h1 data-th='<span class="brand-text">Solar Smart Bill</span><br>แพลตฟอร์มเดียวของ<br>Solar Developer สมัยใหม่' data-en='<span class="brand-text">Solar Smart Bill</span><br>The platform built<br>for modern solar developers'>
+        <span class="brand-text">Solar Smart Bill</span><br>แพลตฟอร์มเดียวของ<br>Solar Developer สมัยใหม่
+      </h1>
+
+      <p class="lede" data-th="มอนิเตอร์ผลผลิตของทุกไซต์ ออก PPA Billing ตาม kWh จริง พร้อมส่งรายงาน M&V และ ESG ให้ผู้พัฒนาระบบโซลาร์ — ออกแบบมาเฉพาะสำหรับ Solar Developer, EPC และ Solar PPA Operator ที่ต้องการสเกลโครงการหลายไซต์โดยไม่เพิ่มทีม Back-office" data-en="Monitor every site's output, bill PPA customers by actual kWh, and auto-generate M&V plus ESG reports your offtakers actually need — purpose-built for solar developers, EPCs, and PPA operators who need to scale portfolios without scaling back-office headcount.">
+        มอนิเตอร์ผลผลิตของทุกไซต์ ออก PPA Billing ตาม kWh จริง พร้อมส่งรายงาน M&V และ ESG ให้ผู้พัฒนาระบบโซลาร์ — ออกแบบมาเฉพาะสำหรับ Solar Developer, EPC และ Solar PPA Operator ที่ต้องการสเกลโครงการหลายไซต์โดยไม่เพิ่มทีม Back-office
+      </p>
+
+      <div class="ssb-hero-cta">
+        <a href="#quote" class="btn btn-primary" data-th="ขอทดลองใช้งาน Demo →" data-en="Request a live demo →">ขอทดลองใช้งาน Demo →</a>
+        <a href="#quote" class="btn btn-ghost" data-th="ปรึกษาผู้เชี่ยวชาญ" data-en="Talk to a specialist">ปรึกษาผู้เชี่ยวชาญ</a>
+      </div>
+
+      <div class="ssb-hero-trust">
+        <div class="item">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <strong data-th="อัปเดตเรียลไทม์" data-en="Real-time updates">อัปเดตเรียลไทม์</strong>
+            <span data-th="ทุก 5 นาที 24/7" data-en="Every 5 minutes, 24/7">ทุก 5 นาที 24/7</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <strong data-th="ตรงตามเรท TOU" data-en="Accurate TOU tariff">ตรงตามเรท TOU</strong>
+            <span data-th="คำนวณตามการไฟฟ้า" data-en="Matches utility tariffs">คำนวณตามการไฟฟ้า</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div>
+            <strong data-th="ออกบิล PDF อัตโนมัติ" data-en="Auto-generated PDF bills">ออกบิล PDF อัตโนมัติ</strong>
+            <span data-th="แนบ QR พร้อมจ่าย" data-en="QR-ready for payment">แนบ QR พร้อมจ่าย</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero dashboard mockup -->
+    <div class="ssb-hero-visual">
+      <div class="ssb-dashboard">
+        <div class="ssb-dash-head">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="url">app.solarsmartbill.com</div>
+          <div style="font-family:var(--font-en); font-size:11px; color:var(--ink-3);">🔔 3</div>
+        </div>
+        <div class="ssb-dash-body">
+
+          <!-- Stat cards -->
+          <div class="ssb-stat-row">
+            <div class="ssb-stat">
+              <div class="ttl" data-th="ผลิตวันนี้" data-en="Today">ผลิตวันนี้</div>
+              <div class="v">487<span class="u"> kWh</span></div>
+              <div class="d">▲ 12.4%</div>
+            </div>
+            <div class="ssb-stat">
+              <div class="ttl" data-th="รายได้เดือนนี้" data-en="MTD revenue">รายได้เดือนนี้</div>
+              <div class="v">฿62.8<span class="u">K</span></div>
+              <div class="d">▲ 8.1%</div>
+            </div>
+            <div class="ssb-stat dwn">
+              <div class="ttl" data-th="ค้างชำระ" data-en="Unpaid">ค้างชำระ</div>
+              <div class="v">3<span class="u" data-th=" ไซต์" data-en=" sites"> ไซต์</span></div>
+              <div class="d">▼ 1</div>
+            </div>
+          </div>
+
+          <!-- Production chart -->
+          <div class="ssb-chart">
+            <div class="head">
+              <div class="ttl" data-th="การผลิต vs การใช้ — วันนี้" data-en="Generation vs Usage — Today">การผลิต vs การใช้ — วันนี้</div>
+              <div class="leg">
+                <span><span class="dot" style="background:#F59E0B;"></span>Gen</span>
+                <span><span class="dot" style="background:var(--accent);"></span>Use</span>
+              </div>
+            </div>
+            <svg viewBox="0 0 320 90" style="width:100%; height:90px;">
+              <defs>
+                <linearGradient id="genGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="useGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#B91C1C" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="#B91C1C" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <!-- Grid -->
+              <g stroke="var(--line)" stroke-width="0.5">
+                <line x1="0" y1="20" x2="320" y2="20"/>
+                <line x1="0" y1="45" x2="320" y2="45"/>
+                <line x1="0" y1="70" x2="320" y2="70"/>
+              </g>
+              <!-- Generation curve (sun bell) -->
+              <path d="M0 80 C40 80, 60 75, 80 55 C100 35, 140 10, 160 8 C180 10, 220 35, 240 55 C260 75, 280 80, 320 80 L320 90 L0 90 Z" fill="url(#genGrad)"/>
+              <path d="M0 80 C40 80, 60 75, 80 55 C100 35, 140 10, 160 8 C180 10, 220 35, 240 55 C260 75, 280 80, 320 80" fill="none" stroke="#F59E0B" stroke-width="2"/>
+              <!-- Usage curve -->
+              <path d="M0 65 C30 60, 60 55, 90 50 C120 48, 150 50, 180 45 C210 38, 240 30, 270 35 C290 40, 310 50, 320 55 L320 90 L0 90 Z" fill="url(#useGrad)"/>
+              <path d="M0 65 C30 60, 60 55, 90 50 C120 48, 150 50, 180 45 C210 38, 240 30, 270 35 C290 40, 310 50, 320 55" fill="none" stroke="#B91C1C" stroke-width="2"/>
+              <!-- Markers -->
+              <circle cx="160" cy="8" r="3" fill="#F59E0B"/>
+              <circle cx="160" cy="8" r="7" fill="#F59E0B" opacity="0.2"/>
+            </svg>
+            <div style="display:flex; justify-content:space-between; font-family:var(--font-en); font-size:9px; color:var(--ink-3); margin-top:4px;">
+              <span>06:00</span><span>10:00</span><span>14:00</span><span>18:00</span><span>22:00</span>
+            </div>
+          </div>
+
+          <!-- Mini bill summary -->
+          <div class="ssb-bill">
+            <div style="display:flex; flex-direction:column; gap:0;">
+              <div class="row">
+                <span class="room">SITE-A</span>
+                <span data-th="ค่า PPA · 4.20 บ./kWh" data-en="PPA · 4.20 บ./kWh" style="color:var(--ink-3);">ค่า PPA · 4.20 บ./kWh</span>
+                <span class="amt">฿128,400</span>
+              </div>
+              <div class="row">
+                <span class="room">SITE-B</span>
+                <span data-th="PR 96.4% · Tier 2" data-en="PR 96.4% · Tier 2" style="color:var(--ink-3);">PR 96.4% · Tier 2</span>
+                <span class="amt">฿96,820</span>
+              </div>
+              <div class="row">
+                <span data-th="รอออกบิล · 12 ไซต์ในพอร์ต" data-en="This cycle · 12 sites" style="color:var(--ink-3); font-weight:500;">รอออกบิล · 12 ไซต์ในพอร์ต</span>
+                <span class="amt">฿1.42M</span>
+              </div>
+            </div>
+            <div class="qr" aria-hidden="true"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     2. Pain Points & Solution
+     ==================================================== -->
+<section id="pain-solution" class="ssb-section">
+  <div class="container">
+    <div class="ssb-section-head">
+      <span class="eyebrow" data-th="ปัญหา & ทางออก ของ Solar Developer" data-en="Solar dev pain & solution">ปัญหา & ทางออก ของ Solar Developer</span>
+      <h2 data-th="เลิกบริหารพอร์ตด้วย Excel และไฟล์ PR รายไซต์ได้แล้ว" data-en="Drop the spreadsheets and the per-site PR files">เลิกบริหารพอร์ตด้วย Excel และไฟล์ PR รายไซต์ได้แล้ว</h2>
+      <p data-th="Solar Developer ต้องรับมือกับงานหลังบ้านที่ซับซ้อน — ติดตามผลผลิตรายไซต์ ออก PPA Billing ตาม kWh จริง ส่งรายงาน M&V/ESG ให้ Offtaker และตอบ Lender — เราออกแบบ Solar Smart Bill มาเพื่อรวบงานเหล่านี้มาไว้ในระบบเดียว" data-en="Solar developers juggle site-level performance, PPA billing by actual kWh, and M&V/ESG reporting to offtakers and lenders. Solar Smart Bill consolidates all of it into one system.">
+        Solar Developer ต้องรับมือกับงานหลังบ้านที่ซับซ้อน — ติดตามผลผลิตรายไซต์ ออก PPA Billing ตาม kWh จริง ส่งรายงาน M&amp;V/ESG ให้ Offtaker และตอบ Lender — เราออกแบบ Solar Smart Bill มาเพื่อรวบงานเหล่านี้มาไว้ในระบบเดียว
+      </p>
+    </div>
+
+    <div class="ssb-pain-grid">
+      <div class="ssb-pain-col pain">
+        <h3 data-th="ปัญหาที่ Solar Dev เจออยู่" data-en="What's slowing solar devs down">ปัญหาที่ Solar Dev เจออยู่</h3>
+        <ul class="ssb-pain-list">
+          <li>
+            <span class="mark">!</span>
+            <span data-th="ยิ่งมีไซต์เยอะ ยิ่งติดตาม Performance Ratio ยาก — Excel หลายไฟล์ ไม่ผิดไม่ได้" data-en="More sites, harder PR tracking — one Excel per site is the bottleneck.">ยิ่งมีไซต์เยอะ ยิ่งติดตาม Performance Ratio ยาก — Excel หลายไฟล์ ไม่ผิดไม่ได้</span>
+          </li>
+          <li>
+            <span class="mark">!</span>
+            <span data-th="ไม่รู้ว่า Inverter ตัวไหน Under-perform จนกว่าบิลสิ้นเดือน — รายได้ที่หายไปก็หายไปแล้ว" data-en="Inverter under-performance is invisible until month-end — the lost generation is gone for good.">ไม่รู้ว่า Inverter ตัวไหน Under-perform จนกว่าบิลสิ้นเดือน — รายได้ที่หายไปก็หายไปแล้ว</span>
+          </li>
+          <li>
+            <span class="mark">!</span>
+            <span data-th="PPA Billing ต้องออกแยกหลาย Tier (ขั้นบันได, Escalation, Discount) คำนวณมือผิดง่าย" data-en="PPA billing needs tiered rates, escalators, and discounts — easy to miscalculate by hand.">PPA Billing ต้องออกแยกหลาย Tier (ขั้นบันได, Escalation, Discount) คำนวณมือผิดง่าย</span>
+          </li>
+          <li>
+            <span class="mark">!</span>
+            <span data-th="Offtaker / Lender ขอรายงาน M&V และ ESG รายเดือน — ไม่มีเวลาทำ" data-en="Offtakers and lenders want monthly M&V and ESG reports — nobody has the bandwidth.">Offtaker / Lender ขอรายงาน M&amp;V และ ESG รายเดือน — ไม่มีเวลาทำ</span>
+          </li>
+          <li>
+            <span class="mark">!</span>
+            <span data-th="ข้อมูลแยกกันอยู่ใน Huawei / SMA / Sungrow / SolarEdge — ดูพอร์ตทั้งหมดในที่เดียวไม่ได้" data-en="Data lives in Huawei / SMA / Sungrow / SolarEdge silos — there's no single portfolio view.">ข้อมูลแยกกันอยู่ใน Huawei / SMA / Sungrow / SolarEdge — ดูพอร์ตทั้งหมดในที่เดียวไม่ได้</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ssb-pain-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+
+      <div class="ssb-pain-col solution">
+        <h3 data-th="Solar Smart Bill จัดการให้" data-en="Solar Smart Bill handles it">Solar Smart Bill จัดการให้</h3>
+        <ul class="ssb-pain-list">
+          <li>
+            <span class="mark">✓</span>
+            <span data-th="รวมทุกไซต์ อินเวอร์เตอร์ และมิเตอร์ ไว้ในแดชบอร์ดเดียว — ไม่ต้องสลับ portal ตาม vendor" data-en="All sites, inverters, and meters on one dashboard — no more juggling vendor portals.">รวมทุกไซต์ อินเวอร์เตอร์ และมิเตอร์ ไว้ในแดชบอร์ดเดียว — ไม่ต้องสลับ portal ตาม vendor</span>
+          </li>
+          <li>
+            <span class="mark">✓</span>
+            <span data-th="คำนวณ PR / Yield / Availability รายไซต์อัตโนมัติ แจ้งเตือนทันทีเมื่อ Under-perform" data-en="Auto PR, yield, and availability per site — alerts the moment a site under-performs.">คำนวณ PR / Yield / Availability รายไซต์อัตโนมัติ แจ้งเตือนทันทีเมื่อ Under-perform</span>
+          </li>
+          <li>
+            <span class="mark">✓</span>
+            <span data-th="PPA Engine รองรับ Tier rate, Escalation, Discount, Take-or-Pay — ออกบิลตามสัญญาของแต่ละ Offtaker" data-en="PPA engine handles tiered rates, escalators, discounts, take-or-pay — every offtaker billed to the exact contract terms.">PPA Engine รองรับ Tier rate, Escalation, Discount, Take-or-Pay — ออกบิลตามสัญญาของแต่ละ Offtaker</span>
+          </li>
+          <li>
+            <span class="mark">✓</span>
+            <span data-th="สร้างรายงาน M&V (IPMVP), ESG / CO₂ และ Lender Report ได้ในคลิกเดียว" data-en="One click → M&V (IPMVP), ESG/CO₂, and lender-ready reports.">สร้างรายงาน M&amp;V (IPMVP), ESG / CO₂ และ Lender Report ได้ในคลิกเดียว</span>
+          </li>
+          <li>
+            <span class="mark">✓</span>
+            <span data-th="API เชื่อมตรงกับ Huawei FusionSolar, SMA, Sungrow, SolarEdge และ SCADA ของลูกค้า" data-en="Native API to Huawei FusionSolar, SMA, Sungrow, SolarEdge — plus your client's SCADA.">API เชื่อมตรงกับ Huawei FusionSolar, SMA, Sungrow, SolarEdge และ SCADA ของลูกค้า</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     3. Core Features — 3 pillars
+     ==================================================== -->
+<section id="features" class="ssb-section">
+  <div class="container">
+    <div class="ssb-section-head">
+      <span class="eyebrow" data-th="3 ขาหลักของระบบ" data-en="3 core pillars">3 ขาหลักของระบบ</span>
+      <h2 data-th="ครบทั้งฝั่งผลิต ฝั่งคำนวณ และฝั่งคิดเงิน" data-en="Generation, calculation, and billing — all in one platform">ครบทั้งฝั่งผลิต ฝั่งคำนวณ และฝั่งคิดเงิน</h2>
+    </div>
+
+    <div class="ssb-pillars">
+
+      <!-- Pillar 1: Monitor -->
+      <article class="ssb-pillar">
+        <div class="num">01 — MONITOR</div>
+        <div class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="12" y1="2" x2="12" y2="4"/>
+            <line x1="12" y1="20" x2="12" y2="22"/>
+            <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/>
+            <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+            <line x1="2" y1="12" x2="4" y2="12"/>
+            <line x1="20" y1="12" x2="22" y2="12"/>
+            <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/>
+            <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+          </svg>
+        </div>
+        <h3 data-th="ฝั่งผลิต" data-en="Generation side">ฝั่งผลิต</h3>
+        <div class="sub" data-th="Real-time Solar Monitoring" data-en="Real-time Solar Monitoring">Real-time Solar Monitoring</div>
+        <p data-th="มอนิเตอร์ประสิทธิภาพระบบโซลาร์แบบเรียลไทม์ พร้อมแจ้งเตือนเมื่อมีปัญหา และรายงานลดคาร์บอนสำหรับงาน ESG" data-en="Real-time solar performance monitoring with instant alerts and ESG-ready carbon reduction reports.">
+          มอนิเตอร์ประสิทธิภาพระบบโซลาร์แบบเรียลไทม์ พร้อมแจ้งเตือนเมื่อมีปัญหา และรายงานลดคาร์บอนสำหรับงาน ESG
+        </p>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="รายงาน kWh / kWp / Performance Ratio รายอินเวอร์เตอร์" data-en="kWh / kWp / Performance Ratio per inverter">รายงาน kWh / kWp / Performance Ratio รายอินเวอร์เตอร์</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="แจ้งเตือน LINE / Email เมื่อระบบมีปัญหา" data-en="LINE / Email alerts when something's wrong">แจ้งเตือน LINE / Email เมื่อระบบมีปัญหา</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="รายงานการลดคาร์บอน (CO₂ saved) สำหรับ ESG" data-en="CO₂-saved reports for ESG disclosures">รายงานการลดคาร์บอน (CO₂ saved) สำหรับ ESG</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="ดูย้อนหลังได้ตั้งแต่นาทีจนถึงปี" data-en="Drill down from minutes to years">ดูย้อนหลังได้ตั้งแต่นาทีจนถึงปี</span>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Pillar 2: Manage & Analyze -->
+      <article class="ssb-pillar">
+        <div class="num">02 — ANALYZE</div>
+        <div class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+            <line x1="3" y1="20" x2="21" y2="20"/>
+          </svg>
+        </div>
+        <h3 data-th="ฝั่งคำนวณ" data-en="Calculation side">ฝั่งคำนวณ</h3>
+        <div class="sub" data-th="Smart Tariff Engine + AMR" data-en="Smart Tariff Engine + AMR">Smart Tariff Engine + AMR</div>
+        <p data-th="ดึงข้อมูลจากมิเตอร์ไร้สายอัตโนมัติ คำนวณค่าไฟตามเรท MEA/PEA จริง รวมถึง TOU และเฉลี่ยสัดส่วนไฟโซลาร์รายห้องอย่างเที่ยงธรรม" data-en="Auto-pull from AMR meters, calculate against actual MEA/PEA tariffs including TOU, and fairly allocate solar credit per room.">
+          ดึงข้อมูลจากมิเตอร์ไร้สายอัตโนมัติ คำนวณค่าไฟตามเรท MEA/PEA จริง รวมถึง TOU และเฉลี่ยสัดส่วนไฟโซลาร์รายห้องอย่างเที่ยงธรรม
+        </p>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="อ่านมิเตอร์อัตโนมัติผ่าน AMR — รองรับ Mk6E, Premier 550, Elite 500" data-en="Auto-read via AMR — Mk6E, Premier 550, Elite 500 supported">อ่านมิเตอร์อัตโนมัติผ่าน AMR — รองรับ Mk6E, Premier 550, Elite 500</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="คำนวณตามเรท MEA / PEA / TOU จริง อัปเดตอัตโนมัติ" data-en="MEA / PEA / TOU rates always up to date">คำนวณตามเรท MEA / PEA / TOU จริง อัปเดตอัตโนมัติ</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="เฉลี่ยไฟโซลาร์รายห้องตามสัดส่วนการใช้งานจริง" data-en="Per-room solar allocation by actual consumption">เฉลี่ยไฟโซลาร์รายห้องตามสัดส่วนการใช้งานจริง</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="Audit trail ตรวจสอบย้อนหลังได้ทุกการคำนวณ" data-en="Full audit trail on every calculation">Audit trail ตรวจสอบย้อนหลังได้ทุกการคำนวณ</span>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Pillar 3: Monetize & Bill -->
+      <article class="ssb-pillar">
+        <div class="num">03 — BILL</div>
+        <div class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="9" y1="13" x2="15" y2="13"/>
+            <line x1="9" y1="17" x2="15" y2="17"/>
+          </svg>
+        </div>
+        <h3 data-th="ฝั่งคิดเงิน" data-en="Billing side">ฝั่งคิดเงิน</h3>
+        <div class="sub" data-th="Automated Billing & Collection" data-en="Automated Billing & Collection">Automated Billing & Collection</div>
+        <p data-th="ออกใบแจ้งหนี้และใบเสร็จ PDF อัตโนมัติ แนบ QR Code พร้อมจ่าย พร้อมระบบหลังบ้านสรุปรายได้และติดตามการค้างชำระ" data-en="One-click PDF invoices and receipts with payment QR codes, plus a back-office dashboard for revenue and overdue tracking.">
+          ออกใบแจ้งหนี้และใบเสร็จ PDF อัตโนมัติ แนบ QR Code พร้อมจ่าย พร้อมระบบหลังบ้านสรุปรายได้และติดตามการค้างชำระ
+        </p>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="สร้างบิล PDF ทั้งตึก ในคลิกเดียว" data-en="Generate the whole building's PDF bills in one click">สร้างบิล PDF ทั้งตึก ในคลิกเดียว</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="แนบ PromptPay QR Code อัตโนมัติ จ่ายในแอปธนาคารได้ทันที" data-en="PromptPay QR auto-attached — pay in any banking app">แนบ PromptPay QR Code อัตโนมัติ จ่ายในแอปธนาคารได้ทันที</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="ส่งบิลผ่าน LINE / SMS / Email" data-en="Deliver via LINE / SMS / Email">ส่งบิลผ่าน LINE / SMS / Email</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-th="Dashboard รายรับ รายจ่าย ค้างชำระ ครบในที่เดียว" data-en="Revenue, expense, and overdue tracking on one dashboard">Dashboard รายรับ รายจ่าย ค้างชำระ ครบในที่เดียว</span>
+          </li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     4. Target Users
+     ==================================================== -->
+<section id="target" class="ssb-section">
+  <div class="container">
+    <div class="ssb-section-head">
+      <span class="eyebrow" data-th="ออกแบบมาเพื่อใคร" data-en="Built for">ออกแบบมาเพื่อใคร</span>
+      <h2 data-th="3 บทบาทใน Solar Industry ที่ Solar Smart Bill ตอบโจทย์ที่สุด" data-en="The 3 roles in the solar industry Solar Smart Bill serves best">3 บทบาทใน Solar Industry ที่ Solar Smart Bill ตอบโจทย์ที่สุด</h2>
+    </div>
+
+    <div class="ssb-targets ssb-targets-3">
+
+      <!-- Target 1: EPC / Developer -->
+      <article class="ssb-target">
+        <div class="ssb-target-art">
+          <svg viewBox="0 0 180 320" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="epcBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1E40AF"/>
+                <stop offset="100%" stop-color="#1E3A8A"/>
+              </linearGradient>
+            </defs>
+            <rect width="180" height="320" fill="url(#epcBg)"/>
+            <!-- Sun -->
+            <circle cx="40" cy="60" r="20" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="40" cy="60" r="12" fill="#FCD34D"/>
+            <!-- Solar field, large -->
+            <rect y="240" width="180" height="80" fill="#0F172A"/>
+            <g transform="translate(10, 180)" fill="#1E293B" stroke="#475569" stroke-width="0.7">
+              <polygon points="0,55 50,55 60,20 10,20"/>
+              <line x1="20" y1="20" x2="10" y2="55" stroke="#0F172A" stroke-width="0.4"/>
+              <line x1="32" y1="20" x2="26" y2="55" stroke="#0F172A" stroke-width="0.4"/>
+              <line x1="44" y1="20" x2="42" y2="55" stroke="#0F172A" stroke-width="0.4"/>
+              <rect x="25" y="55" width="3" height="22" fill="#475569"/>
+            </g>
+            <g transform="translate(70, 180)" fill="#1E293B" stroke="#475569" stroke-width="0.7">
+              <polygon points="0,55 50,55 60,20 10,20"/>
+              <line x1="20" y1="20" x2="10" y2="55" stroke="#0F172A" stroke-width="0.4"/>
+              <line x1="32" y1="20" x2="26" y2="55" stroke="#0F172A" stroke-width="0.4"/>
+              <line x1="44" y1="20" x2="42" y2="55" stroke="#0F172A" stroke-width="0.4"/>
+              <rect x="25" y="55" width="3" height="22" fill="#475569"/>
+            </g>
+            <g transform="translate(130, 180)" fill="#1E293B" stroke="#475569" stroke-width="0.7" opacity="0.7">
+              <polygon points="0,55 50,55 60,20 10,20"/>
+              <line x1="20" y1="20" x2="10" y2="55" stroke="#0F172A" stroke-width="0.4"/>
+              <line x1="32" y1="20" x2="26" y2="55" stroke="#0F172A" stroke-width="0.4"/>
+            </g>
+            <!-- Crane symbol -->
+            <g transform="translate(105, 95)" stroke="#F59E0B" stroke-width="2" fill="none">
+              <line x1="0" y1="0" x2="0" y2="60"/>
+              <line x1="0" y1="0" x2="40" y2="0"/>
+              <line x1="40" y1="0" x2="40" y2="12"/>
+              <rect x="36" y="12" width="8" height="6" fill="#F59E0B" stroke="none"/>
+            </g>
+          </svg>
+        </div>
+        <div class="ssb-target-body">
+          <span class="who" data-th="บทบาทที่ 1" data-en="Role 1">บทบาทที่ 1</span>
+          <h3 data-th="Solar Developer / EPC" data-en="Solar Developer / EPC">Solar Developer / EPC</h3>
+          <p data-th="ผู้พัฒนาโครงการและผู้รับเหมา EPC ที่ต้องส่งมอบงาน Commissioning ให้ลูกค้า ผ่าน Witness Test การไฟฟ้า และตั้งระบบมอนิเตอร์ก่อน COD" data-en="Project developers and EPCs needing to commission sites, pass utility witness tests, and stand up monitoring before COD.">
+            ผู้พัฒนาโครงการและผู้รับเหมา EPC ที่ต้องส่งมอบงาน Commissioning ให้ลูกค้า ผ่าน Witness Test การไฟฟ้า และตั้งระบบมอนิเตอร์ก่อน COD
+          </p>
+          <ul>
+            <li data-th="Commissioning Dashboard — สรุปผล Performance Test รายไซต์" data-en="Commissioning dashboard — site-by-site Performance Test results">Commissioning Dashboard — สรุปผล Performance Test รายไซต์</li>
+            <li data-th="ส่งมอบเอกสาร M&V พร้อมข้อมูลย้อนหลังให้ลูกค้าตอน Handover" data-en="Handover-ready M&V package with full historical data">ส่งมอบเอกสาร M&amp;V พร้อมข้อมูลย้อนหลังให้ลูกค้าตอน Handover</li>
+            <li data-th="ตั้งระบบเทียบ Expected vs Actual ตั้งแต่วันแรกของ Operation" data-en="Expected-vs-actual benchmark from day one of operations">ตั้งระบบเทียบ Expected vs Actual ตั้งแต่วันแรกของ Operation</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Target 2: IPP / PPA Operator -->
+      <article class="ssb-target">
+        <div class="ssb-target-art">
+          <svg viewBox="0 0 180 320" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="ppaBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0E7490"/>
+                <stop offset="100%" stop-color="#155E75"/>
+              </linearGradient>
+            </defs>
+            <rect width="180" height="320" fill="url(#ppaBg)"/>
+            <!-- Sun -->
+            <circle cx="135" cy="60" r="22" fill="#F59E0B" opacity="0.8"/>
+            <circle cx="135" cy="60" r="14" fill="#FCD34D"/>
+            <!-- Ground -->
+            <rect y="240" width="180" height="80" fill="#0F172A"/>
+            <!-- Solar arrays -->
+            <g transform="translate(15, 180)" fill="#1E293B" stroke="#475569" stroke-width="0.8">
+              <polygon points="0,55 60,55 70,20 10,20"/>
+              <rect x="32" y="55" width="3" height="25" fill="#475569"/>
+            </g>
+            <g transform="translate(95, 180)" fill="#1E293B" stroke="#475569" stroke-width="0.8">
+              <polygon points="0,55 60,55 70,20 10,20"/>
+              <rect x="32" y="55" width="3" height="25" fill="#475569"/>
+            </g>
+            <!-- $ icon overlay -->
+            <g transform="translate(90, 130)">
+              <circle r="22" fill="#0F172A" stroke="#F59E0B" stroke-width="1.8"/>
+              <text y="7" font-family="Manrope" font-size="24" font-weight="700" fill="#F59E0B" text-anchor="middle">฿</text>
+            </g>
+            <!-- Contract icon top-left -->
+            <g transform="translate(15, 25)" stroke="#FCD34D" stroke-width="1.2" fill="none">
+              <rect width="32" height="42" rx="2" fill="rgba(252,211,77,0.1)"/>
+              <line x1="6" y1="10" x2="26" y2="10"/>
+              <line x1="6" y1="18" x2="26" y2="18"/>
+              <line x1="6" y1="26" x2="20" y2="26"/>
+              <text x="16" y="38" font-family="Manrope" font-size="6" font-weight="700" fill="#FCD34D" text-anchor="middle">PPA</text>
+            </g>
+          </svg>
+        </div>
+        <div class="ssb-target-body">
+          <span class="who" data-th="บทบาทที่ 2" data-en="Role 2">บทบาทที่ 2</span>
+          <h3 data-th="IPP / Solar PPA Operator" data-en="IPP / Solar PPA Operator">IPP / Solar PPA Operator</h3>
+          <p data-th="ผู้ลงทุนติดตั้งโซลาร์และขายไฟแบบ Private PPA / Corporate PPA / Direct PPA ที่ต้องออกบิลตามสัญญารายลูกค้า และรายงานผลให้ Offtaker, Investor, และ Lender" data-en="Investors who install solar and sell power via Private / Corporate / Direct PPAs — needing per-contract billing and reporting to offtakers, investors, and lenders.">
+            ผู้ลงทุนติดตั้งโซลาร์และขายไฟแบบ Private PPA / Corporate PPA / Direct PPA ที่ต้องออกบิลตามสัญญารายลูกค้า และรายงานผลให้ Offtaker, Investor, และ Lender
+          </p>
+          <ul>
+            <li data-th="PPA Billing ตาม kWh จริง — รองรับ Tier rate, Escalator, Discount" data-en="Bill on actual kWh — tiered rates, escalators, and discounts supported">PPA Billing ตาม kWh จริง — รองรับ Tier rate, Escalator, Discount</li>
+            <li data-th="Investor / Lender Report สรุป Revenue, Yield, Availability รายเดือน" data-en="Monthly investor/lender reports: revenue, yield, availability">Investor / Lender Report สรุป Revenue, Yield, Availability รายเดือน</li>
+            <li data-th="พอร์ตหลายไซต์ — เปรียบเทียบ Performance ระหว่างไซต์ได้ทันที" data-en="Multi-site portfolio — instant cross-site performance benchmarking">พอร์ตหลายไซต์ — เปรียบเทียบ Performance ระหว่างไซต์ได้ทันที</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Target 3: O&M / Asset Manager -->
+      <article class="ssb-target">
+        <div class="ssb-target-art">
+          <svg viewBox="0 0 180 320" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="oamBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#312E81"/>
+                <stop offset="100%" stop-color="#1E1B4B"/>
+              </linearGradient>
+            </defs>
+            <rect width="180" height="320" fill="url(#oamBg)"/>
+            <!-- Sun -->
+            <circle cx="90" cy="60" r="18" fill="#F59E0B" opacity="0.7"/>
+            <!-- Gear icon center -->
+            <g transform="translate(90, 160)" stroke="#FCD34D" stroke-width="2" fill="none">
+              <circle r="32"/>
+              <circle r="10"/>
+              <g stroke-linecap="round">
+                <line x1="0" y1="-40" x2="0" y2="-30"/>
+                <line x1="0" y1="40" x2="0" y2="30"/>
+                <line x1="-40" y1="0" x2="-30" y2="0"/>
+                <line x1="40" y1="0" x2="30" y2="0"/>
+                <line x1="-28" y1="-28" x2="-21" y2="-21"/>
+                <line x1="28" y1="-28" x2="21" y2="-21"/>
+                <line x1="-28" y1="28" x2="-21" y2="21"/>
+                <line x1="28" y1="28" x2="21" y2="21"/>
+              </g>
+            </g>
+            <!-- Alert dot -->
+            <circle cx="125" cy="125" r="8" fill="#B91C1C"/>
+            <text x="125" y="130" font-family="Manrope" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">!</text>
+            <!-- Chart bars at bottom -->
+            <g transform="translate(20, 250)" fill="#FCD34D" opacity="0.6">
+              <rect width="14" height="40"/>
+              <rect x="22" y="-10" width="14" height="50"/>
+              <rect x="44" y="-5" width="14" height="45"/>
+              <rect x="66" y="-15" width="14" height="55"/>
+              <rect x="88" y="-20" width="14" height="60"/>
+              <rect x="110" y="-8" width="14" height="48"/>
+              <rect x="132" y="-12" width="14" height="52"/>
+            </g>
+          </svg>
+        </div>
+        <div class="ssb-target-body">
+          <span class="who" data-th="บทบาทที่ 3" data-en="Role 3">บทบาทที่ 3</span>
+          <h3 data-th="Asset Manager / O&amp;M Team" data-en="Asset Manager / O&M Team">Asset Manager / O&amp;M Team</h3>
+          <p data-th="ทีมที่ดูแลโครงการโซลาร์หลายไซต์หลังเปิดใช้งานแล้ว ต้องการเครื่องมือ ติดตาม Performance, จัดการ Ticket / Alarm และวางแผน Maintenance ให้ตรงเวลา" data-en="Teams managing live solar portfolios — needing performance tracking, ticket/alarm management, and on-time maintenance planning.">
+            ทีมที่ดูแลโครงการโซลาร์หลายไซต์หลังเปิดใช้งานแล้ว ต้องการเครื่องมือ ติดตาม Performance, จัดการ Ticket / Alarm และวางแผน Maintenance ให้ตรงเวลา
+          </p>
+          <ul>
+            <li data-th="Alarm Center — รวมการแจ้งเตือนจากทุกไซต์ จัดลำดับความสำคัญอัตโนมัติ" data-en="Alarm Center — all-site alerts, auto-prioritized">Alarm Center — รวมการแจ้งเตือนจากทุกไซต์ จัดลำดับความสำคัญอัตโนมัติ</li>
+            <li data-th="ติดตาม PR, Availability, Energy Yield รายอินเวอร์เตอร์ และเทียบกับ Benchmark" data-en="Track PR, availability, and yield per inverter against benchmarks">ติดตาม PR, Availability, Energy Yield รายอินเวอร์เตอร์ และเทียบกับ Benchmark</li>
+            <li data-th="Work Order / Maintenance Log ดูประวัติย้อนหลังของทุกอุปกรณ์" data-en="Work orders and maintenance log per asset, fully historical">Work Order / Maintenance Log ดูประวัติย้อนหลังของทุกอุปกรณ์</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     5. How it works
+     ==================================================== -->
+<section id="how" class="ssb-section">
+  <div class="container">
+    <div class="ssb-section-head">
+      <span class="eyebrow" data-th="ทำงานอย่างไร" data-en="How it works">ทำงานอย่างไร</span>
+      <h2 data-th="จากแผงโซลาร์ ถึงบิลในมือลูกค้า — 4 ขั้นตอน" data-en="From solar panel to your customer's bill — in 4 steps">จากแผงโซลาร์ ถึงบิลในมือลูกค้า — 4 ขั้นตอน</h2>
+    </div>
+
+    <div class="ssb-flow">
+      <div class="ssb-step">
+        <div class="badge">
+          <span class="num">1</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="3 21 8 8 16 8 21 21"/>
+            <line x1="3" y1="21" x2="21" y2="21"/>
+            <line x1="8" y1="8" x2="16" y2="8"/>
+            <line x1="10" y1="13" x2="14" y2="13"/>
+            <line x1="9" y1="17" x2="15" y2="17"/>
+          </svg>
+        </div>
+        <h4 data-th="วัดที่หน้างาน" data-en="Measure on-site">วัดที่หน้างาน</h4>
+        <p data-th="แผงโซลาร์ผลิตไฟ มิเตอร์อ่านการใช้งานรายห้อง" data-en="Solar panels generate, meters read each room's usage">แผงโซลาร์ผลิตไฟ มิเตอร์อ่านการใช้งานรายห้อง</p>
+      </div>
+
+      <div class="ssb-step">
+        <div class="badge">
+          <span class="num">2</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+            <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+            <line x1="12" y1="20" x2="12.01" y2="20"/>
+          </svg>
+        </div>
+        <h4 data-th="ส่งข้อมูลไร้สาย" data-en="Wireless upload">ส่งข้อมูลไร้สาย</h4>
+        <p data-th="AMR ส่งข้อมูลผ่าน 4G / LoRa เข้า Cloud ทุก 5 นาที" data-en="AMR sends data to the cloud over 4G / LoRa every 5 min">AMR ส่งข้อมูลผ่าน 4G / LoRa เข้า Cloud ทุก 5 นาที</p>
+      </div>
+
+      <div class="ssb-step">
+        <div class="badge">
+          <span class="num">3</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+            <path d="M7 13l3-3 3 3 4-4"/>
+          </svg>
+        </div>
+        <h4 data-th="Cloud ประมวลผล" data-en="Cloud processing">Cloud ประมวลผล</h4>
+        <p data-th="คำนวณ TOU จัดสรรไฟโซลาร์ และสร้างบิลอัตโนมัติ" data-en="Calculate TOU, allocate solar, draft each bill automatically">คำนวณ TOU จัดสรรไฟโซลาร์ และสร้างบิลอัตโนมัติ</p>
+      </div>
+
+      <div class="ssb-step">
+        <div class="badge">
+          <span class="num">4</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+        </div>
+        <h4 data-th="บิลถึงมือลูกค้า" data-en="Bill in their hand">บิลถึงมือลูกค้า</h4>
+        <p data-th="ส่ง PDF + QR ผ่าน LINE / Email — จ่ายในแอปได้ทันที" data-en="PDF + QR delivered via LINE / Email — pay instantly">ส่ง PDF + QR ผ่าน LINE / Email — จ่ายในแอปได้ทันที</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     6. Final CTA + Quote form
+     ==================================================== -->
+<section id="quote" class="ssb-cta">
+  <div class="container ssb-cta-grid">
+    <div>
+      <span class="eyebrow" data-th="เริ่มใช้งานวันนี้" data-en="Start today">เริ่มใช้งานวันนี้</span>
+      <h2 data-th="พร้อมเปลี่ยนทุก kWh ให้กลายเป็นบิลที่แม่นยำ?" data-en="Ready to turn every kWh into an accurate bill?">พร้อมเปลี่ยนทุก kWh ให้กลายเป็นบิลที่แม่นยำ?</h2>
+      <p data-th="ส่งรายละเอียดของโครงการคุณ ทีมงานเราจะติดต่อกลับภายใน 1 วันทำการ พร้อมเดโม่ระบบและใบเสนอราคาที่ปรับให้เหมาะกับขนาดอาคารของคุณ" data-en="Send your project details. We'll respond within 1 business day with a live demo and a quote sized to your building.">
+        ส่งรายละเอียดของโครงการคุณ ทีมงานเราจะติดต่อกลับภายใน 1 วันทำการ พร้อมเดโม่ระบบและใบเสนอราคาที่ปรับให้เหมาะกับขนาดอาคารของคุณ
+      </p>
+      <ul class="ssb-cta-perks">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-th="ทดลองใช้งานฟรี 30 วัน — ไม่ต้องใช้บัตรเครดิต" data-en="30-day free trial — no credit card required">ทดลองใช้งานฟรี 30 วัน — ไม่ต้องใช้บัตรเครดิต</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-th="ติดตั้งและเทรนทีมงานโดยวิศวกรของ Advanced Grid" data-en="Setup and team training by Advanced Grid engineers">ติดตั้งและเทรนทีมงานโดยวิศวกรของ Advanced Grid</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-th="รองรับมิเตอร์ที่คุณมีอยู่แล้ว ไม่ต้องเปลี่ยน" data-en="Works with the meters you already own — no swap needed">รองรับมิเตอร์ที่คุณมีอยู่แล้ว ไม่ต้องเปลี่ยน</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-th="ข้อมูลเก็บในประเทศไทย ปลอดภัยตาม PDPA" data-en="Data stored in Thailand, PDPA-compliant">ข้อมูลเก็บในประเทศไทย ปลอดภัยตาม PDPA</span>
+        </li>
+      </ul>
+    </div>
+
+    <form class="ssb-quote-form" id="quote-form">
+      <h3 data-th="ขอใบเสนอราคา + ทดลอง Demo" data-en="Get a quote + try the demo">ขอใบเสนอราคา + ทดลอง Demo</h3>
+      <p data-th="ตอบกลับภายใน 1 วันทำการ" data-en="We reply within 1 business day">ตอบกลับภายใน 1 วันทำการ</p>
+
+      <div class="row">
+        <div class="field">
+          <label for="qf-name" data-th="ชื่อ-นามสกุล" data-en="Full name">ชื่อ-นามสกุล</label>
+          <input id="qf-name" type="text" required>
+        </div>
+        <div class="field">
+          <label for="qf-company" data-th="บริษัท / โครงการ" data-en="Company / project">บริษัท / โครงการ</label>
+          <input id="qf-company" type="text">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="qf-email" data-th="อีเมล" data-en="Email">อีเมล</label>
+          <input id="qf-email" type="email" required>
+        </div>
+        <div class="field">
+          <label for="qf-phone" data-th="เบอร์โทร" data-en="Phone">เบอร์โทร</label>
+          <input id="qf-phone" type="tel">
+        </div>
+      </div>
+      <div class="field">
+        <label for="qf-type" data-th="ประเภทธุรกิจ" data-en="Business type">ประเภทธุรกิจ</label>
+        <select id="qf-type">
+          <option data-th="Solar Developer / EPC" data-en="Solar Developer / EPC">Solar Developer / EPC</option>
+          <option data-th="IPP / Solar PPA Operator" data-en="IPP / Solar PPA Operator">IPP / Solar PPA Operator</option>
+          <option data-th="Asset Manager / O&M" data-en="Asset Manager / O&M">Asset Manager / O&amp;M</option>
+          <option data-th="ผู้ลงทุน / Investor" data-en="Investor">ผู้ลงทุน / Investor</option>
+          <option data-th="อื่นๆ" data-en="Other">อื่นๆ</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="qf-rooms" data-th="ขนาดพอร์ตโซลาร์ (โดยประมาณ)" data-en="Approximate portfolio size">ขนาดพอร์ตโซลาร์ (โดยประมาณ)</label>
+        <select id="qf-rooms">
+          <option data-th="ต่ำกว่า 500 kWp" data-en="Under 500 kWp">ต่ำกว่า 500 kWp</option>
+          <option>500 kWp – 1 MW</option>
+          <option>1 – 5 MW</option>
+          <option>5 – 20 MW</option>
+          <option data-th="มากกว่า 20 MW" data-en="20+ MW">มากกว่า 20 MW</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="qf-msg" data-th="ข้อความเพิ่มเติม" data-en="Anything else?">ข้อความเพิ่มเติม</label>
+        <textarea id="qf-msg" placeholder=""></textarea>
+      </div>
+
+      <div class="check-row">
+        <input id="qf-consent" type="checkbox">
+        <label for="qf-consent" data-th="ยินยอมให้ Advanced Grid ใช้ข้อมูลเพื่อติดต่อกลับ" data-en="I agree to be contacted by Advanced Grid">ยินยอมให้ Advanced Grid ใช้ข้อมูลเพื่อติดต่อกลับ</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" data-th="ส่งคำขอ →" data-en="Send request →">ส่งคำขอ →</button>
+    </form>
+  </div>
+</section>
+
+<!-- ====================================================
+     Footer
+     ==================================================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand">
+          <img class="brand-wordmark" src="assets/advancedgrid-wordmark.png" alt="Advanced Grid">
+        </div>
+        <p class="tagline" data-th="ระบบมิเตอร์ไฟฟ้าและสื่อสาร สำหรับโครงการระดับอุตสาหกรรมในประเทศไทย" data-en="Energy metering and communication systems for industrial-scale projects in Thailand.">
+          ระบบมิเตอร์ไฟฟ้าและสื่อสาร สำหรับโครงการระดับอุตสาหกรรมในประเทศไทย
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h5 data-th="ผลิตภัณฑ์" data-en="Products">ผลิตภัณฑ์</h5>
+        <ul>
+          <li><a href="solar-smart-bill.html">Solar Smart Bill</a></li>
+          <li><a href="index.html#products">CEWE Prometer 100</a></li>
+          <li><a href="index.html#products">SECURE Premier 550</a></li>
+          <li><a href="index.html#products">CEWE ProQ 100</a></li>
+          <li><a href="index.html#products">CEWE Elite 500</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5 data-th="บริการ" data-en="Services">บริการ</h5>
+        <ul>
+          <li><a href="index.html#services" data-th="ที่ปรึกษาทางวิศวกรรม" data-en="Engineering consulting">ที่ปรึกษาทางวิศวกรรม</a></li>
+          <li><a href="index.html#services" data-th="ออกแบบ Meter Box" data-en="Meter Box design">ออกแบบ Meter Box</a></li>
+          <li><a href="index.html#services" data-th="ติดตั้งและทดสอบ" data-en="Installation & commissioning">ติดตั้งและทดสอบ</a></li>
+          <li><a href="index.html#services" data-th="สอบเทียบและซ่อมบำรุง" data-en="Calibration & maintenance">สอบเทียบและซ่อมบำรุง</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5 data-th="บริษัท" data-en="Company">บริษัท</h5>
+        <ul>
+          <li><a href="index.html#about" data-th="เกี่ยวกับเรา" data-en="About">เกี่ยวกับเรา</a></li>
+          <li><a href="index.html#projects" data-th="โครงการของเรา" data-en="Projects">โครงการของเรา</a></li>
+          <li><a href="index.html#contact" data-th="ติดต่อ" data-en="Contact">ติดต่อ</a></li>
+          <li><a href="tel:+66992268000">099-226-8000</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div data-th="© 2026 บริษัท แอดวานซ์ กริด จำกัด · สงวนลิขสิทธิ์" data-en="© 2026 Advanced Grid Co., Ltd. · All rights reserved">© 2026 บริษัท แอดวานซ์ กริด จำกัด · สงวนลิขสิทธิ์</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============================================
+// Language toggle
+// ============================================
+let currentLang = 'th';
+const html = document.documentElement;
+
+function applyLang(lang) {
+  currentLang = lang;
+  html.setAttribute('lang', lang);
+  document.querySelectorAll('[data-th], [data-en]').forEach(el => {
+    const val = el.dataset[lang];
+    if (val == null) return;
+    if (val.includes('<')) el.innerHTML = val;
+    else el.textContent = val;
+  });
+  document.querySelectorAll('.lang-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+}
+
+document.querySelectorAll('.lang-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
+// Mobile menu
+document.querySelector('.menu-btn')?.addEventListener('click', () => {
+  document.querySelector('.nav').classList.toggle('open');
+});
+document.querySelectorAll('.nav a').forEach(a => {
+  a.addEventListener('click', () => document.querySelector('.nav').classList.remove('open'));
+});
+
+// Quote form — friendly no-op
+document.getElementById('quote-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const orig = btn.textContent;
+  btn.textContent = currentLang === 'th' ? 'ส่งสำเร็จ ✓ ทีมงานจะติดต่อกลับ' : 'Sent ✓ — we\'ll be in touch';
+  btn.style.background = '#16A34A';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; e.target.reset(); }, 3000);
+});
+</script>
+
+</body>
+</html>

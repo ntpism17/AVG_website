@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+
+const pillars = [
+  {
+    title: 'ฝั่งผลิต',
+    sub: 'Real-time Solar Monitoring',
+    desc: 'มอนิเตอร์ประสิทธิภาพระบบโซลาร์แบบเรียลไทม์ พร้อมแจ้งเตือนเมื่อมีปัญหา และรายงานลดคาร์บอนสำหรับงาน ESG',
+    items: [
+      'รายงาน kWh / kWp / Performance Ratio รายอินเวอร์เตอร์',
+      'แจ้งเตือน LINE / Email เมื่อระบบมีปัญหา',
+      'รายงานการลดคาร์บอน (CO₂ saved) สำหรับ ESG',
+      'ดูย้อนหลังได้ตั้งแต่นาทีจนถึงปี',
+    ],
+  },
+  {
+    title: 'ฝั่งคำนวณ',
+    sub: 'Smart Tariff Engine + AMR',
+    desc: 'ดึงข้อมูลจากมิเตอร์ไร้สายอัตโนมัติ คำนวณค่าไฟตามเรท MEA/PEA จริง รวมถึง TOU และเฉลี่ยสัดส่วนไฟโซลาร์รายห้องอย่างเที่ยงธรรม',
+    items: [
+      'อ่านมิเตอร์อัตโนมัติผ่าน AMR — รองรับ Mk6E, Premier 550, Elite 500',
+      'คำนวณตามเรท MEA / PEA / TOU จริง อัปเดตอัตโนมัติ',
+      'เฉลี่ยไฟโซลาร์รายห้องตามสัดส่วนการใช้งานจริง',
+      'Audit trail ตรวจสอบย้อนหลังได้ทุกการคำนวณ',
+    ],
+  },
+  {
+    title: 'ฝั่งคิดเงิน',
+    sub: 'Automated Billing & Collection',
+    desc: 'ออกใบแจ้งหนี้และใบเสร็จ PDF อัตโนมัติ แนบ QR Code พร้อมจ่าย พร้อมระบบหลังบ้านสรุปรายได้และติดตามการค้างชำระ',
+    items: [
+      'สร้างบิล PDF ทั้งตึก ในคลิกเดียว',
+      'แนบ PromptPay QR Code อัตโนมัติ จ่ายในแอปธนาคารได้ทันที',
+      'ส่งบิลผ่าน LINE / SMS / Email',
+      'Dashboard รายรับ รายจ่าย ค้างชำระ ครบในที่เดียว',
+    ],
+  },
+];
+
+const personas = [
+  {
+    title: 'Solar Developer / EPC',
+    desc: 'ผู้พัฒนาโครงการและผู้รับเหมา EPC ที่ต้องส่งมอบงาน Commissioning ให้ลูกค้า ผ่าน Witness Test การไฟฟ้า และตั้งระบบมอนิเตอร์ก่อน COD',
+    items: [
+      'Commissioning Dashboard — สรุปผล Performance Test รายไซต์',
+      'ส่งมอบเอกสาร M&V พร้อมข้อมูลย้อนหลังให้ลูกค้าตอน Handover',
+      'ตั้งระบบเทียบ Expected vs Actual ตั้งแต่วันแรกของ Operation',
+    ],
+  },
+  {
+    title: 'IPP / Solar PPA Operator',
+    desc: 'ผู้ลงทุนติดตั้งโซลาร์และขายไฟแบบ Private PPA / Corporate PPA / Direct PPA ที่ต้องออกบิลตามสัญญารายลูกค้า และรายงานผลให้ Offtaker, Investor, และ Lender',
+    items: [
+      'PPA Billing ตาม kWh จริง — รองรับ Tier rate, Escalator, Discount',
+      'Investor / Lender Report สรุป Revenue, Yield, Availability รายเดือน',
+      'พอร์ตหลายไซต์ — เปรียบเทียบ Performance ระหว่างไซต์ได้ทันที',
+    ],
+  },
+  {
+    title: 'Asset Manager / O&M Team',
+    desc: 'ทีมที่ดูแลโครงการโซลาร์หลายไซต์หลังเปิดใช้งานแล้ว ต้องการเครื่องมือ ติดตาม Performance, จัดการ Ticket / Alarm และวางแผน Maintenance ให้ตรงเวลา',
+    items: [
+      'Alarm Center — รวมการแจ้งเตือนจากทุกไซต์ จัดลำดับความสำคัญอัตโนมัติ',
+      'ติดตาม PR, Availability, Energy Yield รายอินเวอร์เตอร์ และเทียบกับ Benchmark',
+      'Work Order / Maintenance Log ดูประวัติย้อนหลังของทุกอุปกรณ์',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Solar Smart Bill — ระบบมอนิเตอร์โซลาร์ + คิดเงินอัตโนมัติ | Advanced Grid"
+  description="Solar Smart Bill: แพลตฟอร์มมอนิเตอร์ผลผลิตโซลาร์ ออก PPA Billing ตาม kWh จริง พร้อมรายงาน M&V และ ESG สำหรับ Solar Developer, EPC และ IPP/PPA Operator เชื่อมต่อ Huawei FusionSolar, SMA, Sungrow, SolarEdge"
+>
+  <section class="max-w-6xl mx-auto px-5 py-16 lg:py-24">
+    <span class="font-en text-sm font-semibold text-accent">ผลิตภัณฑ์ใหม่ · 2026</span>
+    <h1 class="mt-3 font-display text-4xl sm:text-5xl font-bold leading-tight text-ink">
+      Solar Smart Bill — แพลตฟอร์มเดียวของ Solar Developer สมัยใหม่
+    </h1>
+    <p class="mt-5 text-lg text-ink-2 leading-relaxed max-w-3xl">
+      มอนิเตอร์ผลผลิตของทุกไซต์ ออก PPA Billing ตาม kWh จริง พร้อมส่งรายงาน M&amp;V และ ESG ให้ผู้พัฒนาระบบโซลาร์ — ออกแบบมาเฉพาะสำหรับ Solar Developer, EPC และ Solar PPA Operator ที่ต้องการสเกลโครงการหลายไซต์โดยไม่เพิ่มทีม Back-office
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a href="#quote" class="inline-flex items-center rounded-md bg-accent px-6 py-3 font-semibold text-white hover:bg-accent-deep transition-colors">ขอทดลองใช้งาน Demo →</a>
+      <a href="#quote" class="inline-flex items-center rounded-md border border-line-strong px-6 py-3 font-semibold text-ink hover:bg-surface transition-colors">ปรึกษาผู้เชี่ยวชาญ</a>
+    </div>
+  </section>
+
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-6xl mx-auto px-5 py-20">
+      <SectionHeading
+        eyebrow="3 ขาหลักของระบบ"
+        heading="ครบทั้งฝั่งผลิต ฝั่งคำนวณ และฝั่งคิดเงิน"
+      />
+      <div class="mt-10 grid lg:grid-cols-3 gap-6">
+        {pillars.map((p) => (
+          <article class="rounded-lg bg-bg-elev border border-line p-6">
+            <h3 class="font-display font-bold text-lg text-ink">{p.title}</h3>
+            <div class="font-en text-sm text-accent">{p.sub}</div>
+            <p class="mt-3 text-sm text-ink-2 leading-relaxed">{p.desc}</p>
+            <ul class="mt-4 space-y-2 text-sm text-ink-2">
+              {p.items.map((item) => <li class="flex gap-2"><span class="text-accent">✓</span>{item}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-5 py-20">
+    <SectionHeading
+      eyebrow="ออกแบบมาเพื่อใคร"
+      heading="3 บทบาทใน Solar Industry ที่ Solar Smart Bill ตอบโจทย์ที่สุด"
+    />
+    <div class="mt-10 grid lg:grid-cols-3 gap-6">
+      {personas.map((p) => (
+        <article class="rounded-lg border border-line bg-bg-elev p-6">
+          <h3 class="font-display font-bold text-lg text-ink">{p.title}</h3>
+          <p class="mt-3 text-sm text-ink-2 leading-relaxed">{p.desc}</p>
+          <ul class="mt-4 space-y-2 text-sm text-ink-2 list-disc list-inside">
+            {p.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-surface border-y border-line">
+    <div class="max-w-4xl mx-auto px-5 py-20">
+      <h2 class="font-display text-2xl font-bold text-ink text-center">ระบบเชื่อมต่ออุปกรณ์ที่คุณมีอยู่แล้ว</h2>
+      <p class="mt-3 text-center text-ink-2">API เชื่อมตรงกับ Huawei FusionSolar, SMA, Sungrow, SolarEdge และ SCADA ของลูกค้า — พร้อมอ่านมิเตอร์ผ่าน AMR รองรับ Mk6E, Premier 550, Elite 500</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-2 font-display font-semibold text-ink-2">
+        <span>Huawei FusionSolar</span><span>SMA</span><span>Sungrow</span><span>SolarEdge</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="quote" class="max-w-2xl mx-auto px-5 py-20">
+    <h2 class="font-display text-2xl font-bold text-ink text-center">ขอใบเสนอราคา + ทดลอง Demo</h2>
+    <p class="mt-2 text-center text-ink-2">ตอบกลับภายใน 1 วันทำการ · ทดลองใช้งานฟรี 30 วัน ไม่ต้องใช้บัตรเครดิต</p>
+
+    <form
+      class="mt-8 space-y-5 rounded-lg border border-line bg-bg-elev p-8"
+      action="https://api.web3forms.com/submit"
+      method="POST"
+      data-form="solar-smart-bill-quote"
+    >
+      <input type="hidden" name="access_key" value="PENDING_WEB3FORMS_ACCESS_KEY" />
+      <input type="hidden" name="subject" value="Solar Smart Bill — Quote request" />
+
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label for="qf-name" class="block text-sm font-medium text-ink">ชื่อ-นามสกุล</label>
+          <input id="qf-name" name="name" type="text" required class="mt-1 w-full rounded-md border border-line-strong px-3 py-2 bg-bg-elev text-ink" />
+        </div>
+        <div>
+          <label for="qf-company" class="block text-sm font-medium text-ink">บริษัท / โครงการ</label>
+          <input id="qf-company" name="company" type="text" class="mt-1 w-full rounded-md border border-line-strong px-3 py-2 bg-bg-elev text-ink" />
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label for="qf-email" class="block text-sm font-medium text-ink">อีเมล</label>
+          <input id="qf-email" name="email" type="email" required class="mt-1 w-full rounded-md border border-line-strong px-3 py-2 bg-bg-elev text-ink" />
+        </div>
+        <div>
+          <label for="qf-phone" class="block text-sm font-medium text-ink">เบอร์โทร</label>
+          <input id="qf-phone" name="phone" type="tel" class="mt-1 w-full rounded-md border border-line-strong px-3 py-2 bg-bg-elev text-ink" />
+        </div>
+      </div>
+      <div>
+        <label for="qf-type" class="block text-sm font-medium text-ink">ประเภทธุรกิจ</label>
+        <select id="qf-type" name="business_type" class="mt-1 w-full rounded-md border border-line-strong px-3 py-2 bg-bg-elev text-ink">
+          <option>Solar Developer / EPC</option>
+          <option>IPP / Solar PPA Operator</option>
+          <option>Asset Manager / O&M</option>
+          <option>ผู้ลงทุน / Investor</option>
+        </select>
+      </div>
+      <div>
+        <label for="qf-rooms" class="block text-sm font-medium text-ink">ขนาดพอร์ตโซลาร์ (โดยประมาณ)</label>
+        <select id="qf-rooms" name="portfolio_size" class="mt-1 w-full rounded-md border border-line-strong px-3 py-2 bg-bg-elev text-ink">
+          <option>ต่ำกว่า 500 kWp</option>
+          <option>500 kWp – 5 MWp</option>
+          <option>5 MWp – 50 MWp</option>
+          <option>มากกว่า 50 MWp</option>
+        </select>
+      </div>
+      <div>
+        <label for="qf-msg" class="block text-sm font-medium text-ink">ข้อความเพิ่มเติม</label>
+        <textarea id="qf-msg" name="message" rows="4" class="mt-1 w-full rounded-md border border-line-strong px-3 py-2 bg-bg-elev text-ink"></textarea>
+      </div>
+      <div class="flex items-start gap-2">
+        <input id="qf-consent" name="consent" type="checkbox" required class="mt-1" />
+        <label for="qf-consent" class="text-sm text-ink-2">ยินยอมให้ Advanced Grid ใช้ข้อมูลเพื่อติดต่อกลับ</label>
+      </div>
+      <button type="submit" class="w-full rounded-md bg-accent px-6 py-3 font-semibold text-white hover:bg-accent-deep transition-colors">ส่งคำขอ →</button>
+      <p class="text-xs text-ink-3 text-center">ข้อมูลเก็บในประเทศไทย ปลอดภัยตาม PDPA</p>
+    </form>
+  </section>
+</BaseLayout>

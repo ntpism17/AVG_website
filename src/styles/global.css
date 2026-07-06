@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@import "@fontsource/noto-sans-thai/400.css";
+@import "@fontsource/noto-sans-thai/500.css";
+@import "@fontsource/noto-sans-thai/600.css";
+@import "@fontsource/noto-sans-thai/700.css";
+@import "@fontsource/ibm-plex-sans-thai/400.css";
+@import "@fontsource/ibm-plex-sans-thai/500.css";
+@import "@fontsource/ibm-plex-sans-thai/600.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+@import "@fontsource/manrope/800.css";
+
+/* Design tokens migrated from legacy-html/styles.css — Cream / Crimson / Slate palette.
+   Kept as the original --bg/--ink/--accent names so the legacy inline SVG illustrations
+   (which reference these directly) still work when reused as Astro components. */
+:root {
+  --bg: #F7F4ED;
+  --bg-elev: #FFFFFF;
+  --surface: #EFEAE0;
+  --ink: #0F172A;
+  --ink-2: #334155;
+  --ink-3: #64748B;
+  --line: #E5DFD0;
+  --line-strong: #CFC8B5;
+  --accent: #B91C1C;
+  --accent-deep: #7F1313;
+  --accent-soft: #FCEDED;
+  --gold: #C99B2D;
+
+  --font-th: "Noto Sans Thai", "IBM Plex Sans Thai", system-ui, sans-serif;
+  --font-en: "Inter", "Noto Sans Thai", system-ui, sans-serif;
+  --font-display: "Manrope", "Noto Sans Thai", system-ui, sans-serif;
+}
+
+@theme {
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-soft: var(--accent-soft);
+  --color-gold: var(--gold);
+
+  --font-sans: var(--font-th);
+  --font-en: var(--font-en);
+  --font-display: var(--font-display);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-th);
+}
+
+:lang(en) {
+  font-family: var(--font-en);
+}

@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map((product) => ({
+    params: { slug: product.id },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const { Content } = await render(product);
+---
+
+<BaseLayout
+  title={`${product.data.name} — ${product.data.tagline} | Advanced Grid Co., Ltd.`}
+  description={product.data.description}
+  ogType="product"
+>
+  <article class="max-w-3xl mx-auto px-5 py-16 lg:py-24">
+    <a href="/products" class="text-sm font-semibold text-accent hover:text-accent-deep">← ผลิตภัณฑ์ทั้งหมด</a>
+    <span class="mt-6 block font-en text-sm font-semibold text-accent">{product.data.brand}</span>
+    <h1 class="mt-2 font-display text-3xl sm:text-4xl font-bold text-ink">{product.data.name}</h1>
+    <div class="mt-1 text-ink-3">{product.data.tagline}</div>
+
+    <div class="mt-6 flex flex-wrap gap-2">
+      {product.data.specs.map((spec) => (
+        <span class="text-sm rounded-full bg-surface border border-line px-3 py-1 text-ink-2">{spec}</span>
+      ))}
+    </div>
+
+    <div class="mt-8 prose prose-neutral max-w-none text-ink-2 leading-relaxed">
+      <Content />
+    </div>
+
+    <div class="mt-12 rounded-lg bg-surface border border-line p-8 text-center">
+      <h2 class="font-display text-xl font-bold text-ink">สนใจ {product.data.name}?</h2>
+      <p class="mt-2 text-ink-2">ส่งรายละเอียดโครงการของคุณ ทีมวิศวกรของเราจะแนะนำรุ่นที่เหมาะสมและเสนอราคาให้</p>
+      <a href="/contact" class="mt-5 inline-flex items-center rounded-md bg-accent px-6 py-3 font-semibold text-white hover:bg-accent-deep transition-colors">ขอใบเสนอราคา →</a>
+    </div>
+  </article>
+</BaseLayout>
