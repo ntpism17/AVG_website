@@ -3,8 +3,8 @@ name: 'SECURE Saral'
 brand: 'SECURE'
 category: 'Energy Meter · Single-Phase Credit Meter'
 tagline: 'Energy Meter · Single-Phase Credit Meter'
-description: 'มิเตอร์เฟสเดียวแบบต่อตรง ขนาดกะทัดรัด สำหรับที่พักอาศัยและร้านค้าขนาดเล็ก รองรับงาน Net Metering'
-specs: ['Class 1.0', '1 เฟส', 'Direct connected', 'Net metering', 'BLE']
+description: 'มิเตอร์เฟสเดียวแบบต่อตรง ขนาดกะทัดรัด สำหรับที่พักอาศัยและร้านค้าขนาดเล็ก รองรับการวัดพลังงานสองทิศทาง (Import/Export) สำหรับ Net Billing'
+specs: ['Class 1.0', '1 เฟส', 'Direct connected', 'Net Billing', 'BLE']
 specSource: 'SECURE Saral datasheet'
 specTable:
   - group: 'การวัด'
@@ -76,6 +76,6 @@ specTable:
 order: 7
 ---
 
-มิเตอร์เฟสเดียวแบบต่อตรง (direct connected) ขนาดกะทัดรัด สำหรับงานวัดหน่วยที่พักอาศัยและร้านค้าขนาดเล็ก รวมถึงงาน Net Metering ที่ต้องบันทึกทั้งพลังงานขาเข้าและขาออก
+มิเตอร์เฟสเดียวแบบต่อตรง (direct connected) ขนาดกะทัดรัด สำหรับงานวัดหน่วยที่พักอาศัยและร้านค้าขนาดเล็ก รวมถึงงาน Net Billing ที่ต้องบันทึกทั้งพลังงานขาเข้าและขาออก
 
 ให้ค่าการวัดที่เสถียรในสภาพหน้างานที่หลากหลาย พร้อมฟังก์ชันป้องกันการสูญเสียรายได้ รองรับการอ่านค่าผ่านพอร์ต IEC 62056-21 และเลือกเพิ่ม BLE สำหรับอ่านค่าผ่านแอปบนมือถือได้

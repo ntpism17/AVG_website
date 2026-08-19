@@ -7,7 +7,7 @@
  */
 
 import { getCollection } from 'astro:content';
-import type { BrandEntry, ProductEntry, ProjectEntry } from '../content.config';
+import type { ArticleEntry, BrandEntry, ProductEntry, ProjectEntry } from '../content.config';
 
 function byOrder<T extends { data: { order: number } }>(a: T, b: T): number {
   return a.data.order - b.data.order;
@@ -37,4 +37,14 @@ export async function getPublishedProjects(): Promise<ProjectEntry[]> {
 
 export async function getSortedBrands(): Promise<BrandEntry[]> {
   return (await getCollection('brands')).sort(byOrder);
+}
+
+/** All articles, including `pending` ones — the listing renders those as placeholders. */
+export async function getSortedArticles(): Promise<ArticleEntry[]> {
+  return (await getCollection('articles')).sort(byOrder);
+}
+
+/** Only articles cleared for publication. */
+export async function getPublishedArticles(): Promise<ArticleEntry[]> {
+  return (await getCollection('articles', ({ data }) => data.status === 'published')).sort(byOrder);
 }

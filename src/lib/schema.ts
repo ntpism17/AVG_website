@@ -5,7 +5,7 @@
  * being retyped into a schema literal, where drift is invisible to reviewers.
  */
 
-import type { ProductEntry } from '../content.config';
+import type { ArticleEntry, ProductEntry } from '../content.config';
 import { SITE } from './site';
 
 /** A schema.org PostalAddress built from one of the SITE address entries. */
@@ -49,6 +49,33 @@ export function productSchema(product: ProductEntry, site: URL | undefined) {
       ? { provider: { '@type': 'Organization', name: SITE.name.en } }
       : { brand: { '@type': 'Brand', name: product.data.brand } }),
     ...(product.data.image && { image: new URL(product.data.image.src, site).href }),
+  };
+}
+
+/** Article schema for an /insights detail page. */
+export function articleSchema(article: ArticleEntry, site: URL | undefined) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.data.title,
+    description: article.data.metaDescription,
+    datePublished: article.data.publishedDate.toISOString(),
+    url: new URL(`/insights/${article.id}/`, site).href,
+    author: { '@type': 'Organization', name: SITE.name.en },
+    publisher: { '@type': 'Organization', name: SITE.name.en },
+  };
+}
+
+/** FAQPage schema built from an article's frontmatter Q&A pairs. */
+export function faqSchema(article: ArticleEntry) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: article.data.faq.map((entry) => ({
+      '@type': 'Question',
+      name: entry.question,
+      acceptedAnswer: { '@type': 'Answer', text: entry.answer },
+    })),
   };
 }
 

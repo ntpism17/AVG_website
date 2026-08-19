@@ -1,0 +1,84 @@
+---
+import { render } from 'astro:content';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import CTABand from '../../components/ui/CTABand.astro';
+import type { ArticleEntry } from '../../content.config';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedArticles } from '../../lib/collections';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const articles = await getPublishedArticles();
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: ArticleEntry;
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+const breadcrumb = breadcrumbSchema(
+  [{ name: 'บทความ', href: '/insights' }, { name: article.data.title }],
+  Astro.site
+);
+const article_ = articleSchema(article, Astro.site);
+const faq = faqSchema(article);
+
+const relatedHref = article.data.relatedSolution
+  ? `/solutions/${article.data.relatedSolution}${
+      article.data.relatedAnchor ? `#${article.data.relatedAnchor}` : ''
+    }`
+  : undefined;
+---
+
+<BaseLayout title={article.data.title} description={article.data.metaDescription} ogType="article">
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(article_)} />
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(faq)} />
+
+  <article class="max-w-3xl mx-auto px-5 py-16 lg:py-24">
+    <Breadcrumb href="/insights" label="← บทความทั้งหมด" />
+    <h1 class="mt-6 font-display text-3xl sm:text-4xl font-bold text-ink">{article.data.title}</h1>
+
+    <div class="mt-10 prose prose-neutral max-w-none text-ink-2 leading-relaxed">
+      <Content />
+    </div>
+
+    <div class="mt-12 space-y-6">
+      <h2 class="font-display text-xl font-bold text-ink">คำถามที่พบบ่อย</h2>
+      {
+        article.data.faq.map((entry) => (
+          <div>
+            <h3 class="font-display font-semibold text-ink">{entry.question}</h3>
+            <p class="mt-2 text-sm text-ink-2 leading-relaxed">{entry.answer}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    {
+      relatedHref && (
+        <CTABand
+          layout="card"
+          heading="อยากดูว่าระบบทำงานจริงอย่างไร?"
+          body="ดูรายละเอียดโซลูชันที่เกี่ยวข้องกับหัวข้อนี้ พร้อมขอเดโมใช้งานฟรี"
+          ctaLabel="ดูโซลูชัน →"
+          ctaHref={relatedHref}
+        />
+      )
+    }
+
+    <CTABand
+      layout="card"
+      class="mt-6"
+      heading="มีคำถามเพิ่มเติม?"
+      body="ปรึกษาทีมงาน Advanced Grid ฟรี เราตอบกลับภายใน 1 วันทำการ"
+      ctaLabel="ติดต่อเรา →"
+    />
+  </article>
+</BaseLayout>

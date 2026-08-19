@@ -10,6 +10,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const pillars = [
   {
+    id: undefined as string | undefined,
     title: 'ฝั่งผลิต',
     sub: 'Real-time Solar Monitoring',
     desc: 'มอนิเตอร์ประสิทธิภาพระบบโซลาร์แบบเรียลไทม์ พร้อมแจ้งเตือนเมื่อมีปัญหา และรายงานลดคาร์บอนสำหรับงาน ESG',
@@ -21,25 +22,25 @@ const pillars = [
     ],
   },
   {
-    title: 'ฝั่งคำนวณ',
-    sub: 'Smart Tariff Engine + AMR',
-    desc: 'ดึงข้อมูลจากมิเตอร์ไร้สายอัตโนมัติ คำนวณค่าไฟตามเรท MEA/PEA จริง รวมถึง TOU และเฉลี่ยสัดส่วนไฟโซลาร์รายห้องอย่างเที่ยงธรรม',
+    id: 'amr-integration',
+    title: 'ฝั่งเก็บข้อมูล',
+    sub: 'Automatic Meter Reading (AMR)',
+    desc: 'อ่านมิเตอร์ไร้สายอัตโนมัติ ดึงข้อมูลการใช้ไฟและผลผลิตโซลาร์เข้าสู่ระบบแบบไม่ต้องจดมิเตอร์ด้วยมือ เป็นชั้นข้อมูลตั้งต้นให้ระบบคิดเงินและรายงานอื่น ๆ ต่อยอดได้',
     items: [
       'อ่านมิเตอร์อัตโนมัติผ่าน AMR — รองรับ Mk6E, Premier 550, Elite 500',
-      'คำนวณตามเรท MEA / PEA / TOU จริง อัปเดตอัตโนมัติ',
-      'เฉลี่ยไฟโซลาร์รายห้องตามสัดส่วนการใช้งานจริง',
-      'Audit trail ตรวจสอบย้อนหลังได้ทุกการคำนวณ',
+      'ดึงข้อมูลตามรอบเวลาที่ตั้งไว้ ไม่ต้องส่งคนไปจดหน้างาน',
+      'ข้อมูลพร้อมส่งต่อให้ระบบคิดเงิน (Billing) หรือ SCADA ของลูกค้าแบบ real-time',
     ],
   },
   {
-    title: 'ฝั่งคิดเงิน',
-    sub: 'Automated Billing & Collection',
-    desc: 'ออกใบแจ้งหนี้และใบเสร็จ PDF อัตโนมัติ แนบ QR Code พร้อมจ่าย พร้อมระบบหลังบ้านสรุปรายได้และติดตามการค้างชำระ',
+    id: 'meter-data-management',
+    title: 'ฝั่งจัดการข้อมูล',
+    sub: 'Meter Data Management (MDM)',
+    desc: 'รวบรวมและกระทบยอดข้อมูลจาก AMR ของทุกมิเตอร์เข้าไว้ที่เดียว ตรวจสอบความผิดปกติของข้อมูลก่อนส่งต่อ เป็นชั้นข้อมูลที่ระบบคิดเงินและรายงานทางการเงินต้องอ้างอิงได้อย่างน่าเชื่อถือ',
     items: [
-      'สร้างบิล PDF ทั้งตึก ในคลิกเดียว',
-      'แนบ PromptPay QR Code อัตโนมัติ จ่ายในแอปธนาคารได้ทันที',
-      'ส่งบิลผ่าน LINE / SMS / Email',
-      'Dashboard รายรับ รายจ่าย ค้างชำระ ครบในที่เดียว',
+      'กระทบยอด (reconcile) ข้อมูล Revenue Meter กับข้อมูลจาก AMR อัตโนมัติ',
+      'เก็บ Audit trail ของข้อมูลมิเตอร์ทุกจุดแบบย้อนหลังได้',
+      'จ่ายข้อมูลที่ตรวจสอบแล้วให้ระบบคิดเงินและ SCADA ผ่าน API เดียว',
     ],
   },
 ];
@@ -55,15 +56,6 @@ const personas = [
     ],
   },
   {
-    title: 'IPP / Solar PPA Operator',
-    desc: 'ผู้ลงทุนติดตั้งโซลาร์และขายไฟแบบ Private PPA / Corporate PPA / Direct PPA ที่ต้องออกบิลตามสัญญารายลูกค้า และรายงานผลให้ Offtaker, Investor, และ Lender',
-    items: [
-      'PPA Billing ตาม kWh จริง — รองรับ Tier rate, Escalator, Discount',
-      'Investor / Lender Report สรุป Revenue, Yield, Availability รายเดือน',
-      'พอร์ตหลายไซต์ — เปรียบเทียบ Performance ระหว่างไซต์ได้ทันที',
-    ],
-  },
-  {
     title: 'Asset Manager / O&M Team',
     desc: 'ทีมที่ดูแลโครงการโซลาร์หลายไซต์หลังเปิดใช้งานแล้ว ต้องการเครื่องมือ ติดตาม Performance, จัดการ Ticket / Alarm และวางแผน Maintenance ให้ตรงเวลา',
     items: [
@@ -74,7 +66,8 @@ const personas = [
   },
 ];
 
-const integrations = ['Huawei FusionSolar', 'SMA', 'Sungrow', 'SolarEdge'];
+const inverterIntegrations = ['Huawei FusionSolar', 'SMA', 'Sungrow', 'SolarEdge'];
+const meterIntegrations = ['Mk6E', 'Premier 550', 'Elite 500'];
 
 const businessTypes = [
   'Solar Developer / EPC',
@@ -87,18 +80,20 @@ const portfolioSizes = ['ต่ำกว่า 500 kWp', '500 kWp – 5 MWp', '5
 ---
 
 <BaseLayout
-  title="Solar Smart Bill — ระบบมอนิเตอร์โซลาร์ + คิดเงินอัตโนมัติ"
-  description="Solar Smart Bill: แพลตฟอร์มมอนิเตอร์ผลผลิตโซลาร์ ออก PPA Billing ตาม kWh จริง พร้อมรายงาน M&V และ ESG สำหรับ Solar Developer, EPC และ IPP/PPA Operator เชื่อมต่อ Huawei FusionSolar, SMA, Sungrow, SolarEdge"
+  title="AMR — ระบบอ่านมิเตอร์อัตโนมัติและมอนิเตอร์โซลาร์แบบเรียลไทม์"
+  description="AMR: ระบบมอนิเตอร์ผลผลิตโซลาร์และอ่านมิเตอร์ไฟฟ้าอัตโนมัติ (Automatic Meter Reading) รองรับ Mk6E, Premier 550, Elite 500 เชื่อมต่อ Huawei FusionSolar, SMA, Sungrow, SolarEdge พร้อมส่งข้อมูลต่อให้ระบบคิดเงิน (Billing) สำหรับ Solar Developer, EPC และทีม O&M และ MDM (ระบบจัดการข้อมูลมิเตอร์)"
 >
   <Section width="wide" spacing="lg">
     <Eyebrow>ผลิตภัณฑ์ใหม่ · 2026</Eyebrow>
     <h1 class="mt-3 font-display text-4xl sm:text-5xl font-bold leading-tight text-ink">
-      Solar Smart Bill — แพลตฟอร์มเดียวของ Solar Developer สมัยใหม่
+      AMR — มอนิเตอร์ผลผลิตโซลาร์ พร้อมอ่านมิเตอร์อัตโนมัติ
     </h1>
     <p class="mt-5 text-lg text-ink-2 leading-relaxed max-w-3xl">
-      มอนิเตอร์ผลผลิตของทุกไซต์ ออก PPA Billing ตาม kWh จริง พร้อมส่งรายงาน M&amp;V และ ESG
-      ให้ผู้พัฒนาระบบโซลาร์ — ออกแบบมาเฉพาะสำหรับ Solar Developer, EPC และ Solar PPA Operator
-      ที่ต้องการสเกลโครงการหลายไซต์โดยไม่เพิ่มทีม Back-office
+      มอนิเตอร์ผลผลิตของทุกไซต์แบบเรียลไทม์ และอ่านมิเตอร์ไฟฟ้าอัตโนมัติผ่าน AMR
+      โดยไม่ต้องส่งคนไปจดหน้างาน — เป็นชั้นข้อมูลตั้งต้นที่แม่นยำ พร้อมส่งต่อให้ระบบ{' '}
+      <a href="/solutions/billing" class="text-accent font-semibold hover:text-accent-deep"
+        >คิดเงิน (Billing)</a
+      > หรือ SCADA ของลูกค้าใช้งานต่อได้ทันที
     </p>
     <div class="mt-8 flex flex-wrap gap-4">
       <Button href="#quote">ขอทดลองใช้งาน Demo →</Button>
@@ -107,11 +102,14 @@ const portfolioSizes = ['ต่ำกว่า 500 kWp', '500 kWp – 5 MWp', '5
   </Section>
 
   <Section band="surface-y" width="wide">
-    <SectionHeading eyebrow="3 ขาหลักของระบบ" heading="ครบทั้งฝั่งผลิต ฝั่งคำนวณ และฝั่งคิดเงิน" />
+    <SectionHeading
+      eyebrow="3 ขาหลักของระบบ"
+      heading="ครบทั้งฝั่งผลิต ฝั่งเก็บข้อมูล และฝั่งจัดการข้อมูล (MDM)"
+    />
     <div class="mt-10 grid lg:grid-cols-3 gap-6">
       {
         pillars.map((pillar) => (
-          <Card as="article">
+          <Card as="article" id={pillar.id}>
             <h3 class="font-display font-bold text-lg text-ink">{pillar.title}</h3>
             <div class="font-en text-sm text-accent">{pillar.sub}</div>
             <p class="mt-3 text-sm text-ink-2 leading-relaxed">{pillar.desc}</p>
@@ -132,9 +130,9 @@ const portfolioSizes = ['ต่ำกว่า 500 kWp', '500 kWp – 5 MWp', '5
   <Section width="wide">
     <SectionHeading
       eyebrow="ออกแบบมาเพื่อใคร"
-      heading="3 บทบาทใน Solar Industry ที่ Solar Smart Bill ตอบโจทย์ที่สุด"
+      heading="2 บทบาทใน Solar Industry ที่ AMR ตอบโจทย์ที่สุด"
     />
-    <div class="mt-10 grid lg:grid-cols-3 gap-6">
+    <div class="mt-10 grid lg:grid-cols-2 gap-6">
       {
         personas.map((persona) => (
           <Card as="article">
@@ -156,13 +154,14 @@ const portfolioSizes = ['ต่ำกว่า 500 kWp', '500 kWp – 5 MWp', '5
       ระบบเชื่อมต่ออุปกรณ์ที่คุณมีอยู่แล้ว
     </h2>
     <p class="mt-3 text-center text-ink-2">
-      API เชื่อมตรงกับ Huawei FusionSolar, SMA, Sungrow, SolarEdge และ SCADA ของลูกค้า —
-      พร้อมอ่านมิเตอร์ผ่าน AMR รองรับ Mk6E, Premier 550, Elite 500
+      API เชื่อมตรงกับอินเวอร์เตอร์ {inverterIntegrations.join(', ')} และ SCADA ของลูกค้า — พร้อมอ่านมิเตอร์ผ่าน
+      AMR รองรับ {meterIntegrations.join(', ')}
     </p>
     <div
       class="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-2 font-display font-semibold text-ink-2"
     >
-      {integrations.map((name) => <span>{name}</span>)}
+      {inverterIntegrations.map((name) => <span>{name}</span>)}
+      {meterIntegrations.map((name) => <span>{name}</span>)}
     </div>
   </Section>
 
@@ -172,11 +171,7 @@ const portfolioSizes = ['ต่ำกว่า 500 kWp', '500 kWp – 5 MWp', '5
       ตอบกลับภายใน 1 วันทำการ · ทดลองใช้งานฟรี 30 วัน ไม่ต้องใช้บัตรเครดิต
     </p>
 
-    <ContactForm
-      subject="Solar Smart Bill — Quote request"
-      formId="solar-smart-bill-quote"
-      class="mt-8"
-    >
+    <ContactForm subject="AMR — Quote request" formId="amr-quote" class="mt-8">
       <div class="grid sm:grid-cols-2 gap-5">
         <Field id="qf-name" name="name" label="ชื่อ-นามสกุล" required />
         <Field id="qf-company" name="company" label="บริษัท / โครงการ" />

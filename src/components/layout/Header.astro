@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import wordmark from '../../assets/advancedgrid-wordmark.png';
 import { MAIN_NAV } from '../../lib/nav';
 import { SITE } from '../../lib/site';
+import ChevronDownIcon from '../icons/ChevronDownIcon.astro';
 import MailIcon from '../icons/MailIcon.astro';
 import MenuIcon from '../icons/MenuIcon.astro';
 import PhoneIcon from '../icons/PhoneIcon.astro';
@@ -49,18 +50,47 @@ import Button from '../ui/Button.astro';
 
     <nav class="hidden lg:flex items-center gap-6 font-en text-sm" aria-label="Main">
       {
-        MAIN_NAV.map((item) => (
-          <a
-            href={item.href}
-            class={
-              item.accent
-                ? 'text-accent font-semibold hover:text-accent-deep'
-                : 'text-ink-2 hover:text-ink'
-            }
-          >
-            {item.th}
-          </a>
-        ))
+        MAIN_NAV.map((item) =>
+          item.children ? (
+            <div class="relative group">
+              <button
+                type="button"
+                class={
+                  (item.accent
+                    ? 'text-accent font-semibold hover:text-accent-deep'
+                    : 'text-ink-2 hover:text-ink') + ' flex items-center gap-1'
+                }
+                aria-haspopup="true"
+              >
+                {item.th}
+                <ChevronDownIcon class="transition-transform group-hover:rotate-180" />
+              </button>
+              <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block pt-2">
+                <div class="min-w-48 rounded-md border border-line bg-bg-elev shadow-lg py-2">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="block px-4 py-2 text-ink-2 hover:bg-surface hover:text-ink"
+                    >
+                      {child.th}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              class={
+                item.accent
+                  ? 'text-accent font-semibold hover:text-accent-deep'
+                  : 'text-ink-2 hover:text-ink'
+              }
+            >
+              {item.th}
+            </a>
+          )
+        )
       }
     </nav>
 
@@ -75,11 +105,26 @@ import Button from '../ui/Button.astro';
         aria-label="Main mobile"
       >
         {
-          MAIN_NAV.map((item) => (
-            <a href={item.href} class={item.accent ? 'text-accent font-semibold' : 'text-ink-2'}>
-              {item.th}
-            </a>
-          ))
+          MAIN_NAV.map((item) =>
+            item.children ? (
+              <div>
+                <span class={item.accent ? 'text-accent font-semibold' : 'text-ink-2'}>
+                  {item.th}
+                </span>
+                <div class="mt-2 flex flex-col gap-2 pl-4">
+                  {item.children.map((child) => (
+                    <a href={child.href} class="text-ink-2">
+                      {child.th}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <a href={item.href} class={item.accent ? 'text-accent font-semibold' : 'text-ink-2'}>
+                {item.th}
+              </a>
+            )
+          )
         }
       </nav>
     </details>
