@@ -1,0 +1,47 @@
+---
+/**
+ * Labelled form control.
+ *
+ * `type: 'select'` renders the options passed via the default slot; every other
+ * type renders an input or textarea. The control classes live here so the two
+ * forms on the site cannot drift apart.
+ */
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  type?: 'text' | 'email' | 'tel' | 'textarea' | 'select';
+  required?: boolean;
+  rows?: number;
+  class?: string;
+}
+
+const {
+  id,
+  name,
+  label,
+  type = 'text',
+  required = false,
+  rows = 4,
+  class: className,
+} = Astro.props;
+
+const controlClass =
+  'mt-1 w-full rounded-md border border-line-strong px-3 py-2 bg-bg-elev text-ink';
+---
+
+<div class={className}>
+  <label for={id} class="block text-sm font-medium text-ink">{label}</label>
+
+  {
+    type === 'textarea' ? (
+      <textarea id={id} name={name} rows={rows} required={required} class={controlClass} />
+    ) : type === 'select' ? (
+      <select id={id} name={name} required={required} class={controlClass}>
+        <slot />
+      </select>
+    ) : (
+      <input id={id} name={name} type={type} required={required} class={controlClass} />
+    )
+  }
+</div>

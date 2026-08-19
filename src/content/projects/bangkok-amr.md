@@ -1,8 +1,9 @@
 ---
-title: "อพาร์ตเมนต์ · กรุงเทพฯ"
-location: "กรุงเทพฯ"
-capacity: "[pending case study data]"
-status: "pending"
+title: 'อพาร์ตเมนต์ · กรุงเทพฯ'
+summary: '[pending case study data] — โครงการอพาร์ตเมนต์ในกรุงเทพฯ รอการยืนยันรายละเอียดก่อนเผยแพร่'
+location: 'กรุงเทพฯ'
+capacity: '[pending case study data]'
+status: 'pending'
 order: 4
 ---
 

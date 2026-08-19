@@ -1,0 +1,21 @@
+---
+/** Rounded spec tag. Listing cards use `sm`; detail pages use `md`. */
+interface Props {
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const { size = 'sm', class: className } = Astro.props;
+
+const sizes = { sm: 'text-xs', md: 'text-sm' } as const;
+---
+
+<span
+  class:list={[
+    'rounded-full bg-surface border border-line px-3 py-1 text-ink-2',
+    sizes[size],
+    className,
+  ]}
+>
+  <slot />
+</span>

@@ -1,0 +1,78 @@
+---
+import { SITE } from '../lib/site';
+
+interface Props {
+  subject: string;
+  formId: string;
+  class?: string;
+  redirectPath?: string;
+  submitLabel?: string;
+}
+
+const {
+  subject,
+  formId,
+  class: className = '',
+  redirectPath = '/contact/thank-you',
+  submitLabel = 'ส่งคำขอ →',
+} = Astro.props;
+
+// Public by design — the key is embedded in the built HTML and only permits
+// POSTing to its bound inbox. When it is unset we omit access_key entirely
+// rather than submitting a value we know Web3Forms will reject.
+const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+const isLive = typeof accessKey === 'string' && accessKey.length > 0;
+
+// Web3Forms requires an absolute redirect URL.
+const redirectURL = new URL(redirectPath, Astro.site).href;
+---
+
+{
+  !isLive && (
+    <div
+      role="status"
+      class="mb-5 rounded-md border border-line-strong bg-accent-soft px-4 py-3 text-sm text-ink-2"
+    >
+      <strong class="block text-ink">แบบฟอร์มออนไลน์ปิดใช้งานชั่วคราว</strong>
+      กรุณาติดต่อเราที่{' '}
+      <a href={SITE.phone.href} class="font-semibold text-accent hover:text-accent-deep">
+        {SITE.phone.display}
+      </a>
+      หรือ{' '}
+      <a href={`mailto:${SITE.email}`} class="font-semibold text-accent hover:text-accent-deep">
+        {SITE.email}
+      </a>
+    </div>
+  )
+}
+
+<form
+  class:list={['space-y-5 rounded-lg border border-line bg-bg-elev p-8', className]}
+  action="https://api.web3forms.com/submit"
+  method="POST"
+  data-form={formId}
+>
+  {isLive && <input type="hidden" name="access_key" value={accessKey} />}
+  <input type="hidden" name="subject" value={subject} />
+  <input type="hidden" name="from_name" value={`${SITE.name.en} Website`} />
+  <input type="hidden" name="redirect" value={redirectURL} />
+
+  {/* Honeypot — Web3Forms discards submissions where this arrives non-empty. */}
+  <input
+    type="checkbox"
+    name="botcheck"
+    class="hidden"
+    style="display:none"
+    tabindex="-1"
+    aria-hidden="true"
+  />
+
+  <slot />
+
+  <button
+    type="submit"
+    disabled={!isLive}
+    class="w-full rounded-md bg-accent px-6 py-3 font-semibold text-white transition-colors hover:bg-accent-deep disabled:cursor-not-allowed disabled:bg-ink-3 disabled:hover:bg-ink-3"
+    >{submitLabel}</button
+  >
+</form>

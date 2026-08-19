@@ -1,107 +1,117 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
 import HeroMeter from '../components/illustrations/HeroMeter.astro';
-import { getCollection } from 'astro:content';
+import ProductCard from '../components/ProductCard.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import CTABand from '../components/ui/CTABand.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getFeaturedProducts } from '../lib/collections';
+import { SERVICES } from '../lib/services';
+import { SITE } from '../lib/site';
 
-const products = (await getCollection('products')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+const products = await getFeaturedProducts();
 
-const services = [
-  { num: '01 / 04', title: 'ที่ปรึกษาทางวิศวกรรม', desc: 'ให้คำปรึกษาตั้งแต่ขั้นตอนวางแผน เลือกอุปกรณ์ และตรวจสอบความเหมาะสมของระบบ TOU Meter, PQM และการสื่อสารสำหรับโครงการของคุณ' },
-  { num: '02 / 04', title: 'ออกแบบและจัดหาอุปกรณ์', desc: 'ออกแบบ Meter Box และ Communication Box ตามมาตรฐานการไฟฟ้า พร้อมจัดหา Energy Meter และอุปกรณ์สื่อสารจากแบรนด์ CEWE, SECURE, EDMI' },
-  { num: '03 / 04', title: 'ติดตั้งและทดสอบระบบ', desc: 'ทีมงานวิศวกรและช่างเทคนิคที่มีประสบการณ์ ดำเนินการติดตั้งตามมาตรฐาน พร้อมทดสอบและส่งมอบงานให้พร้อมใช้งานจริง' },
-  { num: '04 / 04', title: 'สอบเทียบและซ่อมบำรุง', desc: 'บริการ Meter Calibration และซ่อมบำรุงตามรอบ พร้อมรายงานผลและใบรับรองตามมาตรฐานสากล เพื่อความแม่นยำของการวัดในระยะยาว' },
-];
+// Brands we distribute, per CLAUDE.md.
+const brands = ['CEWE', 'SECURE', 'EDMI'];
 ---
 
 <BaseLayout
   title="Energy Meter, Power Quality Meter | Advanced Grid Co., Ltd."
+  exactTitle
   description="บริษัท แอดวานซ์ กริด จำกัด ผู้แทนจำหน่าย ให้คำปรึกษา ออกแบบและติดตั้งระบบสื่อสารทางไฟฟ้าสำหรับ Energy Meter, Power Quality Meter (PQM) และอุปกรณ์สื่อสาร TOU Meters & Power Quality Analyzer สำหรับงานโครงการโรงไฟฟ้า โซลาร์ รูฟท็อป และโซลาร์ฟาร์มลอยน้ำ"
 >
   <!-- Hero -->
-  <section class="max-w-6xl mx-auto px-5 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
+  <Section width="wide" spacing="lg" innerClass="grid lg:grid-cols-2 gap-12 items-center">
     <div>
-      <span class="font-en text-sm font-semibold text-accent">ผู้เชี่ยวชาญด้านมิเตอร์ไฟฟ้าและระบบสื่อสาร</span>
+      <Eyebrow>ผู้เชี่ยวชาญด้านมิเตอร์ไฟฟ้าและระบบสื่อสาร</Eyebrow>
       <h1 class="mt-3 font-display text-4xl sm:text-5xl font-bold leading-tight text-ink">
-        ระบบ <span class="text-accent">วัด</span> และ <span class="text-accent">สื่อสาร</span> พลังงานไฟฟ้า สำหรับโครงการระดับอุตสาหกรรม
+        ระบบ <span class="text-accent">วัด</span> และ <span class="text-accent">สื่อสาร</span> พลังงานไฟฟ้า
+        สำหรับโครงการระดับอุตสาหกรรม
       </h1>
       <p class="mt-5 text-lg text-ink-2 leading-relaxed">
-        ผู้แทนจำหน่าย ให้คำปรึกษา ออกแบบและติดตั้งระบบสื่อสารทางไฟฟ้าสำหรับ Energy Meter, Power Quality Meter (PQM) และอุปกรณ์สื่อสาร — TOU Meters &amp; Power Quality Analyzer สำหรับโครงการโรงไฟฟ้า, โซลาร์, รูฟท็อป และโซลาร์ฟาร์มลอยน้ำ
+        ผู้แทนจำหน่าย ให้คำปรึกษา ออกแบบและติดตั้งระบบสื่อสารทางไฟฟ้าสำหรับ Energy Meter, Power
+        Quality Meter (PQM) และอุปกรณ์สื่อสาร — TOU Meters &amp; Power Quality Analyzer
+        สำหรับโครงการโรงไฟฟ้า, โซลาร์, รูฟท็อป และโซลาร์ฟาร์มลอยน้ำ
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
-        <a href="/products" class="inline-flex items-center rounded-md bg-accent px-6 py-3 font-semibold text-white hover:bg-accent-deep transition-colors">ดูผลิตภัณฑ์</a>
-        <a href="/contact" class="inline-flex items-center rounded-md border border-line-strong px-6 py-3 font-semibold text-ink hover:bg-surface transition-colors">ปรึกษาวิศวกร →</a>
+        <Button href="/products">ดูผลิตภัณฑ์</Button>
+        <Button href="/contact" variant="secondary">ปรึกษาวิศวกร →</Button>
       </div>
     </div>
     <div class="aspect-square max-w-md mx-auto w-full">
       <HeroMeter />
     </div>
-  </section>
+  </Section>
 
   <!-- Brand strip -->
   <div class="border-y border-line bg-surface py-8">
     <div class="max-w-6xl mx-auto px-5">
-      <p class="text-center font-en text-sm text-ink-3 mb-4">แบรนด์ระดับโลกที่เราเป็นตัวแทนจัดจำหน่าย</p>
-      <div class="flex flex-wrap justify-center gap-x-10 gap-y-3 font-display font-bold text-xl text-ink-2">
-        <span>CEWE</span><span>SECURE</span><span>PREMIER</span><span>ProQ</span>
+      <p class="text-center font-en text-sm text-ink-3 mb-4">
+        แบรนด์ระดับโลกที่เราเป็นตัวแทนจัดจำหน่าย
+      </p>
+      <div
+        class="flex flex-wrap justify-center gap-x-10 gap-y-3 font-display font-bold text-xl text-ink-2"
+      >
+        {brands.map((brand) => <span>{brand}</span>)}
       </div>
     </div>
   </div>
 
   <!-- About teaser -->
-  <section class="max-w-6xl mx-auto px-5 py-20">
+  <Section width="wide">
     <SectionHeading
       eyebrow="เกี่ยวกับเรา"
       heading="วิศวกรรมที่เชื่อถือได้ ตั้งแต่การออกแบบจนถึงการสื่อสาร"
-      lede="บริษัท แอดวานซ์ กริด จำกัด ก่อตั้งขึ้นเพื่อตอบโจทย์อุตสาหกรรมพลังงานของประเทศไทย เราเป็นผู้แทนจำหน่ายอุปกรณ์มิเตอร์ไฟฟ้าและอุปกรณ์สื่อสารระดับโลก พร้อมให้บริการครบวงจร ตั้งแต่ที่ปรึกษา ออกแบบ จัดหา ติดตั้ง และซ่อมบำรุง"
+      lede={`${SITE.name.th} ก่อตั้งขึ้นเพื่อตอบโจทย์อุตสาหกรรมพลังงานของประเทศไทย เราเป็นผู้แทนจำหน่ายอุปกรณ์มิเตอร์ไฟฟ้าและอุปกรณ์สื่อสารระดับโลก พร้อมให้บริการครบวงจร ตั้งแต่ที่ปรึกษา ออกแบบ จัดหา ติดตั้ง และซ่อมบำรุง`}
     />
-    <a href="/about" class="mt-6 inline-block font-semibold text-accent hover:text-accent-deep">อ่านเพิ่มเติมเกี่ยวกับเรา →</a>
-  </section>
+    <a href="/about" class="mt-6 inline-block font-semibold text-accent hover:text-accent-deep">
+      อ่านเพิ่มเติมเกี่ยวกับเรา →
+    </a>
+  </Section>
 
   <!-- Services teaser -->
-  <section class="max-w-6xl mx-auto px-5 py-20">
+  <Section width="wide">
     <SectionHeading
       eyebrow="บริการของเรา"
       heading="บริการครบวงจรสำหรับระบบมิเตอร์ไฟฟ้าและการสื่อสาร"
       lede="ตั้งแต่การให้คำปรึกษา ออกแบบทางวิศวกรรม จัดหาอุปกรณ์ ไปจนถึงการติดตั้ง ทดสอบ และซ่อมบำรุง — เรารับผิดชอบทุกขั้นตอนของโครงการ"
     />
     <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {services.map((s) => (
-        <article class="rounded-lg border border-line bg-bg-elev p-6 hover:shadow-lg transition-shadow">
-          <div class="font-en text-xs text-ink-3">{s.num}</div>
-          <h3 class="mt-2 font-display font-semibold text-lg text-ink">{s.title}</h3>
-          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{s.desc}</p>
-        </article>
-      ))}
+      {
+        SERVICES.map((service) => (
+          <Card as="article" interactive>
+            <div class="font-en text-xs text-ink-3">{service.num}</div>
+            <h3 class="mt-2 font-display font-semibold text-lg text-ink">{service.title}</h3>
+            <p class="mt-2 text-sm text-ink-2 leading-relaxed">{service.desc}</p>
+          </Card>
+        ))
+      }
     </div>
-    <a href="/services" class="mt-8 inline-block font-semibold text-accent hover:text-accent-deep">ดูบริการทั้งหมด →</a>
-  </section>
+    <a href="/services" class="mt-8 inline-block font-semibold text-accent hover:text-accent-deep">
+      ดูบริการทั้งหมด →
+    </a>
+  </Section>
 
   <!-- Featured products -->
-  <section class="max-w-6xl mx-auto px-5 py-20">
-    <SectionHeading
-      eyebrow="ผลิตภัณฑ์"
-      heading="Energy Meter และอุปกรณ์สื่อสารระดับโลก"
-    />
+  <Section width="wide">
+    <SectionHeading eyebrow="ผลิตภัณฑ์" heading="Energy Meter และอุปกรณ์สื่อสารระดับโลก" />
     <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {products.map((p) => (
-        <a href={`/products/${p.id}`} class="rounded-lg border border-line bg-bg-elev p-6 hover:shadow-lg transition-shadow">
-          <span class="font-en text-xs font-semibold text-accent">{p.data.brand}</span>
-          <h3 class="mt-1 font-display font-semibold text-lg text-ink">{p.data.name}</h3>
-          <div class="text-sm text-ink-3">{p.data.tagline}</div>
-          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{p.data.description}</p>
-        </a>
-      ))}
+      {products.map((product) => <ProductCard product={product} headingLevel="h3" />)}
     </div>
-    <a href="/products" class="mt-8 inline-block font-semibold text-accent hover:text-accent-deep">ดูผลิตภัณฑ์ทั้งหมด →</a>
-  </section>
+    <a href="/products" class="mt-8 inline-block font-semibold text-accent hover:text-accent-deep">
+      ดูผลิตภัณฑ์ทั้งหมด →
+    </a>
+  </Section>
 
   <!-- Contact CTA -->
-  <section class="bg-surface border-t border-line">
-    <div class="max-w-6xl mx-auto px-5 py-20 text-center">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-ink">พร้อมเป็นส่วนหนึ่งของโครงการคุณ</h2>
-      <p class="mt-4 max-w-xl mx-auto text-ink-2">ส่งรายละเอียดโครงการของคุณ ทีมวิศวกรของเราจะประเมินขอบเขตงาน และเสนอราคาให้ภายใน 2 วันทำการ</p>
-      <a href="/contact" class="mt-8 inline-flex items-center rounded-md bg-accent px-6 py-3 font-semibold text-white hover:bg-accent-deep transition-colors">ติดต่อเรา →</a>
-    </div>
-  </section>
+  <CTABand
+    width="wide"
+    headingSize="lg"
+    heading="พร้อมเป็นส่วนหนึ่งของโครงการคุณ"
+    body="ส่งรายละเอียดโครงการของคุณ ทีมวิศวกรของเราจะประเมินขอบเขตงาน และเสนอราคาให้ภายใน 2 วันทำการ"
+    ctaLabel="ติดต่อเรา →"
+  />
 </BaseLayout>

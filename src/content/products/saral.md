@@ -1,0 +1,81 @@
+---
+name: 'SECURE Saral'
+brand: 'SECURE'
+category: 'Energy Meter · Single-Phase Credit Meter'
+tagline: 'Energy Meter · Single-Phase Credit Meter'
+description: 'มิเตอร์เฟสเดียวแบบต่อตรง ขนาดกะทัดรัด สำหรับที่พักอาศัยและร้านค้าขนาดเล็ก รองรับงาน Net Metering'
+specs: ['Class 1.0', '1 เฟส', 'Direct connected', 'Net metering', 'BLE']
+specSource: 'SECURE Saral datasheet'
+specTable:
+  - group: 'การวัด'
+    rows:
+      - label: 'รูปแบบการต่อ (Connection type)'
+        value: 'Direct connected'
+      - label: 'การเดินสาย (Wiring configuration)'
+        value: 'Single phase, two wire'
+      - label: 'ช่วงแรงดัน'
+        value: '230/240 V (P-N)'
+      - label: 'ช่วงกระแส'
+        value: '5-30A, 10-60A, 10-100A'
+      - label: 'ระดับความแม่นยำ (Accuracy class)'
+        value: '1.0'
+      - label: 'ความถี่'
+        value: '50 Hz ± 5%'
+      - label: 'Burden (วงจรแรงดัน)'
+        value: '< 0.5W and 1 VA'
+      - label: 'Burden (วงจรกระแส)'
+        value: '< 0.1 VA'
+      - label: 'Meter constant'
+        value: '6400 imp/kWh, 3200 imp/kWh, 1280 imp/kWh'
+  - group: 'ฟังก์ชันการวัดและบันทึกข้อมูล'
+    rows:
+      - label: 'ประเภทพลังงาน'
+        value: 'Active and apparent'
+      - label: 'การบันทึกพลังงาน'
+        value: 'Forwarded, import and export'
+      - label: 'TOU'
+        value: 'Up to 8 rate registers; up to 8 time zones; seasons, weekdays, and holidays'
+      - label: 'Maximum demand'
+        value: 'Configurable in 6 rate registers'
+      - label: 'Midnight energy'
+        value: '35 days for 2 parameters'
+      - label: 'Load survey'
+        value: 'More than 150 days (30min. IP) upto 5 parameters'
+      - label: 'Events'
+        value: 'Up to 300 events, compartment wise'
+      - label: 'History'
+        value: '12 billing periods'
+  - group: 'การสื่อสาร'
+    rows:
+      - label: 'พอร์ตสื่อสารในตัว'
+        value: 'IEC 62056-21 physical port for local communication'
+      - label: 'ทางเลือกเพิ่มเติม'
+        value: 'Optional BLE (Bluetooth Low Energy) with mobile app support or RS 232 port over micro USB for remote communication'
+  - group: 'สภาพแวดล้อม'
+    rows:
+      - label: 'การป้องกัน (Ingress protection)'
+        value: 'IP 54'
+      - label: 'Surge withstand'
+        value: '10 kV'
+      - label: 'ความชื้น'
+        value: '95% non-condensing'
+      - label: 'อุณหภูมิ'
+        value: '-20°C to +60°C (operating), -25°C to +70°C (storage)'
+  - group: 'กายภาพ'
+    rows:
+      - label: 'ขนาด (W x H x D)'
+        value: '95 x 130 x 60mm (approx.)'
+      - label: 'น้ำหนัก'
+        value: '0.3 kg (approx.)'
+      - label: 'วัสดุ (Enclosure)'
+        value: 'Engineering plastic'
+  - group: 'มาตรฐาน'
+    rows:
+      - label: 'Standards'
+        value: 'IS 13779, IEC 62052-11, IEC 62053-21, IS 15959'
+order: 7
+---
+
+มิเตอร์เฟสเดียวแบบต่อตรง (direct connected) ขนาดกะทัดรัด สำหรับงานวัดหน่วยที่พักอาศัยและร้านค้าขนาดเล็ก รวมถึงงาน Net Metering ที่ต้องบันทึกทั้งพลังงานขาเข้าและขาออก
+
+ให้ค่าการวัดที่เสถียรในสภาพหน้างานที่หลากหลาย พร้อมฟังก์ชันป้องกันการสูญเสียรายได้ รองรับการอ่านค่าผ่านพอร์ต IEC 62056-21 และเลือกเพิ่ม BLE สำหรับอ่านค่าผ่านแอปบนมือถือได้

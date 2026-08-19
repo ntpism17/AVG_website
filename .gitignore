@@ -16,6 +16,10 @@ pnpm-debug.log*
 .env
 .env.production
 
+# manufacturer datasheets — kept locally as the source for product specs,
+# but not committed or published (vendor copyright)
+reference/legacy-site/assets/*.pdf
+
 # macOS-specific files
 .DS_Store
 Thumbs.db
@@ -29,3 +33,4 @@ Thumbs.db
 # editor junk
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json

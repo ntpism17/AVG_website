@@ -1,67 +1,37 @@
 ---
+import Card from '../components/ui/Card.astro';
+import CTABand from '../components/ui/CTABand.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-
-const services = [
-  {
-    id: 'consulting',
-    num: '01 / 04',
-    title: 'ที่ปรึกษาทางวิศวกรรม',
-    titleEn: 'Engineering consulting',
-    desc: 'ให้คำปรึกษาตั้งแต่ขั้นตอนวางแผน เลือกอุปกรณ์ และตรวจสอบความเหมาะสมของระบบ TOU Meter, PQM และการสื่อสารสำหรับโครงการของคุณ',
-  },
-  {
-    id: 'design',
-    num: '02 / 04',
-    title: 'ออกแบบและจัดหาอุปกรณ์',
-    titleEn: 'Design & equipment supply',
-    desc: 'ออกแบบ Meter Box และ Communication Box ตามมาตรฐานการไฟฟ้า พร้อมจัดหา Energy Meter และอุปกรณ์สื่อสารจากแบรนด์ CEWE, SECURE, EDMI',
-  },
-  {
-    id: 'installation',
-    num: '03 / 04',
-    title: 'ติดตั้งและทดสอบระบบ',
-    titleEn: 'Installation & commissioning',
-    desc: 'ทีมงานวิศวกรและช่างเทคนิคที่มีประสบการณ์ ดำเนินการติดตั้งตามมาตรฐาน พร้อมทดสอบและส่งมอบงานให้พร้อมใช้งานจริง',
-  },
-  {
-    id: 'calibration',
-    num: '04 / 04',
-    title: 'สอบเทียบและซ่อมบำรุง',
-    titleEn: 'Calibration & maintenance',
-    desc: 'บริการ Meter Calibration และซ่อมบำรุงตามรอบ พร้อมรายงานผลและใบรับรองตามมาตรฐานสากล เพื่อความแม่นยำของการวัดในระยะยาว',
-  },
-];
+import { SERVICES } from '../lib/services';
 ---
 
 <BaseLayout
-  title="บริการ | Advanced Grid Co., Ltd."
+  title="บริการ"
   description="บริการครบวงจรสำหรับระบบมิเตอร์ไฟฟ้าและการสื่อสาร ตั้งแต่ที่ปรึกษาทางวิศวกรรม ออกแบบและจัดหาอุปกรณ์ ติดตั้งและทดสอบระบบ ไปจนถึงสอบเทียบและซ่อมบำรุง"
 >
-  <section class="max-w-4xl mx-auto px-5 py-16 lg:py-24">
+  <Section spacing="lg">
     <SectionHeading
       as="h1"
       eyebrow="บริการของเรา"
       heading="บริการครบวงจรสำหรับระบบมิเตอร์ไฟฟ้าและการสื่อสาร"
       lede="ตั้งแต่การให้คำปรึกษา ออกแบบทางวิศวกรรม จัดหาอุปกรณ์ ไปจนถึงการติดตั้ง ทดสอบ และซ่อมบำรุง — เรารับผิดชอบทุกขั้นตอนของโครงการ"
     />
-  </section>
+  </Section>
 
-  <section class="max-w-4xl mx-auto px-5 pb-24 space-y-10">
-    {services.map((s) => (
-      <article id={s.id} class="scroll-mt-24 rounded-lg border border-line bg-bg-elev p-8">
-        <div class="font-en text-xs text-ink-3">{s.num}</div>
-        <h2 class="mt-2 font-display text-2xl font-bold text-ink">{s.title}</h2>
-        <div class="font-en text-sm text-ink-3">{s.titleEn}</div>
-        <p class="mt-4 text-ink-2 leading-relaxed">{s.desc}</p>
-      </article>
-    ))}
-  </section>
+  <Section spacing="none" innerClass="pb-24 space-y-10">
+    {
+      SERVICES.map((service) => (
+        <Card as="article" id={service.id} padding="lg" class="scroll-mt-24">
+          <div class="font-en text-xs text-ink-3">{service.num}</div>
+          <h2 class="mt-2 font-display text-2xl font-bold text-ink">{service.title}</h2>
+          <div class="font-en text-sm text-ink-3">{service.titleEn}</div>
+          <p class="mt-4 text-ink-2 leading-relaxed">{service.desc}</p>
+        </Card>
+      ))
+    }
+  </Section>
 
-  <section class="bg-surface border-t border-line">
-    <div class="max-w-4xl mx-auto px-5 py-16 text-center">
-      <h2 class="font-display text-2xl font-bold text-ink">ให้เราช่วยประเมินขอบเขตงานของคุณ</h2>
-      <a href="/contact" class="mt-6 inline-flex items-center rounded-md bg-accent px-6 py-3 font-semibold text-white hover:bg-accent-deep transition-colors">ขอใบเสนอราคา →</a>
-    </div>
-  </section>
+  <CTABand heading="ให้เราช่วยประเมินขอบเขตงานของคุณ" ctaLabel="ขอใบเสนอราคา →" />
 </BaseLayout>

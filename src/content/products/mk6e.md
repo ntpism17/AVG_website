@@ -1,10 +1,10 @@
 ---
-name: "EDMI Mk6E"
-brand: "EDMI"
-category: "Smart Energy Meter"
-tagline: "Smart Energy Meter"
-description: "สมาร์ทมิเตอร์ EDMI Mk6E สำหรับโครงการ AMI/AMR รองรับการสื่อสารผ่าน RF, PLC, และ Cellular ขยายระบบได้ยืดหยุ่น"
-specs: ["Smart Meter", "AMI / AMR", "RF · PLC"]
+name: 'EDMI Mk6E'
+brand: 'EDMI'
+category: 'Smart Energy Meter'
+tagline: 'Smart Energy Meter'
+description: 'สมาร์ทมิเตอร์ EDMI Mk6E สำหรับโครงการ AMI/AMR รองรับการสื่อสารผ่าน RF, PLC, และ Cellular ขยายระบบได้ยืดหยุ่น'
+specs: ['Smart Meter', 'AMI / AMR', 'RF · PLC']
 order: 5
 ---
 

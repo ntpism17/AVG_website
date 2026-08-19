@@ -1,8 +1,9 @@
 ---
-title: "โรงไฟฟ้าก๊าซธรรมชาติ · ระยอง"
-location: "จ.ระยอง"
-capacity: "[pending case study data]"
-status: "pending"
+title: 'โรงไฟฟ้าก๊าซธรรมชาติ · ระยอง'
+summary: '[pending case study data] — โครงการโรงไฟฟ้าก๊าซธรรมชาติ จ.ระยอง รอการยืนยันรายละเอียดก่อนเผยแพร่'
+location: 'จ.ระยอง'
+capacity: '[pending case study data]'
+status: 'pending'
 order: 2
 ---
 

@@ -1,0 +1,70 @@
+---
+import Button from './Button.astro';
+import Section from './Section.astro';
+
+/**
+ * Closing call to action.
+ *
+ * `band` is the full-bleed strip that ends the top-level pages; `card` is the
+ * inset panel used at the foot of product and project detail pages.
+ */
+interface Props {
+  heading: string;
+  body?: string;
+  ctaLabel: string;
+  ctaHref?: string;
+  layout?: 'band' | 'card';
+  width?: 'narrow' | 'default' | 'wide';
+  /** Heading scale — `lg` matches the homepage's larger closing band. */
+  headingSize?: 'md' | 'lg';
+  class?: string;
+}
+
+const {
+  heading,
+  body,
+  ctaLabel,
+  ctaHref = '/contact',
+  layout = 'band',
+  width = 'default',
+  headingSize = 'md',
+  class: className,
+}: Props = Astro.props;
+
+const isLarge = headingSize === 'lg';
+
+const headingClass = isLarge
+  ? 'font-display text-3xl sm:text-4xl font-bold text-ink'
+  : 'font-display text-2xl font-bold text-ink';
+
+// The large variant is airier throughout: more band padding and more space
+// above the button, matching its bigger heading.
+const buttonSpacing = isLarge ? 'mt-8' : 'mt-6';
+const bandSpacing = isLarge ? 'md' : 'sm';
+---
+
+{
+  layout === 'band' ? (
+    <Section
+      band="surface-top"
+      width={width}
+      spacing={bandSpacing}
+      innerClass="text-center"
+      class={className}
+    >
+      <h2 class={headingClass}>{heading}</h2>
+      {body && <p class="mt-4 max-w-xl mx-auto text-ink-2">{body}</p>}
+      <Button href={ctaHref} class={buttonSpacing}>
+        {ctaLabel}
+      </Button>
+    </Section>
+  ) : (
+    <div class:list={['mt-12 rounded-lg bg-surface border border-line p-8 text-center', className]}>
+      <h2 class="font-display text-xl font-bold text-ink">{heading}</h2>
+      {body && <p class="mt-2 text-ink-2">{body}</p>}
+      <Button href={ctaHref} class="mt-5">
+        {ctaLabel}
+      </Button>
+    </div>
+  )
+}

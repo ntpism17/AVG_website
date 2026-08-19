@@ -1,8 +1,9 @@
 ---
-title: "นิคมอุตสาหกรรม · ชลบุรี"
-location: "จ.ชลบุรี"
-capacity: "[pending case study data]"
-status: "pending"
+title: 'นิคมอุตสาหกรรม · ชลบุรี'
+summary: '[pending case study data] — โครงการนิคมอุตสาหกรรม จ.ชลบุรี รอการยืนยันรายละเอียดก่อนเผยแพร่'
+location: 'จ.ชลบุรี'
+capacity: '[pending case study data]'
+status: 'pending'
 order: 3
 ---
 

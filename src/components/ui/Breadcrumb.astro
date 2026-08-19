@@ -1,0 +1,17 @@
+---
+/**
+ * Back-link for detail pages, which sit one level below their listing page.
+ *
+ * The matching `BreadcrumbList` JSON-LD is emitted by the page into
+ * BaseLayout's `head` slot — see `breadcrumbSchema` in `lib/schema.ts` — so all
+ * of a page's structured data stays together in <head>.
+ */
+interface Props {
+  href: string;
+  label: string;
+}
+
+const { href, label }: Props = Astro.props;
+---
+
+<a {href} class="text-sm font-semibold text-accent hover:text-accent-deep">{label}</a>

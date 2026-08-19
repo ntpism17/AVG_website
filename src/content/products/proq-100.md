@@ -1,10 +1,10 @@
 ---
-name: "CEWE ProQ 100"
-brand: "CEWE"
-category: "Power Quality Analyzer"
-tagline: "Power Quality Analyzer"
-description: "เครื่องวิเคราะห์คุณภาพไฟฟ้า ProQ 100 ตามมาตรฐาน IEC 61000-4-30 Class A สำหรับการตรวจสอบฮาร์มอนิกและการรบกวนทางไฟฟ้า"
-specs: ["IEC 61000-4-30 Class A", "PQ Analyzer"]
+name: 'CEWE ProQ 100'
+brand: 'CEWE'
+category: 'Power Quality Analyzer'
+tagline: 'Power Quality Analyzer'
+description: 'เครื่องวิเคราะห์คุณภาพไฟฟ้า ProQ 100 ตามมาตรฐาน IEC 61000-4-30 Class A สำหรับการตรวจสอบฮาร์มอนิกและการรบกวนทางไฟฟ้า'
+specs: ['IEC 61000-4-30 Class A', 'PQ Analyzer']
 order: 3
 ---
 

@@ -1,0 +1,30 @@
+---
+/**
+ * Link-styled call to action. Renders an <a>; forms use their own submit button
+ * inside ContactForm, which has disabled-state styling this doesn't need.
+ */
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary';
+  size?: 'md' | 'sm';
+  class?: string;
+}
+
+const { href, variant = 'primary', size = 'md', class: className } = Astro.props;
+
+const base = 'inline-flex items-center rounded-md font-semibold transition-colors';
+
+const variants = {
+  primary: 'bg-accent text-white hover:bg-accent-deep',
+  secondary: 'border border-line-strong text-ink hover:bg-surface',
+} as const;
+
+const sizes = {
+  md: 'px-6 py-3',
+  sm: 'px-4 py-2 text-sm',
+} as const;
+---
+
+<a {href} class:list={[base, variants[variant], sizes[size], className]}>
+  <slot />
+</a>

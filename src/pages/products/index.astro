@@ -1,35 +1,21 @@
 ---
+import ProductCard from '../../components/ProductCard.astro';
+import Section from '../../components/ui/Section.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import SectionHeading from '../../components/SectionHeading.astro';
-import { getCollection } from 'astro:content';
+import { getSortedProducts } from '../../lib/collections';
 
-const products = (await getCollection('products')).sort((a, b) => a.data.order - b.data.order);
+const products = await getSortedProducts();
 ---
 
 <BaseLayout
-  title="ผลิตภัณฑ์ | Energy Meter, Power Quality Meter | Advanced Grid Co., Ltd."
+  title="ผลิตภัณฑ์ | Energy Meter, Power Quality Meter"
   description="Energy Meter และอุปกรณ์สื่อสารระดับโลกจาก CEWE, SECURE, EDMI — TOU Meter, Power Quality Analyzer, Smart Meter และบริการสอบเทียบมิเตอร์ ISO/IEC 17025"
 >
-  <section class="max-w-6xl mx-auto px-5 py-16 lg:py-24">
-    <SectionHeading
-      as="h1"
-      eyebrow="ผลิตภัณฑ์"
-      heading="Energy Meter และอุปกรณ์สื่อสารระดับโลก"
-    />
+  <Section width="wide" spacing="lg">
+    <SectionHeading as="h1" eyebrow="ผลิตภัณฑ์" heading="Energy Meter และอุปกรณ์สื่อสารระดับโลก" />
     <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {products.map((p) => (
-        <a href={`/products/${p.id}`} class="rounded-lg border border-line bg-bg-elev p-6 hover:shadow-lg transition-shadow">
-          <span class="font-en text-xs font-semibold text-accent">{p.data.brand}</span>
-          <h2 class="mt-1 font-display font-semibold text-lg text-ink">{p.data.name}</h2>
-          <div class="text-sm text-ink-3">{p.data.tagline}</div>
-          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{p.data.description}</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            {p.data.specs.map((spec) => (
-              <span class="text-xs rounded-full bg-surface border border-line px-3 py-1 text-ink-2">{spec}</span>
-            ))}
-          </div>
-        </a>
-      ))}
+      {products.map((product) => <ProductCard product={product} headingLevel="h2" showSpecs />)}
     </div>
-  </section>
+  </Section>
 </BaseLayout>

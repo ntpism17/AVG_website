@@ -1,0 +1,13 @@
+# build output & generated types
+dist/
+.astro/
+
+# dependencies & lockfile
+node_modules/
+package-lock.json
+
+# legacy CMS export — kept verbatim as the migration reference
+reference/
+
+# binary/static assets
+public/

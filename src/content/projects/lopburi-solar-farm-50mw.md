@@ -1,12 +1,13 @@
 ---
-title: "โซลาร์ฟาร์ม 50MW: ส่งข้อมูลให้การไฟฟ้าครบทุกจุด แบบเรียลไทม์"
-location: "จ.ลพบุรี"
-capacity: "50 MW"
-status: "published"
+title: 'โซลาร์ฟาร์ม 50MW: ส่งข้อมูลให้การไฟฟ้าครบทุกจุด แบบเรียลไทม์'
+summary: 'กรณีศึกษาโซลาร์ฟาร์ม 50MW จ.ลพบุรี — Advanced Grid ออกแบบและติดตั้งระบบ TOU Energy Meter, Power Quality Analyzer และ Communication Box ส่งข้อมูลเข้าระบบ Tariff ของการไฟฟ้าแบบเรียลไทม์ ลดเวลาตรวจสอบรายเดือนลง 70%'
+location: 'จ.ลพบุรี'
+capacity: '50 MW'
+status: 'published'
 stats:
-  - { label: "กำลังผลิต", value: "50 MW" }
-  - { label: "จุดวัด", value: "36" }
-  - { label: "ลดเวลาตรวจ", value: "70%" }
+  - { label: 'กำลังผลิต', value: '50 MW' }
+  - { label: 'จุดวัด', value: '36' }
+  - { label: 'ลดเวลาตรวจ', value: '70%' }
 order: 1
 ---
 
@@ -26,7 +27,7 @@ Advanced Grid ออกแบบและติดตั้งระบบ TOU E
 
 Advanced Grid เข้าไปสำรวจหน้างาน ออกแบบสถาปัตยกรรมระบบใหม่ทั้งหมดให้ผ่านมาตรฐาน Tariff Metering ของการไฟฟ้า โดยใช้อุปกรณ์ระดับ Class 0.2S เป็นหลัก พร้อมระบบสื่อสารที่ออกแบบสำหรับสภาพแวดล้อมกลางแจ้งของโซลาร์ฟาร์ม
 
-- ติดตั้ง CEWE Prometer 100 (Class 0.2S) ที่จุดเชื่อมต่อ Grid และ Inverter Station หลัก
+- ติดตั้ง SECURE Prometer 100 (Class 0.2S) ที่จุดเชื่อมต่อ Grid และ Inverter Station หลัก
 - วาง CEWE ProQ 100 Power Quality Analyzer ที่จุด Point of Common Coupling เพื่อตรวจคุณภาพไฟฟ้าตาม IEC 61000-4-30 Class A
 - ออกแบบและประกอบ Meter Box + Communication Box แบบ Outdoor IP54 พร้อม Lightning Protection
 - สร้างระบบสื่อสาร RS-485 → Fiber Backbone → 4G/Cellular Failover ไปยัง SCADA ของลูกค้าและการไฟฟ้า
@@ -44,6 +45,6 @@ Advanced Grid ยังให้บริการ Calibration ประจำ�
 
 ### ผลิตภัณฑ์ที่ใช้ในโครงการนี้
 
-- **CEWE Prometer 100** (Energy Meter · Class 0.2S) — ติดตั้ง 18 เครื่อง ที่ Grid Interconnect และ Inverter Stations หลัก
+- **SECURE Prometer 100** (Energy Meter · Class 0.2S) — ติดตั้ง 18 เครื่อง ที่ Grid Interconnect และ Inverter Stations หลัก
 - **CEWE ProQ 100** (Power Quality Analyzer · IEC 61000-4-30 Class A) — ติดตั้ง 2 เครื่อง ที่จุด Point of Common Coupling
 - **บริการสอบเทียบประจำปี** — สอบเทียบมิเตอร์ทุกจุดประจำปี พร้อมใบรับรองที่ใช้กับการไฟฟ้าได้

@@ -1,70 +1,108 @@
 ---
+import { Image } from 'astro:assets';
+import Card from '../components/ui/Card.astro';
+import CTABand from '../components/ui/CTABand.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-import { getCollection } from 'astro:content';
+import { getSortedBrands } from '../lib/collections';
+import { SITE } from '../lib/site';
 
-const brands = (await getCollection('brands')).sort((a, b) => a.data.order - b.data.order);
+const brands = await getSortedBrands();
+
+const principles = [
+  {
+    title: 'ซื่อสัตย์ & จริงใจ',
+    desc: 'ให้คำแนะนำตามความเหมาะสมของโครงการจริง ไม่ขายเกินความจำเป็น',
+  },
+  {
+    title: 'รวดเร็ว & ตรงต่อเวลา',
+    desc: 'ตอบกลับและส่งมอบงานตามกำหนด เพื่อไม่ให้โครงการของลูกค้าล่าช้า',
+  },
+];
+
+// Placeholder sentinel used by the brands collection for unconfirmed fields.
+const PENDING = '[pending]';
 ---
 
 <BaseLayout
-  title="เกี่ยวกับเรา | Advanced Grid Co., Ltd."
+  title="เกี่ยวกับเรา"
   description="บริษัท แอดวานซ์ กริด จำกัด ก่อตั้งขึ้นเพื่อตอบโจทย์อุตสาหกรรมพลังงานของประเทศไทย ผู้แทนจำหน่ายอุปกรณ์มิเตอร์ไฟฟ้าและอุปกรณ์สื่อสารระดับโลก พร้อมบริการครบวงจร"
 >
-  <section class="max-w-4xl mx-auto px-5 py-16 lg:py-24">
-    <span class="font-en text-sm font-semibold text-accent">เกี่ยวกับเรา</span>
+  <Section spacing="lg">
+    <Eyebrow>เกี่ยวกับเรา</Eyebrow>
     <h1 class="mt-3 font-display text-4xl sm:text-5xl font-bold text-ink">
       วิศวกรรมที่เชื่อถือได้ ตั้งแต่การออกแบบจนถึงการสื่อสาร
     </h1>
     <p class="mt-6 text-lg text-ink-2 leading-relaxed">
-      บริษัท แอดวานซ์ กริด จำกัด ก่อตั้งขึ้นเพื่อตอบโจทย์อุตสาหกรรมพลังงานของประเทศไทย เราเป็นผู้แทนจำหน่ายอุปกรณ์มิเตอร์ไฟฟ้าและอุปกรณ์สื่อสารระดับโลก พร้อมให้บริการครบวงจร ตั้งแต่ที่ปรึกษา ออกแบบ จัดหา ติดตั้ง และซ่อมบำรุง
+      {SITE.name.th} ก่อตั้งขึ้นเพื่อตอบโจทย์อุตสาหกรรมพลังงานของประเทศไทย เราเป็นผู้แทนจำหน่ายอุปกรณ์มิเตอร์ไฟฟ้าและอุปกรณ์สื่อสารระดับโลก
+      พร้อมให้บริการครบวงจร ตั้งแต่ที่ปรึกษา ออกแบบ จัดหา ติดตั้ง และซ่อมบำรุง
     </p>
     <p class="mt-4 text-lg text-ink-2 leading-relaxed">
-      ทีมวิศวกรของเราเชี่ยวชาญในงาน TOU Meters, Power Quality Analyzer, Meter Box, Communication Box และระบบสื่อสารสมาร์ทมิเตอร์ สำหรับโครงการโรงไฟฟ้า, โซลาร์, รูฟท็อป และโซลาร์ฟาร์มลอยน้ำ
+      ทีมวิศวกรของเราเชี่ยวชาญในงาน TOU Meters, Power Quality Analyzer, Meter Box, Communication Box
+      และระบบสื่อสารสมาร์ทมิเตอร์ สำหรับโครงการโรงไฟฟ้า, โซลาร์, รูฟท็อป และโซลาร์ฟาร์มลอยน้ำ
     </p>
-  </section>
+  </Section>
 
-  <section class="bg-surface border-y border-line">
-    <div class="max-w-4xl mx-auto px-5 py-16">
-      <h2 class="font-display text-2xl font-bold text-ink">แนวทางการทำงานของเรา</h2>
-      <p class="mt-3 text-ink-2">ทำงานด้วยความซื่อสัตย์ จริงใจ รวดเร็ว และตรงต่อเวลา</p>
-      <div class="mt-8 grid sm:grid-cols-2 gap-6">
-        <div class="rounded-lg bg-bg-elev border border-line p-6">
-          <h3 class="font-display font-semibold text-ink">ซื่อสัตย์ &amp; จริงใจ</h3>
-          <p class="mt-2 text-sm text-ink-2">ให้คำแนะนำตามความเหมาะสมของโครงการจริง ไม่ขายเกินความจำเป็น</p>
-        </div>
-        <div class="rounded-lg bg-bg-elev border border-line p-6">
-          <h3 class="font-display font-semibold text-ink">รวดเร็ว &amp; ตรงต่อเวลา</h3>
-          <p class="mt-2 text-sm text-ink-2">ตอบกลับและส่งมอบงานตามกำหนด เพื่อไม่ให้โครงการของลูกค้าล่าช้า</p>
-        </div>
-      </div>
+  <Section band="surface-y" spacing="sm">
+    <h2 class="font-display text-2xl font-bold text-ink">แนวทางการทำงานของเรา</h2>
+    <p class="mt-3 text-ink-2">ทำงานด้วยความซื่อสัตย์ จริงใจ รวดเร็ว และตรงต่อเวลา</p>
+    <div class="mt-8 grid sm:grid-cols-2 gap-6">
+      {
+        principles.map((principle) => (
+          <Card>
+            <h3 class="font-display font-semibold text-ink">{principle.title}</h3>
+            <p class="mt-2 text-sm text-ink-2">{principle.desc}</p>
+          </Card>
+        ))
+      }
     </div>
-  </section>
+  </Section>
 
-  <section class="max-w-4xl mx-auto px-5 py-16">
+  <Section spacing="sm">
     <SectionHeading
       eyebrow="แบรนด์ที่เราเป็นตัวแทน"
       heading="ผู้ผลิตชั้นนำของโลก ในมือคุณ"
       lede="เราคัดเลือกแบรนด์ที่ได้รับการยอมรับในตลาดสาธารณูปโภคไฟฟ้าระดับโลก — ทุกแบรนด์มีการรับรองมาตรฐานสากลและพร้อมรองรับงาน Tariff ของการไฟฟ้าไทย"
     />
-    <div class="mt-8 grid sm:grid-cols-2 gap-6">
-      {brands.map((b) => (
-        <article class="rounded-lg border border-line bg-bg-elev p-6">
-          <h3 class="font-display font-bold text-xl text-ink">{b.data.name}</h3>
-          <p class="text-sm text-ink-3">{b.data.origin}</p>
-          <p class="mt-3 text-sm text-ink-2 leading-relaxed">{b.data.description}</p>
-          <div class="mt-4 flex gap-6 text-sm border-t border-line pt-4">
-            <div><strong class="block text-ink">ก่อตั้ง</strong><span class="text-ink-2">{b.data.founded}</span></div>
-            <div><strong class="block text-ink">{b.data.highlightLabel}</strong><span class="text-ink-2">{b.data.highlightValue}</span></div>
-          </div>
-        </article>
-      ))}
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        brands.map((brand) => (
+          <Card as="article">
+            {brand.data.logo ? (
+              <Image
+                src={brand.data.logo}
+                alt={brand.data.logoAlt ?? brand.data.name}
+                height={40}
+                class="h-10 w-auto object-contain"
+                loading="lazy"
+              />
+            ) : (
+              <div class="flex h-10 items-center font-display text-xl font-bold text-ink-3">
+                {brand.data.name}
+              </div>
+            )}
+            <h3 class="mt-4 font-display font-bold text-xl text-ink">{brand.data.name}</h3>
+            {brand.data.origin !== PENDING && <p class="text-sm text-ink-3">{brand.data.origin}</p>}
+            <p class="mt-3 text-sm text-ink-2 leading-relaxed">{brand.data.description}</p>
+            <div class="mt-4 flex gap-6 text-sm border-t border-line pt-4">
+              {brand.data.founded !== PENDING && (
+                <div>
+                  <strong class="block text-ink">ก่อตั้ง</strong>
+                  <span class="text-ink-2">{brand.data.founded}</span>
+                </div>
+              )}
+              <div>
+                <strong class="block text-ink">{brand.data.highlightLabel}</strong>
+                <span class="text-ink-2">{brand.data.highlightValue}</span>
+              </div>
+            </div>
+          </Card>
+        ))
+      }
     </div>
-  </section>
+  </Section>
 
-  <section class="bg-surface border-t border-line">
-    <div class="max-w-4xl mx-auto px-5 py-16 text-center">
-      <h2 class="font-display text-2xl font-bold text-ink">อยากพูดคุยเกี่ยวกับโครงการของคุณ?</h2>
-      <a href="/contact" class="mt-6 inline-flex items-center rounded-md bg-accent px-6 py-3 font-semibold text-white hover:bg-accent-deep transition-colors">ติดต่อเรา →</a>
-    </div>
-  </section>
+  <CTABand heading="อยากพูดคุยเกี่ยวกับโครงการของคุณ?" ctaLabel="ติดต่อเรา →" />
 </BaseLayout>

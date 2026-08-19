@@ -1,0 +1,65 @@
+---
+/**
+ * Page section with a centred container.
+ *
+ * `band` wraps the container in a full-bleed tinted strip, which is how the
+ * surface-coloured sections on the home/about/services pages are built.
+ */
+interface Props {
+  width?: 'narrow' | 'default' | 'wide';
+  spacing?: 'lg' | 'md' | 'sm' | 'none';
+  /** Full-bleed background treatment behind the container. */
+  band?: 'none' | 'surface' | 'surface-top' | 'surface-y';
+  as?: 'section' | 'div' | 'article';
+  id?: string;
+  class?: string;
+  /** Applied to the inner container rather than the outer element. */
+  innerClass?: string;
+}
+
+const {
+  width = 'default',
+  spacing = 'md',
+  band = 'none',
+  as: Tag = 'section',
+  id,
+  class: className,
+  innerClass,
+}: Props = Astro.props;
+
+const widths = {
+  narrow: 'max-w-2xl',
+  default: 'max-w-4xl',
+  wide: 'max-w-6xl',
+} as const;
+
+const spacings = {
+  lg: 'py-16 lg:py-24',
+  md: 'py-20',
+  sm: 'py-16',
+  none: '',
+} as const;
+
+const bands = {
+  none: '',
+  surface: 'bg-surface',
+  'surface-top': 'bg-surface border-t border-line',
+  'surface-y': 'bg-surface border-y border-line',
+} as const;
+
+const container = [widths[width], 'mx-auto px-5', spacings[spacing], innerClass];
+---
+
+{
+  band === 'none' ? (
+    <Tag id={id} class:list={[...container, className]}>
+      <slot />
+    </Tag>
+  ) : (
+    <Tag id={id} class:list={[bands[band], className]}>
+      <div class:list={container}>
+        <slot />
+      </div>
+    </Tag>
+  )
+}

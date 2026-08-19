@@ -1,0 +1,101 @@
+---
+import { Image } from 'astro:assets';
+import wordmark from '../../assets/advancedgrid-wordmark.png';
+import { getSortedProducts } from '../../lib/collections';
+import { FOOTER_COMPANY_LINKS } from '../../lib/nav';
+import { SERVICES } from '../../lib/services';
+import { SITE } from '../../lib/site';
+import FacebookIcon from '../icons/FacebookIcon.astro';
+import LineIcon from '../icons/LineIcon.astro';
+import MailIcon from '../icons/MailIcon.astro';
+
+const year = new Date().getFullYear();
+
+// Driven off the collection so names and brands can't drift from the content.
+const products = await getSortedProducts();
+---
+
+<footer class="bg-surface border-t border-line mt-24">
+  <div class="max-w-6xl mx-auto px-5 py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <Image
+        src={wordmark}
+        alt={SITE.name.en}
+        width={140}
+        height={35}
+        class="h-[35px] w-auto object-contain"
+      />
+      <p class="mt-4 text-sm text-ink-2 max-w-xs">
+        ระบบมิเตอร์ไฟฟ้าและสื่อสาร สำหรับโครงการระดับอุตสาหกรรมในประเทศไทย
+      </p>
+      <div class="mt-4 flex items-center gap-4 text-ink-2">
+        <a href={SITE.social.facebook} aria-label="Facebook" class="hover:text-accent">
+          <FacebookIcon />
+        </a>
+        <a href={SITE.line.href} aria-label="LINE" class="hover:text-accent">
+          <LineIcon />
+        </a>
+        <a href={`mailto:${SITE.email}`} aria-label="Email" class="hover:text-accent">
+          <MailIcon size={18} />
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h5 class="font-display font-semibold text-ink mb-3">ผลิตภัณฑ์</h5>
+      <ul class="space-y-2 text-sm text-ink-2">
+        {
+          products.map((product) => (
+            <li>
+              <a href={`/products/${product.id}`} class="hover:text-accent">
+                {product.data.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h5 class="font-display font-semibold text-ink mb-3">บริการ</h5>
+      <ul class="space-y-2 text-sm text-ink-2">
+        {
+          SERVICES.map((service) => (
+            <li>
+              <a href={`/services#${service.id}`} class="hover:text-accent">
+                {service.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h5 class="font-display font-semibold text-ink mb-3">บริษัท</h5>
+      <ul class="space-y-2 text-sm text-ink-2">
+        {
+          FOOTER_COMPANY_LINKS.map((link) => (
+            <li>
+              <a href={link.href} class="hover:text-accent">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li><a href={SITE.phone.href} class="hover:text-accent">{SITE.phone.display}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-line">
+    <div
+      class="max-w-6xl mx-auto px-5 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-ink-3"
+    >
+      <div>&copy; {year} {SITE.name.th} · สงวนลิขสิทธิ์</div>
+      <div class="flex gap-4">
+        <span>เลขทะเบียนนิติบุคคล {SITE.registration}</span>
+      </div>
+    </div>
+  </div>
+</footer>

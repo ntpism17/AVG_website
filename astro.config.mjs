@@ -8,8 +8,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://www.advancedgrid.co.th',
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
 
-  integrations: [sitemap()]
+  // The form thank-you page is a post-submit destination, not a landing page.
+  integrations: [sitemap({ filter: (page) => !page.includes('/contact/thank-you') })],
 });

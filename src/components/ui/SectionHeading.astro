@@ -6,8 +6,9 @@ interface Props {
   center?: boolean;
   as?: 'h1' | 'h2';
 }
-const { eyebrow, heading, lede, center = false, as: Tag = 'h2' } = Astro.props;
+const { eyebrow, heading, lede, center = false, as: Tag = 'h2' }: Props = Astro.props;
 ---
+
 <div class={`max-w-2xl ${center ? 'mx-auto text-center' : ''}`}>
   <span class="font-en text-sm font-semibold uppercase tracking-wide text-accent">{eyebrow}</span>
   <Tag class="mt-2 font-display text-3xl sm:text-4xl font-bold text-ink">{heading}</Tag>

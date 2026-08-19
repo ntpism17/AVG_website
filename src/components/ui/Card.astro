@@ -1,0 +1,45 @@
+---
+/** Bordered content card. Renders an <a> when `href` is given. */
+interface Props {
+  href?: string;
+  padding?: 'md' | 'lg';
+  /** `elevated` is the default body card; `surface` inverts it for use on tinted bands. */
+  tone?: 'elevated' | 'surface';
+  /** Lift on hover — only meaningful for linked cards. */
+  interactive?: boolean;
+  as?: 'div' | 'article';
+  id?: string;
+  class?: string;
+}
+
+const {
+  href,
+  padding = 'md',
+  tone = 'elevated',
+  interactive = false,
+  as = 'div',
+  id,
+  class: className,
+}: Props = Astro.props;
+
+const tones = {
+  elevated: 'border border-line bg-bg-elev',
+  surface: 'border border-line bg-surface',
+} as const;
+
+const paddings = { md: 'p-6', lg: 'p-8' } as const;
+
+const classes = [
+  'rounded-lg',
+  tones[tone],
+  paddings[padding],
+  interactive && 'hover:shadow-lg transition-shadow',
+  className,
+];
+
+const Tag = href ? 'a' : as;
+---
+
+<Tag {id} {href} class:list={classes}>
+  <slot />
+</Tag>

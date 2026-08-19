@@ -1,0 +1,14 @@
+---
+/**
+ * Small accent label above a heading. SectionHeading renders its own uppercase
+ * variant; this is the standalone version used by hero blocks.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<span class:list={['font-en text-sm font-semibold text-accent', className]}>
+  <slot />
+</span>

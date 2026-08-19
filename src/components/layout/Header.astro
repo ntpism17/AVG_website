@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import wordmark from '../../assets/advancedgrid-wordmark.png';
+import { MAIN_NAV } from '../../lib/nav';
+import { SITE } from '../../lib/site';
+import MailIcon from '../icons/MailIcon.astro';
+import MenuIcon from '../icons/MenuIcon.astro';
+import PhoneIcon from '../icons/PhoneIcon.astro';
+import Button from '../ui/Button.astro';
+---
+
+<div class="utility bg-surface border-b border-line text-sm">
+  <div class="max-w-6xl mx-auto px-5 flex items-center justify-between h-10">
+    <div class="flex items-center gap-5 text-ink-2">
+      <a
+        href={SITE.phone.href}
+        class="flex items-center gap-1.5 hover:text-accent"
+        aria-label={`โทร ${SITE.phone.display}`}
+      >
+        <PhoneIcon />
+        {SITE.phone.display}
+      </a>
+      <a
+        href={`mailto:${SITE.email}`}
+        class="hidden sm:flex items-center gap-1.5 hover:text-accent"
+      >
+        <MailIcon />
+        {SITE.email}
+      </a>
+      <a href={SITE.line.href} class="hidden md:flex items-center gap-1.5 hover:text-accent">
+        LINE: {SITE.line.id}
+      </a>
+    </div>
+  </div>
+</div>
+
+<header class="sticky top-0 z-40 bg-bg-elev/90 backdrop-blur border-b border-line relative">
+  <div class="max-w-6xl mx-auto px-5 h-20 flex items-center justify-between gap-6">
+    <a href="/" class="shrink-0" aria-label={`${SITE.name.en} home`}>
+      <Image
+        src={wordmark}
+        alt={SITE.name.en}
+        width={160}
+        height={40}
+        loading="eager"
+        class="h-10 w-auto object-contain"
+      />
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-6 font-en text-sm" aria-label="Main">
+      {
+        MAIN_NAV.map((item) => (
+          <a
+            href={item.href}
+            class={
+              item.accent
+                ? 'text-accent font-semibold hover:text-accent-deep'
+                : 'text-ink-2 hover:text-ink'
+            }
+          >
+            {item.th}
+          </a>
+        ))
+      }
+    </nav>
+
+    <Button href="/contact" size="sm" class="hidden lg:inline-flex">ขอใบเสนอราคา</Button>
+
+    <details class="lg:hidden">
+      <summary class="list-none cursor-pointer p-1" aria-label="Menu">
+        <MenuIcon />
+      </summary>
+      <nav
+        class="absolute inset-x-0 top-full flex flex-col gap-3 bg-bg-elev px-5 pb-4 pt-3 font-en text-sm border-t border-b border-line shadow-lg"
+        aria-label="Main mobile"
+      >
+        {
+          MAIN_NAV.map((item) => (
+            <a href={item.href} class={item.accent ? 'text-accent font-semibold' : 'text-ink-2'}>
+              {item.th}
+            </a>
+          ))
+        }
+      </nav>
+    </details>
+  </div>
+</header>

@@ -1,43 +1,43 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
-@import "@fontsource/noto-sans-thai/400.css";
-@import "@fontsource/noto-sans-thai/500.css";
-@import "@fontsource/noto-sans-thai/600.css";
-@import "@fontsource/noto-sans-thai/700.css";
-@import "@fontsource/ibm-plex-sans-thai/400.css";
-@import "@fontsource/ibm-plex-sans-thai/500.css";
-@import "@fontsource/ibm-plex-sans-thai/600.css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
-@import "@fontsource/manrope/400.css";
-@import "@fontsource/manrope/500.css";
-@import "@fontsource/manrope/600.css";
-@import "@fontsource/manrope/700.css";
-@import "@fontsource/manrope/800.css";
+@import '@fontsource/noto-sans-thai/400.css';
+@import '@fontsource/noto-sans-thai/500.css';
+@import '@fontsource/noto-sans-thai/600.css';
+@import '@fontsource/noto-sans-thai/700.css';
+@import '@fontsource/ibm-plex-sans-thai/400.css';
+@import '@fontsource/ibm-plex-sans-thai/500.css';
+@import '@fontsource/ibm-plex-sans-thai/600.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/700.css';
+@import '@fontsource/manrope/800.css';
 
-/* Design tokens migrated from legacy-html/styles.css — Cream / Crimson / Slate palette.
+/* Design tokens migrated from reference/legacy-site/styles.css — Cream / Crimson / Slate palette.
    Kept as the original --bg/--ink/--accent names so the legacy inline SVG illustrations
    (which reference these directly) still work when reused as Astro components. */
 :root {
-  --bg: #F7F4ED;
-  --bg-elev: #FFFFFF;
-  --surface: #EFEAE0;
-  --ink: #0F172A;
+  --bg: #f7f4ed;
+  --bg-elev: #ffffff;
+  --surface: #efeae0;
+  --ink: #0f172a;
   --ink-2: #334155;
-  --ink-3: #64748B;
-  --line: #E5DFD0;
-  --line-strong: #CFC8B5;
-  --accent: #B91C1C;
-  --accent-deep: #7F1313;
-  --accent-soft: #FCEDED;
-  --gold: #C99B2D;
+  --ink-3: #64748b;
+  --line: #e5dfd0;
+  --line-strong: #cfc8b5;
+  --accent: #b91c1c;
+  --accent-deep: #7f1313;
+  --accent-soft: #fceded;
+  --gold: #c99b2d;
 
-  --font-th: "Noto Sans Thai", "IBM Plex Sans Thai", system-ui, sans-serif;
-  --font-en: "Inter", "Noto Sans Thai", system-ui, sans-serif;
-  --font-display: "Manrope", "Noto Sans Thai", system-ui, sans-serif;
+  --font-th: 'Noto Sans Thai', 'IBM Plex Sans Thai', system-ui, sans-serif;
+  --font-en: 'Inter', 'Noto Sans Thai', system-ui, sans-serif;
+  --font-display: 'Manrope', 'Noto Sans Thai', system-ui, sans-serif;
 }
 
 @theme {

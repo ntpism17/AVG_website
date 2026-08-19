@@ -1,0 +1,36 @@
+---
+/**
+ * Three-up figure grid for project stats.
+ * `compact` is the listing-card density; `feature` is the detail-page panel.
+ */
+interface Props {
+  stats: readonly { label: string; value: string }[];
+  variant?: 'compact' | 'feature';
+  class?: string;
+}
+
+const { stats, variant = 'compact', class: className } = Astro.props;
+
+const isFeature = variant === 'feature';
+
+const wrapper = isFeature
+  ? 'grid grid-cols-3 gap-4 rounded-lg bg-surface border border-line p-6'
+  : 'grid grid-cols-3 gap-2 border-t border-line pt-4';
+
+const valueClass = isFeature
+  ? 'font-display font-bold text-2xl text-ink'
+  : 'font-display font-bold text-ink';
+
+const labelClass = isFeature ? 'text-xs text-ink-3 mt-1' : 'text-xs text-ink-3';
+---
+
+<div class:list={[wrapper, className]}>
+  {
+    stats.map((stat) => (
+      <div class={isFeature ? 'text-center' : undefined}>
+        <div class={valueClass}>{stat.value}</div>
+        <div class={labelClass}>{stat.label}</div>
+      </div>
+    ))
+  }
+</div>
