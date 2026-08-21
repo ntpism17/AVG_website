@@ -1,52 +1,13 @@
 ---
-import Card from '../../components/ui/Card.astro';
-import Pill from '../../components/ui/Pill.astro';
-import Section from '../../components/ui/Section.astro';
-import SectionHeading from '../../components/ui/SectionHeading.astro';
+import InsightsIndexBody from '../../components/pages/InsightsIndexBody.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getSortedArticles } from '../../lib/collections';
+import { INSIGHTS_INDEX_COPY } from '../../lib/i18n/pages/insights-index';
 
-const articles = await getSortedArticles();
-
-const PERSONA_LABEL: Record<string, string> = {
-  'solar-developer': 'Solar Developer',
-  utility: 'การไฟฟ้า',
-  'renewable-developer': 'ผู้พัฒนาพลังงานหมุนเวียน',
-  general: 'ทั่วไป',
-};
+const articles = await getSortedArticles('th');
+const t = INSIGHTS_INDEX_COPY.th;
 ---
 
-<BaseLayout
-  title="บทความ"
-  description="ความรู้ด้านพลังงานไฟฟ้าสำหรับ Solar Developer, IPP/SPP/VSPP, การไฟฟ้า และผู้พัฒนาพลังงานหมุนเวียน — AMR, PPA, TOU, Net Billing, UGT และกฎระเบียบที่กำลังเปลี่ยนแปลงในไทย"
->
-  <Section width="wide" spacing="lg">
-    <SectionHeading
-      as="h1"
-      eyebrow="ความรู้พลังงานไฟฟ้า"
-      heading="อธิบายศัพท์และกฎระเบียบที่ผู้พัฒนาโครงการพลังงานต้องรู้"
-      lede="ตั้งแต่ AMR, PPA, TOU ไปจนถึง Net Billing และ UGT — เขียนโดยอ้างอิงแหล่งข้อมูลทางการ สำหรับ Solar Developer, IPP/SPP/VSPP, การไฟฟ้า และผู้พัฒนาพลังงานหมุนเวียน"
-    />
-
-    <div class="mt-10 grid sm:grid-cols-2 gap-6">
-      {
-        articles.map((article) =>
-          article.data.status === 'published' ? (
-            <Card href={`/insights/${article.id}`} interactive>
-              <Pill size="sm">{PERSONA_LABEL[article.data.persona]}</Pill>
-              <h2 class="mt-3 font-display font-semibold text-lg text-ink">{article.data.title}</h2>
-              <p class="mt-2 text-sm text-ink-2 leading-relaxed">{article.data.metaDescription}</p>
-              <span class="mt-4 inline-block text-sm font-semibold text-accent">อ่านต่อ →</span>
-            </Card>
-          ) : (
-            <div class="rounded-lg border border-dashed border-line-strong bg-surface p-6 opacity-70">
-              <Pill size="sm">{PERSONA_LABEL[article.data.persona]}</Pill>
-              <h2 class="mt-3 font-display font-semibold text-lg text-ink">{article.data.title}</h2>
-              <p class="mt-3 text-sm text-ink-3">[pending] — กำลังเตรียมเผยแพร่</p>
-            </div>
-          )
-        )
-      }
-    </div>
-  </Section>
+<BaseLayout title={t.metaTitle} description={t.metaDescription}>
+  <InsightsIndexBody articles={articles} />
 </BaseLayout>

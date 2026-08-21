@@ -1,0 +1,43 @@
+---
+import ProductDetailBody from '../../../components/pages/ProductDetailBody.astro';
+import type { ProductEntry } from '../../../content.config';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getSortedProducts } from '../../../lib/collections';
+import { stripLocale } from '../../../lib/i18n/locales';
+import { breadcrumbSchema, productSchema } from '../../../lib/schema';
+
+export async function getStaticPaths() {
+  const products = await getSortedProducts('zh');
+  return products.map((product) => ({
+    params: { slug: stripLocale(product.id) },
+    props: { product },
+  }));
+}
+
+interface Props {
+  product: ProductEntry;
+}
+
+const { product } = Astro.props;
+
+const schema = productSchema(product, Astro.site, 'zh');
+const breadcrumb = breadcrumbSchema(
+  [{ name: '产品', href: '/products' }, { name: product.data.name }],
+  Astro.site,
+  'zh'
+);
+---
+
+<BaseLayout
+  title={`${product.data.name} — ${product.data.tagline}`}
+  description={product.data.description}
+  ogType="product"
+  ogImage={product.data.image}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumb)} />
+  </Fragment>
+
+  <ProductDetailBody product={product} />
+</BaseLayout>

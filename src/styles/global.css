@@ -5,37 +5,30 @@
 @import '@fontsource/noto-sans-thai/500.css';
 @import '@fontsource/noto-sans-thai/600.css';
 @import '@fontsource/noto-sans-thai/700.css';
-@import '@fontsource/ibm-plex-sans-thai/400.css';
-@import '@fontsource/ibm-plex-sans-thai/500.css';
-@import '@fontsource/ibm-plex-sans-thai/600.css';
 @import '@fontsource/inter/400.css';
 @import '@fontsource/inter/500.css';
 @import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
-@import '@fontsource/manrope/400.css';
-@import '@fontsource/manrope/500.css';
 @import '@fontsource/manrope/600.css';
 @import '@fontsource/manrope/700.css';
-@import '@fontsource/manrope/800.css';
 
 /* Design tokens migrated from reference/legacy-site/styles.css — Cream / Crimson / Slate palette.
    Kept as the original --bg/--ink/--accent names so the legacy inline SVG illustrations
    (which reference these directly) still work when reused as Astro components. */
 :root {
-  --bg: #f7f4ed;
+  --bg: #ffffff;
   --bg-elev: #ffffff;
-  --surface: #efeae0;
+  --surface: #f6f4f1;
   --ink: #0f172a;
   --ink-2: #334155;
   --ink-3: #64748b;
-  --line: #e5dfd0;
-  --line-strong: #cfc8b5;
+  --line: #eae6db;
+  --line-strong: #d8d3c4;
   --accent: #b91c1c;
   --accent-deep: #7f1313;
   --accent-soft: #fceded;
   --gold: #c99b2d;
 
-  --font-th: 'Noto Sans Thai', 'IBM Plex Sans Thai', system-ui, sans-serif;
+  --font-th: 'Noto Sans Thai', system-ui, sans-serif;
   --font-en: 'Inter', 'Noto Sans Thai', system-ui, sans-serif;
   --font-display: 'Manrope', 'Noto Sans Thai', system-ui, sans-serif;
 }
@@ -67,4 +60,43 @@ body {
 
 :lang(en) {
   font-family: var(--font-en);
+}
+
+/* Dark hero — accent words render in gold so they stay readable on the photo. */
+.hero-dark .text-accent {
+  color: var(--gold);
+}
+
+/* Hero background crossfade — three photos cycle every 15s (5s each). */
+@keyframes hero-cycle {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hero-fade {
+  /* `both` keeps later images hidden at opacity 0 during their delay. */
+  animation: hero-cycle 15s infinite both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade {
+    animation: none;
+    opacity: 1;
+  }
+  .hero-fade:nth-child(n + 2) {
+    display: none;
+  }
 }

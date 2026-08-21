@@ -1,6 +1,6 @@
 # Advanced Grid Co., Ltd. — Website
 
-Astro + Tailwind CSS rebuild of advancedgrid.co.th. See `CLAUDE.md` for full project context, content rules, and pending items.
+Astro + Tailwind CSS rebuild of advancedgrid.co.th. See `CLAUDE.md` for full project context, content rules, and pending items. The site is trilingual (Thai default/unprefixed, English and Chinese under `/en/` and `/zh/`).
 
 ## Commands
 
@@ -12,10 +12,12 @@ npm run preview      # preview the build
 npm run check        # type-check (astro check)
 npm run format       # format with Prettier
 npm run build:og     # regenerate public/og-image.png — run manually, then commit
+npm run build:favicon # regenerate the favicon set — run manually, then commit
 ```
 
-`build:og` is deliberately **not** part of `npm run build`: the social card is a
-reviewed, committed artifact rather than a per-build surprise.
+`build:og` and `build:favicon` are deliberately **not** part of `npm run build`:
+the social card and favicon set are reviewed, committed artifacts rather than
+per-build surprises.
 
 ## Project structure
 
@@ -30,14 +32,15 @@ src/
 │   ├── ContactForm.astro    # Web3Forms wrapper; fields passed as children
 │   ├── ProductCard.astro
 │   └── SpecTable.astro
-├── content/                 # Content Collections: products, projects, brands
+├── content/                 # Content Collections, nested th/ en/ zh/: products, projects, articles, brands
 ├── content.config.ts        # collection schemas (glob loader) + entry types
-├── layouts/BaseLayout.astro # SEO meta, OG tags, canonical, JSON-LD, `head` slot
-├── lib/                     # site constants, nav, services, queries, JSON-LD builders
-├── pages/                   # one route per file/folder
+├── layouts/BaseLayout.astro # SEO meta, OG tags, canonical, JSON-LD, favicons, `head` slot
+├── lib/                     # site constants, nav, services, i18n, queries, JSON-LD builders
+├── pages/                   # routes — Thai (unprefixed) + en/ and zh/ mirrors
 └── styles/global.css        # Tailwind v4 entry, font imports, design tokens
-public/                      # served as-is: favicons, og-image.png, robots.txt
+public/                      # served as-is: favicon set, og-image.png, robots.txt
 scripts/build-og.mjs         # generates the OG card (see build:og above)
+scripts/build-favicon.mjs    # regenerates the favicon set (see build:favicon above)
 reference/legacy-site/       # original CMS HTML/CSS, kept as the migration reference — not built or deployed
 ```
 

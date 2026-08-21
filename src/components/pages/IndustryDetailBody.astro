@@ -1,0 +1,143 @@
+---
+import type { ArticleEntry, ProductEntry, ProjectEntry } from '../../content.config';
+import { stripLocale, type Locale } from '../../lib/i18n/locales';
+import { INDUSTRY_DETAIL_COPY } from '../../lib/i18n/pages/industry-detail';
+import { UI } from '../../lib/i18n/ui';
+import { localeHref } from '../../lib/i18n/url';
+import type { Segment } from '../../lib/segments';
+import { SERVICES } from '../../lib/services';
+import ProductCard from '../ProductCard.astro';
+import Breadcrumb from '../ui/Breadcrumb.astro';
+import Card from '../ui/Card.astro';
+import CTABand from '../ui/CTABand.astro';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import StatGrid from '../ui/StatGrid.astro';
+
+interface Props {
+  segment: Segment;
+  products: ProductEntry[];
+  projects: ProjectEntry[];
+  articles: ArticleEntry[];
+}
+
+const { segment, products, projects, articles } = Astro.props;
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const t = INDUSTRY_DETAIL_COPY[locale];
+const ui = UI[locale];
+
+const SOLUTIONS = [
+  { href: '/solutions/amr', title: ui.nav.amr, desc: t.solutionAmrDesc },
+  { href: '/solutions/billing', title: ui.nav.billing, desc: t.solutionBillingDesc },
+];
+---
+
+<article>
+  <Section width="wide" spacing="lg">
+    <Breadcrumb href={localeHref(locale, '/industries')} label={ui.breadcrumb.backToIndustries} />
+    <h1 class="mt-6 font-display text-3xl sm:text-4xl font-bold text-ink">{segment[locale]}</h1>
+    <p class="mt-4 max-w-2xl text-ink-2 leading-relaxed">{segment.description[locale]}</p>
+  </Section>
+
+  <Section band="surface-y" width="wide">
+    <SectionHeading eyebrow={t.productsEyebrow} heading={t.productsHeading} />
+    {
+      products.length > 0 ? (
+        <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {products.map((product) => (
+            <ProductCard product={product} headingLevel="h3" showSpecs />
+          ))}
+        </div>
+      ) : (
+        <p class="mt-6 text-sm text-ink-3">{t.productsEmpty}</p>
+      )
+    }
+  </Section>
+
+  <Section width="wide">
+    <SectionHeading eyebrow={t.servicesEyebrow} heading={t.servicesHeading} />
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        SERVICES.map((service) => (
+          <Card as="article">
+            <div class="font-en text-xs text-ink-3">{service.num}</div>
+            <h3 class="mt-2 font-display font-semibold text-lg text-ink">
+              {service.title[locale]}
+            </h3>
+            <p class="mt-2 text-sm text-ink-2 leading-relaxed">{service.desc[locale]}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section band="surface-y" width="wide">
+    <SectionHeading eyebrow={t.projectsEyebrow} heading={t.projectsHeading} />
+    {
+      projects.length > 0 ? (
+        <div class="mt-10 grid sm:grid-cols-2 gap-6">
+          {projects.map((project) => (
+            <Card href={localeHref(locale, `/projects/${stripLocale(project.id)}`)} interactive>
+              <div class="text-sm font-en font-semibold text-accent">{project.data.location}</div>
+              <h3 class="mt-1 font-display font-semibold text-lg text-ink">{project.data.title}</h3>
+              {project.data.stats && <StatGrid stats={project.data.stats} class="mt-4" />}
+              <span class="mt-4 inline-block text-sm font-semibold text-accent">
+                {ui.card.readStory}
+              </span>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <p class="mt-6 text-sm text-ink-3">{t.projectsEmpty}</p>
+      )
+    }
+  </Section>
+
+  <Section width="wide">
+    <SectionHeading eyebrow={t.articlesEyebrow} heading={t.articlesHeading} />
+    {
+      articles.length > 0 ? (
+        <div class="mt-10 grid sm:grid-cols-2 gap-6">
+          {articles.map((article) => (
+            <Card href={localeHref(locale, `/insights/${stripLocale(article.id)}`)} interactive>
+              <h3 class="font-display font-semibold text-lg text-ink">{article.data.title}</h3>
+              <p class="mt-2 text-sm text-ink-2 leading-relaxed">{article.data.metaDescription}</p>
+              <span class="mt-4 inline-block text-sm font-semibold text-accent">
+                {ui.card.readMore}
+              </span>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <p class="mt-6 text-sm text-ink-3">{t.articlesEmpty}</p>
+      )
+    }
+  </Section>
+
+  {
+    segment.showSolutions && (
+      <Section band="surface-y" width="wide">
+        <SectionHeading eyebrow={t.solutionsEyebrow} heading={t.solutionsHeading} />
+        <div class="mt-10 grid sm:grid-cols-2 gap-6">
+          {SOLUTIONS.map((solution) => (
+            <Card href={localeHref(locale, solution.href)} interactive>
+              <h3 class="font-display font-semibold text-lg text-ink">{solution.title}</h3>
+              <p class="mt-2 text-sm text-ink-2 leading-relaxed">{solution.desc}</p>
+              <span class="mt-4 inline-block text-sm font-semibold text-accent">
+                {ui.card.viewDetails}
+              </span>
+            </Card>
+          ))}
+        </div>
+      </Section>
+    )
+  }
+
+  <CTABand
+    width="wide"
+    headingSize="lg"
+    heading={t.ctaHeading}
+    body={t.ctaBody}
+    ctaLabel={t.ctaLabel}
+  />
+</article>

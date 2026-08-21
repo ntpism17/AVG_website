@@ -1,21 +1,13 @@
 ---
-import ProductCard from '../../components/ProductCard.astro';
-import Section from '../../components/ui/Section.astro';
-import SectionHeading from '../../components/ui/SectionHeading.astro';
+import ProductsIndexBody from '../../components/pages/ProductsIndexBody.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getSortedProducts } from '../../lib/collections';
+import { PRODUCTS_INDEX_COPY } from '../../lib/i18n/pages/products-index';
 
-const products = await getSortedProducts();
+const products = await getSortedProducts('th');
+const t = PRODUCTS_INDEX_COPY.th;
 ---
 
-<BaseLayout
-  title="ผลิตภัณฑ์ | Energy Meter, Power Quality Meter"
-  description="Energy Meter และอุปกรณ์สื่อสารระดับโลกจาก CEWE, SECURE, EDMI — TOU Meter, Power Quality Analyzer, Smart Meter และบริการสอบเทียบมิเตอร์ ISO/IEC 17025"
->
-  <Section width="wide" spacing="lg">
-    <SectionHeading as="h1" eyebrow="ผลิตภัณฑ์" heading="Energy Meter และอุปกรณ์สื่อสารระดับโลก" />
-    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {products.map((product) => <ProductCard product={product} headingLevel="h2" showSpecs />)}
-    </div>
-  </Section>
+<BaseLayout title={t.metaTitle} description={t.metaDescription}>
+  <ProductsIndexBody products={products} />
 </BaseLayout>

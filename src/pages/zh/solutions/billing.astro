@@ -1,0 +1,11 @@
+---
+import BillingSolutionBody from '../../../components/pages/BillingSolutionBody.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { BILLING_COPY } from '../../../lib/i18n/pages/solutions-billing';
+
+const t = BILLING_COPY.zh;
+---
+
+<BaseLayout title={t.metaTitle} description={t.metaDescription}>
+  <BillingSolutionBody />
+</BaseLayout>

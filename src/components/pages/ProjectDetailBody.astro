@@ -1,0 +1,39 @@
+---
+import { render } from 'astro:content';
+import type { ProjectEntry } from '../../content.config';
+import { type Locale } from '../../lib/i18n/locales';
+import { PROJECT_DETAIL_COPY } from '../../lib/i18n/pages/project-detail';
+import { UI } from '../../lib/i18n/ui';
+import { localeHref } from '../../lib/i18n/url';
+import Breadcrumb from '../ui/Breadcrumb.astro';
+import CTABand from '../ui/CTABand.astro';
+import StatGrid from '../ui/StatGrid.astro';
+
+interface Props {
+  project: ProjectEntry;
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const ui = UI[locale];
+const t = PROJECT_DETAIL_COPY[locale];
+---
+
+<article class="max-w-3xl mx-auto px-5 py-16 lg:py-24">
+  <Breadcrumb href={localeHref(locale, '/projects')} label={ui.breadcrumb.backToProjects} />
+  <div class="mt-6 flex flex-wrap gap-4 text-sm text-ink-3">
+    <span>{project.data.location}</span>
+    <span>{project.data.capacity}</span>
+  </div>
+  <h1 class="mt-2 font-display text-3xl sm:text-4xl font-bold text-ink">{project.data.title}</h1>
+
+  {project.data.stats && <StatGrid stats={project.data.stats} variant="feature" class="mt-8" />}
+
+  <div class="mt-10 prose prose-neutral max-w-none text-ink-2 leading-relaxed">
+    <Content />
+  </div>
+
+  <CTABand layout="card" heading={t.ctaHeading} body={t.ctaBody} ctaLabel={t.ctaLabel} />
+</article>

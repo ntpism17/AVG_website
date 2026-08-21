@@ -5,8 +5,8 @@
  */
 interface Props {
   href: string;
-  variant?: 'primary' | 'secondary';
-  size?: 'md' | 'sm';
+  variant?: 'primary' | 'secondary' | 'on-dark';
+  size?: 'md' | 'sm' | 'lg';
   class?: string;
 }
 
@@ -17,11 +17,13 @@ const base = 'inline-flex items-center rounded-md font-semibold transition-color
 const variants = {
   primary: 'bg-accent text-white hover:bg-accent-deep',
   secondary: 'border border-line-strong text-ink hover:bg-surface',
+  'on-dark': 'border border-white/25 text-white hover:bg-white/10',
 } as const;
 
 const sizes = {
   md: 'px-6 py-3',
   sm: 'px-4 py-2 text-sm',
+  lg: 'px-8 py-4 text-base',
 } as const;
 ---
 

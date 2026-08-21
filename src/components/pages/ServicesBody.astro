@@ -1,0 +1,30 @@
+---
+import { type Locale } from '../../lib/i18n/locales';
+import { SERVICES_COPY } from '../../lib/i18n/pages/services';
+import { SERVICES } from '../../lib/services';
+import Card from '../ui/Card.astro';
+import CTABand from '../ui/CTABand.astro';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const t = SERVICES_COPY[locale];
+---
+
+<Section spacing="lg">
+  <SectionHeading as="h1" eyebrow={t.heroEyebrow} heading={t.heroHeading} lede={t.heroLede} />
+</Section>
+
+<Section spacing="none" innerClass="pb-24 space-y-10">
+  {
+    SERVICES.map((service) => (
+      <Card as="article" id={service.id} padding="lg" class="scroll-mt-24">
+        <div class="font-en text-xs text-ink-3">{service.num}</div>
+        <h2 class="mt-2 font-display text-2xl font-bold text-ink">{service.title[locale]}</h2>
+        <p class="mt-4 text-ink-2 leading-relaxed">{service.desc[locale]}</p>
+      </Card>
+    ))
+  }
+</Section>
+
+<CTABand heading={t.ctaHeading} ctaLabel={t.ctaLabel} />

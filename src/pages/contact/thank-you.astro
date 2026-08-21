@@ -1,64 +1,15 @@
 ---
-import CheckIcon from '../../components/icons/CheckIcon.astro';
-import Button from '../../components/ui/Button.astro';
+import ContactThankYouBody from '../../components/pages/ContactThankYouBody.astro';
 import Section from '../../components/ui/Section.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SITE } from '../../lib/site';
+import { CONTACT_THANK_YOU_COPY } from '../../lib/i18n/pages/contact-thank-you';
+import { legalName } from '../../lib/site';
+
+const t = CONTACT_THANK_YOU_COPY.th;
 ---
 
-<BaseLayout
-  title="ได้รับข้อความของคุณแล้ว"
-  description="ขอบคุณที่ติดต่อบริษัท แอดวานซ์ กริด จำกัด เราได้รับข้อความของคุณแล้ว และจะติดต่อกลับภายใน 1 วันทำการ"
-  noindex={true}
->
+<BaseLayout title={t.metaTitle} description={t.metaDescription(legalName('th'))} noindex={true}>
   <Section width="narrow" spacing="none" innerClass="py-24 lg:py-32 text-center">
-    <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent-soft">
-      <CheckIcon class="h-8 w-8 text-accent" label="ส่งสำเร็จ" />
-    </div>
-
-    <h1 class="mt-8 font-display text-3xl sm:text-4xl font-bold text-ink">
-      ได้รับข้อความของคุณแล้ว
-    </h1>
-    <p class="mt-4 text-lg text-ink-2 leading-relaxed">
-      ขอบคุณที่ติดต่อ Advanced Grid ทีมงานของเราจะตรวจสอบรายละเอียดและติดต่อกลับภายใน 1 วันทำการ
-    </p>
-
-    <div class="mt-10 rounded-lg border border-line bg-surface p-6 text-left">
-      <h2 class="font-display font-semibold text-ink">ต้องการติดต่อเร่งด่วน?</h2>
-      <dl class="mt-4 space-y-2 text-sm">
-        <div class="flex gap-2">
-          <dt class="font-medium text-ink">โทรศัพท์:</dt>
-          <dd>
-            <a href={SITE.phone.href} class="font-semibold text-accent hover:text-accent-deep">
-              {SITE.phone.display}
-            </a>
-          </dd>
-        </div>
-        <div class="flex gap-2">
-          <dt class="font-medium text-ink">อีเมล:</dt>
-          <dd>
-            <a
-              href={`mailto:${SITE.email}`}
-              class="font-semibold text-accent hover:text-accent-deep"
-            >
-              {SITE.email}
-            </a>
-          </dd>
-        </div>
-        <div class="flex gap-2">
-          <dt class="font-medium text-ink">Line ID:</dt>
-          <dd>
-            <a href={SITE.line.href} class="font-semibold text-accent hover:text-accent-deep">
-              {SITE.line.id}
-            </a>
-          </dd>
-        </div>
-      </dl>
-    </div>
-
-    <div class="mt-10 flex flex-wrap justify-center gap-4">
-      <Button href="/">กลับหน้าแรก</Button>
-      <Button href="/products" variant="secondary">ดูผลิตภัณฑ์ทั้งหมด</Button>
-    </div>
+    <ContactThankYouBody />
   </Section>
 </BaseLayout>

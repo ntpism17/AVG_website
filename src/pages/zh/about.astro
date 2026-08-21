@@ -1,0 +1,13 @@
+---
+import AboutBody from '../../components/pages/AboutBody.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getSortedBrands } from '../../lib/collections';
+import { ABOUT_COPY } from '../../lib/i18n/pages/about';
+
+const brands = await getSortedBrands('zh');
+const t = ABOUT_COPY.zh;
+---
+
+<BaseLayout title={t.metaTitle} description={t.metaDescription}>
+  <AboutBody brands={brands} />
+</BaseLayout>

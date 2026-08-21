@@ -6,6 +6,8 @@
  */
 
 import type { ArticleEntry, ProductEntry } from '../content.config';
+import { stripLocale, type Locale } from './i18n/locales';
+import { localeHref } from './i18n/url';
 import { SITE } from './site';
 
 /** A schema.org PostalAddress built from one of the SITE address entries. */
@@ -24,9 +26,12 @@ export function localBusinessSchema(site: URL | undefined) {
     name: SITE.name.th,
     alternateName: SITE.name.en,
     url: site ? site.href : undefined,
+    image: site ? new URL('/og-image.png', site).href : undefined,
     telephone: SITE.phone.intl,
     email: SITE.email,
     address: [postalAddress(SITE.addresses.registered), postalAddress(SITE.addresses.sales)],
+    areaServed: { '@type': 'Country', name: 'Thailand' },
+    knowsLanguage: ['th', 'en', 'zh'],
     sameAs: [SITE.social.facebook],
   };
 }
@@ -35,8 +40,9 @@ export function localBusinessSchema(site: URL | undefined) {
  * Product or Service schema for a product detail page.
  * `meter-calibration` is a service offering rather than a physical product.
  */
-export function productSchema(product: ProductEntry, site: URL | undefined) {
+export function productSchema(product: ProductEntry, site: URL | undefined, locale: Locale) {
   const isService = product.data.brand === 'Service';
+  const slug = stripLocale(product.id);
 
   return {
     '@context': 'https://schema.org',
@@ -44,7 +50,7 @@ export function productSchema(product: ProductEntry, site: URL | undefined) {
     name: product.data.name,
     description: product.data.description,
     category: product.data.category,
-    url: new URL(`/products/${product.id}/`, site).href,
+    url: new URL(localeHref(locale, `/products/${slug}/`), site).href,
     ...(isService
       ? { provider: { '@type': 'Organization', name: SITE.name.en } }
       : { brand: { '@type': 'Brand', name: product.data.brand } }),
@@ -53,14 +59,16 @@ export function productSchema(product: ProductEntry, site: URL | undefined) {
 }
 
 /** Article schema for an /insights detail page. */
-export function articleSchema(article: ArticleEntry, site: URL | undefined) {
+export function articleSchema(article: ArticleEntry, site: URL | undefined, locale: Locale) {
+  const slug = stripLocale(article.id);
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: article.data.title,
     description: article.data.metaDescription,
     datePublished: article.data.publishedDate.toISOString(),
-    url: new URL(`/insights/${article.id}/`, site).href,
+    url: new URL(localeHref(locale, `/insights/${slug}/`), site).href,
     author: { '@type': 'Organization', name: SITE.name.en },
     publisher: { '@type': 'Organization', name: SITE.name.en },
   };
@@ -81,13 +89,15 @@ export function faqSchema(article: ArticleEntry) {
 
 export interface BreadcrumbItem {
   name: string;
-  /** Root-relative path, e.g. `/products`. Omit on the current page. */
+  /** Locale-agnostic, root-relative path, e.g. `/products`. Omit on the current page. */
   href?: string;
 }
 
+const HOME_LABEL: Record<Locale, string> = { th: 'หน้าแรก', en: 'Home', zh: '首页' };
+
 /** BreadcrumbList for detail pages, including the implicit home root. */
-export function breadcrumbSchema(trail: BreadcrumbItem[], site: URL | undefined) {
-  const items: BreadcrumbItem[] = [{ name: 'หน้าแรก', href: '/' }, ...trail];
+export function breadcrumbSchema(trail: BreadcrumbItem[], site: URL | undefined, locale: Locale) {
+  const items: BreadcrumbItem[] = [{ name: HOME_LABEL[locale], href: '/' }, ...trail];
 
   return {
     '@context': 'https://schema.org',
@@ -96,7 +106,7 @@ export function breadcrumbSchema(trail: BreadcrumbItem[], site: URL | undefined)
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      ...(item.href && { item: new URL(item.href, site).href }),
+      ...(item.href && { item: new URL(localeHref(locale, item.href), site).href }),
     })),
   };
 }

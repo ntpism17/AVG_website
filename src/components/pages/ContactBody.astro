@@ -1,0 +1,82 @@
+---
+import ContactForm from '../ContactForm.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Field from '../ui/Field.astro';
+import Section from '../ui/Section.astro';
+import { type Locale } from '../../lib/i18n/locales';
+import { CONTACT_COPY } from '../../lib/i18n/pages/contact';
+import { UI } from '../../lib/i18n/ui';
+import { addressText, formatAddressEn, SITE } from '../../lib/site';
+
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const t = CONTACT_COPY[locale];
+const ui = UI[locale];
+
+const mapQuery = encodeURIComponent(formatAddressEn(SITE.addresses.sales.en));
+const registeredLabel = SITE.addresses.registered.label[locale];
+const salesLabel = SITE.addresses.sales.label[locale];
+---
+
+<Section width="wide" spacing="lg" innerClass="grid lg:grid-cols-2 gap-12">
+  <div>
+    <Eyebrow>{t.heroEyebrow}</Eyebrow>
+    <h1 class="mt-3 font-display text-3xl sm:text-4xl font-bold text-ink">{t.heroHeading}</h1>
+    <p class="mt-4 text-ink-2 leading-relaxed">{t.heroLede}</p>
+
+    <div class="mt-8">
+      <h2 class="font-display font-semibold text-ink">{t.directContactHeading}</h2>
+      <ul class="mt-3 space-y-3 text-sm">
+        <li>
+          <strong class="block text-ink">{t.phoneLabel}</strong>
+          <a href={SITE.phone.href} class="text-ink-2 hover:text-accent">{SITE.phone.display}</a>
+        </li>
+        <li>
+          <strong class="block text-ink">{t.emailLabel}</strong>
+          <a href={`mailto:${SITE.email}`} class="text-ink-2 hover:text-accent">{SITE.email}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="font-display font-semibold text-ink">{t.locationHeading}</h2>
+      <ul class="mt-3 space-y-4 text-sm">
+        <li>
+          <strong class="block text-ink">{registeredLabel}</strong>
+          <span class="text-ink-2">{addressText(locale, SITE.addresses.registered)}</span>
+        </li>
+        <li>
+          <strong class="block text-ink">{salesLabel}</strong>
+          <span class="text-ink-2">{addressText(locale, SITE.addresses.sales)}</span>
+        </li>
+        <li>
+          <strong class="block text-ink">{ui.footer.registrationLabel}</strong>
+          <span class="text-ink-2">{SITE.registration}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-8 aspect-video rounded-lg overflow-hidden border border-line">
+      <iframe
+        title={t.mapIframeTitle}
+        src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
+        class="w-full h-full"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+
+  <ContactForm subject="Advanced Grid — New contact request" formId="contact" class="h-fit">
+    <div class="grid sm:grid-cols-2 gap-5">
+      <Field id="cf-name" name="name" label={ui.form.name} required />
+      <Field id="cf-company" name="company" label={ui.form.company} />
+    </div>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <Field id="cf-email" name="email" label={ui.form.email} type="email" required />
+      <Field id="cf-phone" name="phone" label={ui.form.phone} type="tel" />
+    </div>
+    <Field id="cf-topic" name="topic" label={t.topicLabel} type="select">
+      {t.topics.map((topic) => <option>{topic}</option>)}
+    </Field>
+    <Field id="cf-msg" name="message" label={t.projectDetailsLabel} type="textarea" />
+  </ContactForm>
+</Section>

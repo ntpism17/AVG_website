@@ -11,6 +11,14 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
+  // Thai stays unprefixed at existing URLs (preserves current SEO); English
+  // and Chinese live under /en/ and /zh/.
+  i18n: {
+    defaultLocale: 'th',
+    locales: ['th', 'en', 'zh'],
+    routing: { prefixDefaultLocale: false },
+  },
+
   // The form thank-you page is a post-submit destination, not a landing page.
   // Priority/changefreq bias crawlers toward the pages carrying the gold
   // keywords from the Thai SEO research (home, the two solutions pages, and
@@ -20,7 +28,7 @@ export default defineConfig({
       filter: (page) => !page.includes('/contact/thank-you'),
       serialize(item) {
         const url = new URL(item.url);
-        const path = url.pathname;
+        const path = url.pathname.replace(/^\/(en|zh)(?=\/|$)/, '');
         const isHighPriority =
           path === '/' ||
           path.startsWith('/solutions/amr') ||

@@ -1,0 +1,38 @@
+---
+import InsightDetailBody from '../../../components/pages/InsightDetailBody.astro';
+import type { ArticleEntry } from '../../../content.config';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { stripLocale } from '../../../lib/i18n/locales';
+import { getPublishedArticles } from '../../../lib/collections';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
+
+export async function getStaticPaths() {
+  const articles = await getPublishedArticles('en');
+  return articles.map((article) => ({
+    params: { slug: stripLocale(article.id) },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: ArticleEntry;
+}
+
+const { article } = Astro.props;
+
+const breadcrumb = breadcrumbSchema(
+  [{ name: 'Insights', href: '/insights' }, { name: article.data.title }],
+  Astro.site,
+  'en'
+);
+const article_ = articleSchema(article, Astro.site, 'en');
+const faq = faqSchema(article);
+---
+
+<BaseLayout title={article.data.title} description={article.data.metaDescription} ogType="article">
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(article_)} />
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(faq)} />
+
+  <InsightDetailBody article={article} />
+</BaseLayout>

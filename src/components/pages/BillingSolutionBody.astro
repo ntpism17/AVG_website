@@ -1,0 +1,115 @@
+---
+import ContactForm from '../ContactForm.astro';
+import { type Locale } from '../../lib/i18n/locales';
+import { localeHref } from '../../lib/i18n/url';
+import { BILLING_COPY } from '../../lib/i18n/pages/solutions-billing';
+import { UI } from '../../lib/i18n/ui';
+import Button from '../ui/Button.astro';
+import Card from '../ui/Card.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Field from '../ui/Field.astro';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const t = BILLING_COPY[locale];
+const ui = UI[locale];
+const amrHref = localeHref(locale, '/solutions/amr');
+---
+
+<Section width="wide" spacing="lg">
+  <Eyebrow>{t.eyebrow}</Eyebrow>
+  <h1 class="mt-3 font-display text-4xl sm:text-5xl font-bold leading-tight text-ink">
+    {t.heroHeading}
+  </h1>
+  <p class="mt-5 text-lg text-ink-2 leading-relaxed max-w-3xl">
+    {t.heroLedeBeforeAmr}{' '}
+    <a href={amrHref} class="text-accent font-semibold hover:text-accent-deep">AMR</a>
+    {' '}{t.heroLedeAfterAmr}
+  </p>
+  <div class="mt-8 flex flex-wrap gap-4">
+    <Button href="#quote">{t.ctaDemo}</Button>
+    <Button href="#quote" variant="secondary">{t.ctaConsult}</Button>
+  </div>
+</Section>
+
+<Section id="ppa-billing" band="surface-y" width="wide">
+  <SectionHeading eyebrow={t.pillarsEyebrow} heading={t.pillarsHeading} />
+  <div class="mt-10 grid lg:grid-cols-2 gap-6">
+    {
+      t.pillars.map((pillar) => (
+        <Card as="article" id={pillar.id}>
+          <h3 class="font-display font-bold text-lg text-ink">{pillar.title}</h3>
+          <div class="font-en text-sm text-accent">{pillar.sub}</div>
+          <p class="mt-3 text-sm text-ink-2 leading-relaxed">{pillar.desc}</p>
+          <ul class="mt-4 space-y-2 text-sm text-ink-2">
+            {pillar.items.map((item) => (
+              <li class="flex gap-2">
+                <span class="text-accent">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </Card>
+      ))
+    }
+  </div>
+</Section>
+
+<Section width="wide">
+  <SectionHeading eyebrow={t.personasEyebrow} heading={t.personasHeading} />
+  <div class="mt-10 grid lg:grid-cols-2 gap-6">
+    {
+      t.personas.map((persona) => (
+        <Card as="article">
+          <h3 class="font-display font-bold text-lg text-ink">{persona.title}</h3>
+          <p class="mt-3 text-sm text-ink-2 leading-relaxed">{persona.desc}</p>
+          <ul class="mt-4 space-y-2 text-sm text-ink-2 list-disc list-inside">
+            {persona.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </Card>
+      ))
+    }
+  </div>
+</Section>
+
+<Section band="surface-y">
+  <h2 class="font-display text-2xl font-bold text-ink text-center">{t.crossLinkHeading}</h2>
+  <p class="mt-3 text-center text-ink-2">
+    {t.crossLinkLedeBeforeAmr}{' '}
+    <a href={amrHref} class="text-accent font-semibold hover:text-accent-deep">AMR</a>
+    {' '}{t.crossLinkLedeAfterAmr}
+  </p>
+</Section>
+
+<Section id="quote" width="narrow">
+  <h2 class="font-display text-2xl font-bold text-ink text-center">{t.quoteHeading}</h2>
+  <p class="mt-2 text-center text-ink-2">{t.quoteLede}</p>
+
+  <ContactForm subject="Billing — Quote request" formId="billing-quote" class="mt-8">
+    <div class="grid sm:grid-cols-2 gap-5">
+      <Field id="qf-name" name="name" label={ui.form.name} required />
+      <Field id="qf-company" name="company" label={ui.form.companyOrProject} />
+    </div>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <Field id="qf-email" name="email" label={ui.form.email} type="email" required />
+      <Field id="qf-phone" name="phone" label={ui.form.phone} type="tel" />
+    </div>
+    <Field id="qf-type" name="business_type" label={ui.form.businessType} type="select">
+      {t.businessTypes.map((type) => <option>{type}</option>)}
+    </Field>
+    <Field id="qf-rooms" name="portfolio_size" label={ui.form.portfolioSize} type="select">
+      {t.portfolioSizes.map((size) => <option>{size}</option>)}
+    </Field>
+    <Field id="qf-msg" name="message" label={ui.form.message} type="textarea" />
+    <div class="flex items-start gap-2">
+      <input id="qf-consent" name="consent" type="checkbox" required class="mt-1" />
+      <label for="qf-consent" class="text-sm text-ink-2">
+        {ui.form.consent}
+      </label>
+    </div>
+  </ContactForm>
+  <p class="mt-4 text-xs text-ink-3 text-center">{ui.form.pdpaNotice}</p>
+</Section>

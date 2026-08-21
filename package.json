@@ -14,11 +14,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "build:og": "node scripts/build-og.mjs",
+    "build:favicon": "node scripts/build-favicon.mjs",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
-    "@fontsource/ibm-plex-sans-thai": "^5.2.8",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/manrope": "^5.2.8",
     "@fontsource/noto-sans-thai": "^5.2.8",

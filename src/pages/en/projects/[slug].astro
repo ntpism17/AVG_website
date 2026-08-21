@@ -1,0 +1,33 @@
+---
+import ProjectDetailBody from '../../../components/pages/ProjectDetailBody.astro';
+import type { ProjectEntry } from '../../../content.config';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getPublishedProjects } from '../../../lib/collections';
+import { stripLocale } from '../../../lib/i18n/locales';
+import { breadcrumbSchema } from '../../../lib/schema';
+
+export async function getStaticPaths() {
+  const projects = await getPublishedProjects('en');
+  return projects.map((project) => ({
+    params: { slug: stripLocale(project.id) },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: ProjectEntry;
+}
+
+const { project } = Astro.props;
+
+const breadcrumb = breadcrumbSchema(
+  [{ name: 'Projects', href: '/projects' }, { name: project.data.title }],
+  Astro.site,
+  'en'
+);
+---
+
+<BaseLayout title={project.data.title} description={project.data.summary} ogType="article">
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <ProjectDetailBody project={project} />
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import { type Locale } from '../../lib/i18n/locales';
+import { INDUSTRIES_INDEX_COPY } from '../../lib/i18n/pages/industries-index';
+import { UI } from '../../lib/i18n/ui';
+import { localeHref } from '../../lib/i18n/url';
+import { SEGMENTS } from '../../lib/segments';
+import Card from '../ui/Card.astro';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const t = INDUSTRIES_INDEX_COPY[locale];
+const ui = UI[locale];
+const segments = [...SEGMENTS].sort((a, b) => a.order - b.order);
+---
+
+<Section width="wide" spacing="lg">
+  <SectionHeading as="h1" eyebrow={t.eyebrow} heading={t.heading} lede={t.lede} />
+  <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {
+      segments.map((segment) => (
+        <Card as="article" href={localeHref(locale, `/industries/${segment.id}`)} interactive>
+          <Image
+            src={segment.image}
+            alt={segment[locale]}
+            widths={[400, 800]}
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            class="mb-4 h-40 w-full rounded-lg border border-line bg-bg-elev object-cover"
+            loading="lazy"
+          />
+          <h2 class="mt-2 font-display font-semibold text-lg text-ink">{segment[locale]}</h2>
+          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{segment.tagline[locale]}</p>
+          <span class="mt-4 inline-block text-sm font-semibold text-accent">
+            {ui.card.viewDetails}
+          </span>
+        </Card>
+      ))
+    }
+  </div>
+</Section>

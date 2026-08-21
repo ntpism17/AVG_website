@@ -1,0 +1,45 @@
+---
+import IndustryDetailBody from '../../../components/pages/IndustryDetailBody.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  getProductsBySegment,
+  getPublishedArticlesBySegment,
+  getPublishedProjectsBySegment,
+} from '../../../lib/collections';
+import { UI } from '../../../lib/i18n/ui';
+import { breadcrumbSchema } from '../../../lib/schema';
+import { SEGMENTS, type Segment } from '../../../lib/segments';
+
+export async function getStaticPaths() {
+  return SEGMENTS.map((segment) => ({
+    params: { segment: segment.id },
+    props: { segment },
+  }));
+}
+
+interface Props {
+  segment: Segment;
+}
+
+const { segment }: Props = Astro.props;
+const locale = 'en' as const;
+
+const [products, projects, articles] = await Promise.all([
+  getProductsBySegment(locale, segment.id),
+  getPublishedProjectsBySegment(locale, segment.id),
+  getPublishedArticlesBySegment(locale, segment.id),
+]);
+
+const breadcrumb = breadcrumbSchema(
+  [{ name: UI[locale].nav.industries, href: '/industries' }, { name: segment[locale] }],
+  Astro.site,
+  locale
+);
+---
+
+<BaseLayout title={segment[locale]} description={segment.tagline[locale]}>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumb)} />
+  </Fragment>
+  <IndustryDetailBody segment={segment} products={products} projects={projects} articles={articles} />
+</BaseLayout>

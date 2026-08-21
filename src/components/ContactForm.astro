@@ -1,4 +1,6 @@
 ---
+import { type Locale } from '../lib/i18n/locales';
+import { UI } from '../lib/i18n/ui';
 import { SITE } from '../lib/site';
 
 interface Props {
@@ -9,12 +11,15 @@ interface Props {
   submitLabel?: string;
 }
 
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const ui = UI[locale];
+
 const {
   subject,
   formId,
   class: className = '',
   redirectPath = '/contact/thank-you',
-  submitLabel = 'ส่งคำขอ →',
+  submitLabel = ui.form.submit,
 } = Astro.props;
 
 // Public by design — the key is embedded in the built HTML and only permits
@@ -33,12 +38,12 @@ const redirectURL = new URL(redirectPath, Astro.site).href;
       role="status"
       class="mb-5 rounded-md border border-line-strong bg-accent-soft px-4 py-3 text-sm text-ink-2"
     >
-      <strong class="block text-ink">แบบฟอร์มออนไลน์ปิดใช้งานชั่วคราว</strong>
-      กรุณาติดต่อเราที่{' '}
+      <strong class="block text-ink">{ui.form.disabledTitle}</strong>
+      {ui.form.disabledBodyPrefix}{' '}
       <a href={SITE.phone.href} class="font-semibold text-accent hover:text-accent-deep">
         {SITE.phone.display}
       </a>
-      หรือ{' '}
+      {' '}{ui.form.disabledBodyOr}{' '}
       <a href={`mailto:${SITE.email}`} class="font-semibold text-accent hover:text-accent-deep">
         {SITE.email}
       </a>

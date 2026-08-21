@@ -1,0 +1,15 @@
+---
+import ContactThankYouBody from '../../../components/pages/ContactThankYouBody.astro';
+import Section from '../../../components/ui/Section.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { CONTACT_THANK_YOU_COPY } from '../../../lib/i18n/pages/contact-thank-you';
+import { legalName } from '../../../lib/site';
+
+const t = CONTACT_THANK_YOU_COPY.en;
+---
+
+<BaseLayout title={t.metaTitle} description={t.metaDescription(legalName('en'))} noindex={true}>
+  <Section width="narrow" spacing="none" innerClass="py-24 lg:py-32 text-center">
+    <ContactThankYouBody />
+  </Section>
+</BaseLayout>

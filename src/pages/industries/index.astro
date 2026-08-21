@@ -1,0 +1,11 @@
+---
+import IndustriesIndexBody from '../../components/pages/IndustriesIndexBody.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { INDUSTRIES_INDEX_COPY } from '../../lib/i18n/pages/industries-index';
+
+const t = INDUSTRIES_INDEX_COPY.th;
+---
+
+<BaseLayout title={t.heading} description={t.metaDescription}>
+  <IndustriesIndexBody />
+</BaseLayout>

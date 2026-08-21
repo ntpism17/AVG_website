@@ -1,0 +1,13 @@
+---
+import SmartMeterSolutionBody from '../../components/pages/SmartMeterSolutionBody.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getSmartMeterProducts } from '../../lib/collections';
+import { SMART_METER_COPY } from '../../lib/i18n/pages/solutions-smart-meter';
+
+const products = await getSmartMeterProducts('th');
+const t = SMART_METER_COPY.th;
+---
+
+<BaseLayout title={t.metaTitle} description={t.metaDescription}>
+    <SmartMeterSolutionBody {products} />
+</BaseLayout>

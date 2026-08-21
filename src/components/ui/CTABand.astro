@@ -1,4 +1,6 @@
 ---
+import { type Locale } from '../../lib/i18n/locales';
+import { localeHref } from '../../lib/i18n/url';
 import Button from './Button.astro';
 import Section from './Section.astro';
 
@@ -31,6 +33,8 @@ const {
   class: className,
 }: Props = Astro.props;
 
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const resolvedCtaHref = localeHref(locale, ctaHref);
 const isLarge = headingSize === 'lg';
 
 const headingClass = isLarge
@@ -54,7 +58,7 @@ const bandSpacing = isLarge ? 'md' : 'sm';
     >
       <h2 class={headingClass}>{heading}</h2>
       {body && <p class="mt-4 max-w-xl mx-auto text-ink-2">{body}</p>}
-      <Button href={ctaHref} class={buttonSpacing}>
+      <Button href={resolvedCtaHref} class={buttonSpacing}>
         {ctaLabel}
       </Button>
     </Section>
@@ -62,7 +66,7 @@ const bandSpacing = isLarge ? 'md' : 'sm';
     <div class:list={['mt-12 rounded-lg bg-surface border border-line p-8 text-center', className]}>
       <h2 class="font-display text-xl font-bold text-ink">{heading}</h2>
       {body && <p class="mt-2 text-ink-2">{body}</p>}
-      <Button href={ctaHref} class="mt-5">
+      <Button href={resolvedCtaHref} class="mt-5">
         {ctaLabel}
       </Button>
     </div>

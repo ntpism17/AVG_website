@@ -1,17 +1,15 @@
 ---
-import { render } from 'astro:content';
-import Breadcrumb from '../../components/ui/Breadcrumb.astro';
-import CTABand from '../../components/ui/CTABand.astro';
-import StatGrid from '../../components/ui/StatGrid.astro';
+import ProjectDetailBody from '../../components/pages/ProjectDetailBody.astro';
 import type { ProjectEntry } from '../../content.config';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getPublishedProjects } from '../../lib/collections';
+import { stripLocale } from '../../lib/i18n/locales';
 import { breadcrumbSchema } from '../../lib/schema';
 
 export async function getStaticPaths() {
-  const projects = await getPublishedProjects();
+  const projects = await getPublishedProjects('th');
   return projects.map((project) => ({
-    params: { slug: project.id },
+    params: { slug: stripLocale(project.id) },
     props: { project },
   }));
 }
@@ -21,36 +19,15 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { Content } = await render(project);
 
 const breadcrumb = breadcrumbSchema(
   [{ name: 'โครงการ', href: '/projects' }, { name: project.data.title }],
-  Astro.site
+  Astro.site,
+  'th'
 );
 ---
 
 <BaseLayout title={project.data.title} description={project.data.summary} ogType="article">
   <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(breadcrumb)} />
-
-  <article class="max-w-3xl mx-auto px-5 py-16 lg:py-24">
-    <Breadcrumb href="/projects" label="← โครงการทั้งหมด" />
-    <div class="mt-6 flex flex-wrap gap-4 text-sm text-ink-3">
-      <span>{project.data.location}</span>
-      <span>{project.data.capacity}</span>
-    </div>
-    <h1 class="mt-2 font-display text-3xl sm:text-4xl font-bold text-ink">{project.data.title}</h1>
-
-    {project.data.stats && <StatGrid stats={project.data.stats} variant="feature" class="mt-8" />}
-
-    <div class="mt-10 prose prose-neutral max-w-none text-ink-2 leading-relaxed">
-      <Content />
-    </div>
-
-    <CTABand
-      layout="card"
-      heading="มีโครงการแบบนี้อยู่ในมือคุณ?"
-      body="พูดคุยกับวิศวกรของ Advanced Grid ฟรี เราจะช่วยประเมินขอบเขตงาน เลือกอุปกรณ์ และเสนอราคาภายใน 2 วันทำการ"
-      ctaLabel="ปรึกษาวิศวกร →"
-    />
-  </article>
+  <ProjectDetailBody project={project} />
 </BaseLayout>

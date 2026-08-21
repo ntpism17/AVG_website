@@ -33,6 +33,17 @@ const products = defineCollection({
 
       image: image().optional(),
       imageAlt: z.string().optional(),
+
+      // Which industry segments this product serves — drives the "relevant
+      // products" grid on each /industries/[segment] page. A product may
+      // serve more than one (e.g. Prometer 100 is used at both solar-farm
+      // and utility interconnect points).
+      segments: z.array(z.enum(['solar-renewable', 'utility', 'industrial'])).min(1),
+
+      // Whether this is a smart / TOU meter — drives the product grid on the
+      // /solutions/smart-meter page. Keep in sync with what that page promises.
+      smartMeter: z.boolean().optional(),
+
       order: z.number(),
     }),
 });
@@ -50,6 +61,10 @@ const projects = defineCollection({
     capacity: z.string(),
     status: z.enum(['published', 'pending']),
     stats: z.array(z.object({ label: z.string(), value: z.string() })).optional(),
+
+    // Same segment tagging as products — see the comment there.
+    segments: z.array(z.enum(['solar-renewable', 'utility', 'industrial'])).min(1),
+
     order: z.number(),
   }),
 });
@@ -79,7 +94,10 @@ const articles = defineCollection({
     // Reference only for content QA against the keyword research — never rendered.
     targetKeywords: z.array(z.string()),
 
-    persona: z.enum(['solar-developer', 'utility', 'renewable-developer', 'general']),
+    // The industry segment this article targets, or 'general' for
+    // audience-neutral regulatory explainers. Matches `lib/segments.ts`'s
+    // SegmentId, plus 'general' for content with no single target segment.
+    segment: z.enum(['solar-renewable', 'utility', 'industrial', 'general']),
 
     // Doubles as the visible on-page FAQ block and the FAQPage JSON-LD source,
     // so the answer can never drift between what's shown and what's marked up.

@@ -1,0 +1,47 @@
+---
+import type { ProductEntry } from '../../content.config';
+import { type Locale } from '../../lib/i18n/locales';
+import { PRODUCTS_INDEX_COPY } from '../../lib/i18n/pages/products-index';
+import { SERVICES } from '../../lib/services';
+import { localeHref } from '../../lib/i18n/url';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Card from '../ui/Card.astro';
+import ProductCard from '../ProductCard.astro';
+
+interface Props {
+  products: ProductEntry[];
+}
+
+const { products } = Astro.props;
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const t = PRODUCTS_INDEX_COPY[locale];
+---
+
+<Section width="wide" spacing="lg">
+  <SectionHeading as="h1" eyebrow={t.eyebrow} heading={t.heading} />
+  <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {products.map((product) => <ProductCard product={product} headingLevel="h2" showSpecs />)}
+  </div>
+</Section>
+
+<Section width="wide" spacing="lg" band="surface">
+  <SectionHeading eyebrow={t.servicesEyebrow} heading={t.servicesHeading} lede={t.servicesLede} />
+  <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {
+      SERVICES.map((service) => (
+        <Card as="article" href={localeHref(locale, `/services#${service.id}`)} interactive>
+          <div class="font-en text-xs text-ink-3">{service.num}</div>
+          <h3 class="mt-2 font-display font-semibold text-lg text-ink">{service.title[locale]}</h3>
+          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{service.desc[locale]}</p>
+        </Card>
+      ))
+    }
+  </div>
+  <a
+    href={localeHref(locale, '/services')}
+    class="mt-8 inline-block font-semibold text-accent hover:text-accent-deep"
+  >
+    {t.servicesViewAll}
+  </a>
+</Section>

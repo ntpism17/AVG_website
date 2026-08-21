@@ -27,11 +27,6 @@ export const SITE = {
 
   email: 'advancedgrid@gmail.com',
 
-  line: {
-    id: '@856khvjl',
-    href: 'https://line.me/ti/p/~856khvjl',
-  },
-
   social: {
     facebook: 'https://www.facebook.com/profile.php?id=100078060450011',
   },
@@ -41,7 +36,7 @@ export const SITE = {
 
   addresses: {
     registered: {
-      label: { th: 'ที่อยู่จดทะเบียน', en: 'Registered office' },
+      label: { th: 'ที่อยู่จดทะเบียน', en: 'Registered office', zh: '注册地址' },
       th: '99/6116 หมู่ 2 ต.ท่าอิฐ อ.ปากเกร็ด จ.นนทบุรี 11120',
       en: {
         streetAddress: '99/6116 Moo 2, Tha It',
@@ -52,7 +47,7 @@ export const SITE = {
       },
     },
     sales: {
-      label: { th: 'สำนักงานขาย (MRV Building)', en: 'Sales office' },
+      label: { th: 'สำนักงานขาย (MRV Building)', en: 'Sales office', zh: '销售办公室' },
       th: 'อาคาร MRV, 38/5 หมู่ 4 ต.บางพลับ อ.ปากเกร็ด จ.นนทบุรี 11120',
       en: {
         streetAddress: 'MRV Building, 38/5 Moo 4, Bang Phlap',
@@ -81,4 +76,25 @@ export function formatAddressEn(address: {
     address.addressRegion,
     address.postalCode,
   ].join(', ');
+}
+
+/**
+ * Company legal name for visible copy, by locale. There is no Chinese legal
+ * name on file — per CLAUDE.md, never invent company data — so `zh` pages
+ * reuse the English legal name, same as `en`.
+ */
+export function legalName(locale: 'th' | 'en' | 'zh'): string {
+  return locale === 'th' ? SITE.name.th : SITE.name.en;
+}
+
+/**
+ * Visible address text by locale. `th` uses the authoritative Thai string;
+ * `en`/`zh` render the existing structured English address (already part of
+ * `SITE`, not a new translation) via `formatAddressEn`.
+ */
+export function addressText(
+  locale: 'th' | 'en' | 'zh',
+  address: (typeof SITE.addresses)[keyof typeof SITE.addresses]
+): string {
+  return locale === 'th' ? address.th : formatAddressEn(address.en);
 }

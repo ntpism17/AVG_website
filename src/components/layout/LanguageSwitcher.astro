@@ -1,0 +1,34 @@
+---
+/**
+ * TH / EN / 中文 switcher — links to the equivalent page in each locale.
+ * Works as pure build-time links (no client JS) because every content
+ * collection entry shares the same filename across `th/`/`en/`/`zh/`, so the
+ * current URL's locale-agnostic path is also valid in every other locale.
+ */
+import { LOCALES, type Locale } from '../../lib/i18n/locales';
+import { localeHref, stripLocaleFromPath } from '../../lib/i18n/url';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const LOCALE_LABELS: Record<Locale, string> = { th: 'ไทย', en: 'EN', zh: '中文' };
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const basePath = stripLocaleFromPath(Astro.url.pathname);
+---
+
+<div class:list={['flex items-center gap-3 font-en text-sm', className]} aria-label="Language">
+  {
+    LOCALES.map((l) => (
+      <a
+        href={localeHref(l, basePath)}
+        aria-current={l === locale ? 'page' : undefined}
+        class={l === locale ? 'font-semibold text-ink' : 'text-ink-2 hover:text-ink'}
+      >
+        {LOCALE_LABELS[l]}
+      </a>
+    ))
+  }
+</div>

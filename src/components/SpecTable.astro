@@ -5,6 +5,8 @@
  * Values are transcribed verbatim from manufacturer datasheets (see CLAUDE.md),
  * so `source` is rendered alongside them to keep every claim traceable.
  */
+import type { Locale } from '../lib/i18n/locales';
+
 interface Props {
   heading: string;
   groups: readonly { group: string; rows: readonly { label: string; value: string }[] }[];
@@ -13,7 +15,16 @@ interface Props {
   class?: string;
 }
 
-const { heading, groups, source, sourceLabel = 'ที่มา', class: className } = Astro.props;
+const SOURCE_LABELS: Record<Locale, string> = { th: 'ที่มา', en: 'Source', zh: '来源' };
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+
+const {
+  heading,
+  groups,
+  source,
+  sourceLabel = SOURCE_LABELS[locale],
+  class: className,
+} = Astro.props;
 ---
 
 <section class:list={['mt-14', className]}>

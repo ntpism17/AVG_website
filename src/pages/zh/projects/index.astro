@@ -1,0 +1,13 @@
+---
+import ProjectsIndexBody from '../../../components/pages/ProjectsIndexBody.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getSortedProjects } from '../../../lib/collections';
+import { PROJECTS_INDEX_COPY } from '../../../lib/i18n/pages/projects-index';
+
+const projects = await getSortedProjects('zh');
+const t = PROJECTS_INDEX_COPY.zh;
+---
+
+<BaseLayout title={t.metaTitle} description={t.metaDescription}>
+  <ProjectsIndexBody projects={projects} />
+</BaseLayout>

@@ -1,0 +1,13 @@
+---
+import InsightsIndexBody from '../../../components/pages/InsightsIndexBody.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getSortedArticles } from '../../../lib/collections';
+import { INSIGHTS_INDEX_COPY } from '../../../lib/i18n/pages/insights-index';
+
+const articles = await getSortedArticles('en');
+const t = INSIGHTS_INDEX_COPY.en;
+---
+
+<BaseLayout title={t.metaTitle} description={t.metaDescription}>
+  <InsightsIndexBody articles={articles} />
+</BaseLayout>

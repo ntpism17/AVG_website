@@ -1,0 +1,11 @@
+---
+import AmrSolutionBody from '../../../components/pages/AmrSolutionBody.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { AMR_COPY } from '../../../lib/i18n/pages/solutions-amr';
+
+const t = AMR_COPY.zh;
+---
+
+<BaseLayout title={t.metaTitle} description={t.metaDescription}>
+  <AmrSolutionBody />
+</BaseLayout>

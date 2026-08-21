@@ -1,37 +1,11 @@
 ---
-import Card from '../components/ui/Card.astro';
-import CTABand from '../components/ui/CTABand.astro';
-import Section from '../components/ui/Section.astro';
-import SectionHeading from '../components/ui/SectionHeading.astro';
+import ServicesBody from '../components/pages/ServicesBody.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SERVICES } from '../lib/services';
+import { SERVICES_COPY } from '../lib/i18n/pages/services';
+
+const t = SERVICES_COPY.th;
 ---
 
-<BaseLayout
-  title="บริการ"
-  description="บริการครบวงจรสำหรับระบบมิเตอร์ไฟฟ้าและการสื่อสาร ตั้งแต่ที่ปรึกษาทางวิศวกรรม ออกแบบและจัดหาอุปกรณ์ ติดตั้งและทดสอบระบบ ไปจนถึงสอบเทียบและซ่อมบำรุง"
->
-  <Section spacing="lg">
-    <SectionHeading
-      as="h1"
-      eyebrow="บริการของเรา"
-      heading="บริการครบวงจรสำหรับระบบมิเตอร์ไฟฟ้าและการสื่อสาร"
-      lede="ตั้งแต่การให้คำปรึกษา ออกแบบทางวิศวกรรม จัดหาอุปกรณ์ ไปจนถึงการติดตั้ง ทดสอบ และซ่อมบำรุง — เรารับผิดชอบทุกขั้นตอนของโครงการ"
-    />
-  </Section>
-
-  <Section spacing="none" innerClass="pb-24 space-y-10">
-    {
-      SERVICES.map((service) => (
-        <Card as="article" id={service.id} padding="lg" class="scroll-mt-24">
-          <div class="font-en text-xs text-ink-3">{service.num}</div>
-          <h2 class="mt-2 font-display text-2xl font-bold text-ink">{service.title}</h2>
-          <div class="font-en text-sm text-ink-3">{service.titleEn}</div>
-          <p class="mt-4 text-ink-2 leading-relaxed">{service.desc}</p>
-        </Card>
-      ))
-    }
-  </Section>
-
-  <CTABand heading="ให้เราช่วยประเมินขอบเขตงานของคุณ" ctaLabel="ขอใบเสนอราคา →" />
+<BaseLayout title={t.metaTitle} description={t.metaDescription}>
+  <ServicesBody />
 </BaseLayout>

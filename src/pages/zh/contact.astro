@@ -1,0 +1,15 @@
+---
+import ContactBody from '../../components/pages/ContactBody.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CONTACT_COPY } from '../../lib/i18n/pages/contact';
+import { legalName, SITE } from '../../lib/site';
+
+const t = CONTACT_COPY.zh;
+---
+
+<BaseLayout
+  title={t.metaTitle}
+  description={t.metaDescription(legalName('zh'), SITE.phone.display, SITE.email)}
+>
+  <ContactBody />
+</BaseLayout>

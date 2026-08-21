@@ -1,0 +1,169 @@
+---
+import type { ProductEntry } from '../../content.config';
+import { type Locale } from '../../lib/i18n/locales';
+import { localeHref } from '../../lib/i18n/url';
+import { HOME_COPY } from '../../lib/i18n/pages/home';
+import { SEGMENTS } from '../../lib/segments';
+import { SERVICES } from '../../lib/services';
+import { legalName } from '../../lib/site';
+import { Image } from 'astro:assets';
+import heroImage from '../../assets/pexels-quang-nguyen-vinh-222549-14024422.jpg';
+import heroImage2 from '../../assets/pexels-michael-pointner-134459625-18306344.jpg';
+import heroImage3 from '../../assets/pexels-tonywuphotography-10630324.jpg';
+import ProductCard from '../ProductCard.astro';
+import Button from '../ui/Button.astro';
+import Card from '../ui/Card.astro';
+import CTABand from '../ui/CTABand.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+interface Props {
+  products: ProductEntry[];
+}
+
+const { products } = Astro.props;
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const t = HOME_COPY[locale];
+const segments = [...SEGMENTS].sort((a, b) => a.order - b.order);
+
+// Brands we distribute, per CLAUDE.md.
+const brands = ['CEWE', 'SECURE', 'EDMI'];
+
+// Hero backgrounds, crossfaded in sequence.
+const heroImages = [heroImage, heroImage2, heroImage3];
+---
+
+<!-- Hero -->
+<section class="hero-dark relative overflow-hidden bg-ink text-white">
+  {
+    heroImages.map((image, index) => (
+      <Image
+        src={image}
+        alt={t.heroImageAlt}
+        widths={[768, 1280, 1920, 2560]}
+        sizes="100vw"
+        class="hero-fade absolute inset-0 w-full h-full object-cover"
+        style={`animation-delay: ${index * 5}s`}
+        loading={index === 0 ? 'eager' : 'lazy'}
+        fetchpriority={index === 0 ? 'high' : 'auto'}
+      />
+    ))
+  }
+  <div class="absolute inset-0 bg-ink/75"></div>
+  <div class="relative max-w-4xl mx-auto px-5 py-24 lg:py-36 text-center">
+    <Eyebrow>{t.heroEyebrow}</Eyebrow>
+    <h1
+      class="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white"
+      set:html={t.heroHeadingHtml}
+    />
+    <p class="mt-6 text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">{t.heroLede}</p>
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <Button href={localeHref(locale, '/products')} size="lg">{t.heroCtaProducts}</Button>
+      <Button href={localeHref(locale, '/contact')} variant="on-dark" size="lg"
+        >{t.heroCtaConsult}</Button
+      >
+    </div>
+  </div>
+</section>
+
+<!-- Brand strip -->
+<div class="border-y border-line bg-surface py-8">
+  <div class="max-w-6xl mx-auto px-5">
+    <p class="text-center font-en text-sm text-ink-3 mb-4">{t.brandStripLabel}</p>
+    <div
+      class="flex flex-wrap justify-center gap-x-10 gap-y-3 font-display font-bold text-xl text-ink-2"
+    >
+      {brands.map((brand) => <span>{brand}</span>)}
+    </div>
+  </div>
+</div>
+
+<!-- Industry segments -->
+<Section width="wide">
+  <SectionHeading eyebrow={t.industriesEyebrow} heading={t.industriesHeading} />
+  <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {
+      segments.map((segment) => (
+        <Card as="article" href={localeHref(locale, `/industries/${segment.id}`)} interactive>
+          <Image
+            src={segment.image}
+            alt={segment[locale]}
+            widths={[400, 800]}
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            class="mb-4 h-40 w-full rounded-lg border border-line bg-bg-elev object-cover"
+            loading="lazy"
+          />
+          <h3 class="mt-2 font-display font-semibold text-lg text-ink">{segment[locale]}</h3>
+          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{segment.tagline[locale]}</p>
+        </Card>
+      ))
+    }
+  </div>
+  <a
+    href={localeHref(locale, '/industries')}
+    class="mt-8 inline-block font-semibold text-accent hover:text-accent-deep"
+  >
+    {t.industriesViewAll}
+  </a>
+</Section>
+
+<!-- About teaser -->
+<Section width="wide">
+  <SectionHeading
+    eyebrow={t.aboutEyebrow}
+    heading={t.aboutHeading}
+    lede={t.aboutLede(legalName(locale))}
+  />
+  <a
+    href={localeHref(locale, '/about')}
+    class="mt-6 inline-block font-semibold text-accent hover:text-accent-deep"
+  >
+    {t.aboutReadMore}
+  </a>
+</Section>
+
+<!-- Services teaser -->
+<Section width="wide">
+  <SectionHeading eyebrow={t.servicesEyebrow} heading={t.servicesHeading} lede={t.servicesLede} />
+  <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {
+      SERVICES.map((service) => (
+        <Card as="article" interactive>
+          <div class="font-en text-xs text-ink-3">{service.num}</div>
+          <h3 class="mt-2 font-display font-semibold text-lg text-ink">{service.title[locale]}</h3>
+          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{service.desc[locale]}</p>
+        </Card>
+      ))
+    }
+  </div>
+  <a
+    href={localeHref(locale, '/services')}
+    class="mt-8 inline-block font-semibold text-accent hover:text-accent-deep"
+  >
+    {t.servicesViewAll}
+  </a>
+</Section>
+
+<!-- Featured products -->
+<Section width="wide">
+  <SectionHeading eyebrow={t.productsEyebrow} heading={t.productsHeading} />
+  <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {products.map((product) => <ProductCard product={product} headingLevel="h3" />)}
+  </div>
+  <a
+    href={localeHref(locale, '/products')}
+    class="mt-8 inline-block font-semibold text-accent hover:text-accent-deep"
+  >
+    {t.productsViewAll}
+  </a>
+</Section>
+
+<!-- Contact CTA -->
+<CTABand
+  width="wide"
+  headingSize="lg"
+  heading={t.ctaHeading}
+  body={t.ctaBody}
+  ctaLabel={t.ctaLabel}
+/>

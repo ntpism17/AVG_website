@@ -1,18 +1,23 @@
 ---
 import { Image } from 'astro:assets';
 import wordmark from '../../assets/advancedgrid-wordmark.png';
+import { stripLocale, type Locale } from '../../lib/i18n/locales';
+import { localeHref } from '../../lib/i18n/url';
+import { UI } from '../../lib/i18n/ui';
 import { getSortedProducts } from '../../lib/collections';
-import { FOOTER_COMPANY_LINKS } from '../../lib/nav';
+import { getFooterCompanyLinks } from '../../lib/nav';
 import { SERVICES } from '../../lib/services';
-import { SITE } from '../../lib/site';
+import { legalName, SITE } from '../../lib/site';
 import FacebookIcon from '../icons/FacebookIcon.astro';
-import LineIcon from '../icons/LineIcon.astro';
 import MailIcon from '../icons/MailIcon.astro';
 
 const year = new Date().getFullYear();
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const ui = UI[locale];
+const companyLinks = getFooterCompanyLinks(locale);
 
 // Driven off the collection so names and brands can't drift from the content.
-const products = await getSortedProducts();
+const products = await getSortedProducts(locale);
 ---
 
 <footer class="bg-surface border-t border-line mt-24">
@@ -21,19 +26,14 @@ const products = await getSortedProducts();
       <Image
         src={wordmark}
         alt={SITE.name.en}
-        width={140}
-        height={35}
+        width={553}
+        height={70}
         class="h-[35px] w-auto object-contain"
       />
-      <p class="mt-4 text-sm text-ink-2 max-w-xs">
-        ระบบมิเตอร์ไฟฟ้าและสื่อสาร สำหรับโครงการระดับอุตสาหกรรมในประเทศไทย
-      </p>
+      <p class="mt-4 text-sm text-ink-2 max-w-xs">{ui.footer.tagline}</p>
       <div class="mt-4 flex items-center gap-4 text-ink-2">
         <a href={SITE.social.facebook} aria-label="Facebook" class="hover:text-accent">
           <FacebookIcon />
-        </a>
-        <a href={SITE.line.href} aria-label="LINE" class="hover:text-accent">
-          <LineIcon />
         </a>
         <a href={`mailto:${SITE.email}`} aria-label="Email" class="hover:text-accent">
           <MailIcon size={18} />
@@ -42,12 +42,15 @@ const products = await getSortedProducts();
     </div>
 
     <div>
-      <h5 class="font-display font-semibold text-ink mb-3">ผลิตภัณฑ์</h5>
+      <h5 class="font-display font-semibold text-ink mb-3">{ui.footer.productsHeading}</h5>
       <ul class="space-y-2 text-sm text-ink-2">
         {
           products.map((product) => (
             <li>
-              <a href={`/products/${product.id}`} class="hover:text-accent">
+              <a
+                href={localeHref(locale, `/products/${stripLocale(product.id)}`)}
+                class="hover:text-accent"
+              >
                 {product.data.name}
               </a>
             </li>
@@ -57,13 +60,13 @@ const products = await getSortedProducts();
     </div>
 
     <div>
-      <h5 class="font-display font-semibold text-ink mb-3">บริการ</h5>
+      <h5 class="font-display font-semibold text-ink mb-3">{ui.footer.servicesHeading}</h5>
       <ul class="space-y-2 text-sm text-ink-2">
         {
           SERVICES.map((service) => (
             <li>
-              <a href={`/services#${service.id}`} class="hover:text-accent">
-                {service.title}
+              <a href={localeHref(locale, `/services#${service.id}`)} class="hover:text-accent">
+                {service.title[locale]}
               </a>
             </li>
           ))
@@ -72,12 +75,12 @@ const products = await getSortedProducts();
     </div>
 
     <div>
-      <h5 class="font-display font-semibold text-ink mb-3">บริษัท</h5>
+      <h5 class="font-display font-semibold text-ink mb-3">{ui.footer.companyHeading}</h5>
       <ul class="space-y-2 text-sm text-ink-2">
         {
-          FOOTER_COMPANY_LINKS.map((link) => (
+          companyLinks.map((link) => (
             <li>
-              <a href={link.href} class="hover:text-accent">
+              <a href={localeHref(locale, link.href)} class="hover:text-accent">
                 {link.label}
               </a>
             </li>
@@ -92,9 +95,9 @@ const products = await getSortedProducts();
     <div
       class="max-w-6xl mx-auto px-5 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-ink-3"
     >
-      <div>&copy; {year} {SITE.name.th} · สงวนลิขสิทธิ์</div>
+      <div>&copy; {year} {legalName(locale)} · {ui.footer.rightsReserved}</div>
       <div class="flex gap-4">
-        <span>เลขทะเบียนนิติบุคคล {SITE.registration}</span>
+        <span>{ui.footer.registrationLabel} {SITE.registration}</span>
       </div>
     </div>
   </div>

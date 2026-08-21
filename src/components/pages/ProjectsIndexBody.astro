@@ -1,0 +1,43 @@
+---
+import type { ProjectEntry } from '../../content.config';
+import { stripLocale, type Locale } from '../../lib/i18n/locales';
+import { PROJECTS_INDEX_COPY } from '../../lib/i18n/pages/projects-index';
+import { localeHref } from '../../lib/i18n/url';
+import Card from '../ui/Card.astro';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import StatGrid from '../ui/StatGrid.astro';
+
+interface Props {
+  projects: ProjectEntry[];
+}
+
+const { projects } = Astro.props;
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const t = PROJECTS_INDEX_COPY[locale];
+---
+
+<Section width="wide" spacing="lg">
+  <SectionHeading as="h1" eyebrow={t.eyebrow} heading={t.heading} lede={t.lede} />
+
+  <div class="mt-10 grid sm:grid-cols-2 gap-6">
+    {
+      projects.map((project) =>
+        project.data.status === 'published' ? (
+          <Card href={localeHref(locale, `/projects/${stripLocale(project.id)}`)} interactive>
+            <div class="text-sm font-en font-semibold text-accent">{project.data.location}</div>
+            <h2 class="mt-1 font-display font-semibold text-lg text-ink">{project.data.title}</h2>
+            {project.data.stats && <StatGrid stats={project.data.stats} class="mt-4" />}
+            <span class="mt-4 inline-block text-sm font-semibold text-accent">{t.readStory}</span>
+          </Card>
+        ) : (
+          <div class="rounded-lg border border-dashed border-line-strong bg-surface p-6 opacity-70">
+            <div class="text-sm font-en font-semibold text-ink-3">{project.data.location}</div>
+            <h2 class="mt-1 font-display font-semibold text-lg text-ink">{project.data.title}</h2>
+            <p class="mt-3 text-sm text-ink-3">{t.pendingLabel}</p>
+          </div>
+        )
+      )
+    }
+  </div>
+</Section>

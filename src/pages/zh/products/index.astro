@@ -1,0 +1,13 @@
+---
+import ProductsIndexBody from '../../../components/pages/ProductsIndexBody.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getSortedProducts } from '../../../lib/collections';
+import { PRODUCTS_INDEX_COPY } from '../../../lib/i18n/pages/products-index';
+
+const products = await getSortedProducts('zh');
+const t = PRODUCTS_INDEX_COPY.zh;
+---
+
+<BaseLayout title={t.metaTitle} description={t.metaDescription}>
+  <ProductsIndexBody products={products} />
+</BaseLayout>

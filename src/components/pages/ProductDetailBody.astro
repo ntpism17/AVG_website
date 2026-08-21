@@ -1,0 +1,178 @@
+---
+import { render } from 'astro:content';
+import { Image } from 'astro:assets';
+import type { ProductEntry } from '../../content.config';
+import { type Locale } from '../../lib/i18n/locales';
+import { UI } from '../../lib/i18n/ui';
+import { localeHref } from '../../lib/i18n/url';
+import SpecTable from '../SpecTable.astro';
+import Breadcrumb from '../ui/Breadcrumb.astro';
+import Button from '../ui/Button.astro';
+import CTABand from '../ui/CTABand.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Pill from '../ui/Pill.astro';
+
+interface Props {
+  product: ProductEntry;
+}
+
+const { product } = Astro.props;
+const { Content } = await render(product);
+
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const ui = UI[locale];
+
+const COPY: Record<
+  Locale,
+  {
+    specTableHeading: string;
+    specSourceLabel: string;
+    ctaHeading: (name: string) => string;
+    ctaBody: string;
+    ctaSecondaryLabel: string;
+  }
+> = {
+  th: {
+    specTableHeading: 'ข้อมูลจำเพาะ',
+    specSourceLabel: 'ที่มา',
+    ctaHeading: (name) => `สนใจ ${name}?`,
+    ctaBody: 'ส่งรายละเอียดโครงการของคุณ ทีมวิศวกรของเราจะแนะนำรุ่นที่เหมาะสมและเสนอราคาให้',
+    ctaSecondaryLabel: 'ปรึกษาทีมวิศวกร',
+  },
+  en: {
+    specTableHeading: 'Specifications',
+    specSourceLabel: 'Source',
+    ctaHeading: (name) => `Interested in the ${name}?`,
+    ctaBody:
+      'Send us your project details. Our engineering team will recommend the right model and provide a quote.',
+    ctaSecondaryLabel: 'Talk to our engineers',
+  },
+  zh: {
+    specTableHeading: '规格参数',
+    specSourceLabel: '来源',
+    ctaHeading: (name) => `对 ${name} 感兴趣？`,
+    ctaBody: '发送您的项目详情，我们的工程团队将为您推荐合适的型号并提供报价。',
+    ctaSecondaryLabel: '咨询工程师',
+  },
+};
+const t = COPY[locale];
+
+// "Key specs at a glance" — pulled verbatim from specTable rows so the values
+// can never drift from the datasheet (see CLAUDE.md). Labels are matched by the
+// English term embedded in each locale's label (e.g. 'ความแม่นยำ (Accuracy)').
+const HIGHLIGHT_TOKENS: { tokens: Record<Locale, string[]> }[] = [
+  { tokens: { th: ['ความแม่นยำ'], en: ['ccuracy'], zh: ['精度'] } },
+  { tokens: { th: ['รูปแบบการต่อ', 'การเดินสาย'], en: ['onnection', 'iring'], zh: ['接线'] } },
+  { tokens: { th: ['ความถี่'], en: ['requency'], zh: ['频率'] } },
+  {
+    tokens: {
+      th: ['โปรโตคอล', 'พอร์ตสื่อสาร', 'RS 485'],
+      en: ['rotocol', 'RS 485'],
+      zh: ['协议', '通信', 'RS 485'],
+    },
+  },
+];
+
+const allRows = (product.data.specTable ?? []).flatMap((group) => group.rows);
+const highlights: { label: string; value: string }[] = [];
+for (const rule of HIGHLIGHT_TOKENS) {
+  const match = allRows.find((row) =>
+    rule.tokens[locale].some((token) => row.label.toLowerCase().includes(token.toLowerCase()))
+  );
+  if (match) highlights.push({ label: match.label, value: match.value });
+}
+---
+
+<article class="max-w-6xl mx-auto px-5 py-16 lg:py-24">
+  <Breadcrumb href={localeHref(locale, '/products')} label={ui.breadcrumb.backToProducts} />
+
+  <div
+    class:list={[
+      'mt-8 grid gap-10 lg:items-start',
+      product.data.image ? 'lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]' : '',
+    ]}
+  >
+    {
+      product.data.image && (
+        <div class="lg:sticky lg:top-24">
+          <Image
+            src={product.data.image}
+            alt={product.data.imageAlt ?? product.data.name}
+            width={800}
+            height={600}
+            class="w-full rounded-xl border border-line bg-bg-elev object-contain p-6"
+          />
+        </div>
+      )
+    }
+
+    <div>
+      <Eyebrow>{product.data.brand}</Eyebrow>
+      <h1 class="mt-2 font-display text-3xl sm:text-4xl font-bold text-ink">{product.data.name}</h1>
+      <div class="mt-1 text-ink-3">{product.data.tagline}</div>
+
+      <p class="mt-5 text-lg text-ink-2 leading-relaxed">{product.data.description}</p>
+
+      <div class="mt-5 flex flex-wrap gap-2">
+        {product.data.specs.map((spec) => <Pill size="md">{spec}</Pill>)}
+      </div>
+
+      <div class="mt-7 flex flex-wrap gap-4">
+        <Button href={localeHref(locale, '/contact')}>{ui.requestQuote}</Button>
+        <Button href={localeHref(locale, '/contact')} variant="secondary">
+          {t.ctaSecondaryLabel}
+        </Button>
+      </div>
+
+      {
+        highlights.length > 0 && (
+          <div class="mt-9 grid gap-6 rounded-xl border border-line bg-bg-elev p-6 sm:grid-cols-2 lg:grid-cols-4">
+            {highlights.map((highlight) => (
+              <div>
+                <div class="text-xs font-medium text-ink-3">{highlight.label}</div>
+                <div class="mt-1 text-sm font-semibold text-ink leading-snug">
+                  {highlight.value}
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="mt-12 max-w-3xl prose prose-neutral text-ink-2 leading-relaxed">
+    <Content />
+  </div>
+
+  {
+    product.data.specTable && (
+      <div class="max-w-4xl">
+        <SpecTable
+          heading={t.specTableHeading}
+          groups={product.data.specTable}
+          source={product.data.specSource}
+          sourceLabel={t.specSourceLabel}
+        />
+      </div>
+    )
+  }
+
+  <CTABand
+    layout="card"
+    heading={t.ctaHeading(product.data.name)}
+    body={t.ctaBody}
+    ctaLabel={ui.requestQuote + ' →'}
+  />
+
+  <div class="h-20 lg:hidden" aria-hidden="true"></div>
+</article>
+
+<!-- Sticky quote CTA for mobile: the bottom of the page is a long scroll away. -->
+<div
+  class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-bg-elev/95 px-5 py-3 backdrop-blur lg:hidden"
+>
+  <Button href={localeHref(locale, '/contact')} class="w-full justify-center">
+    {ui.requestQuote}
+  </Button>
+</div>

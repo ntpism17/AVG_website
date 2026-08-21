@@ -1,0 +1,11 @@
+---
+import ServicesBody from '../../components/pages/ServicesBody.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SERVICES_COPY } from '../../lib/i18n/pages/services';
+
+const t = SERVICES_COPY.zh;
+---
+
+<BaseLayout title={t.metaTitle} description={t.metaDescription}>
+  <ServicesBody />
+</BaseLayout>

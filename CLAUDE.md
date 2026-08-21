@@ -108,12 +108,15 @@ src/
 ├── components/
 │   ├── icons/               # single-purpose inline SVGs
 │   ├── illustrations/       # decorative artwork
-│   ├── layout/              # Header, Footer
+│   ├── layout/              # Header, Footer, LanguageSwitcher
+│   ├── pages/                # locale-agnostic "Body" components — one per page, see i18n below
 │   └── ui/                  # Button, Card, Section, CTABand, Field, Pill, …
-├── content/ + content.config.ts
+├── content/ + content.config.ts   # each collection nested into th/en/zh subfolders
 ├── layouts/BaseLayout.astro
-├── lib/                     # site.ts, nav.ts, services.ts, collections.ts, schema.ts
-├── pages/
+├── lib/
+│   ├── i18n/                 # locales.ts, url.ts, ui.ts, pages/*.ts — see i18n below
+│   └── site.ts, nav.ts, segments.ts, services.ts, collections.ts, schema.ts
+├── pages/                    # Thai (default locale, unprefixed) + en/ and zh/ mirrors
 └── styles/global.css
 reference/legacy-site/       # old CMS export, migration reference only — never built
 ```
@@ -139,13 +142,42 @@ Rules that keep this from decaying:
   deliberate for SEO).
 - **Services** are a typed const in `src/lib/services.ts`, not a collection — four
   fixed items consumed by the home teaser, the services page and the footer.
+- **Industries** (`src/lib/segments.ts`) are a typed const, not a collection — three
+  fixed segments (`solar-renewable`, `utility`, `industrial`) that drive the
+  `/industries` nav dropdown and `/industries/[segment]` pages. `products`, `projects`
+  and `articles` collection entries carry a `segments`/`segment` field so
+  `src/lib/collections.ts`'s `getXBySegment` helpers can pull the right content onto
+  each segment page.
+- **Trilingual (TH/EN/ZH)**, using Astro's native `i18n` routing (`astro.config.mjs`).
+  Thai is the default locale and stays unprefixed at existing URLs (`/products/...`);
+  English and Chinese live under `/en/` and `/zh/`. The pattern, one per page:
+  - A content-agnostic **copy dictionary** — either the shared `src/lib/i18n/ui.ts`
+    (nav, footer, forms, breadcrumbs — chrome repeated across many pages) or a
+    dedicated `src/lib/i18n/pages/<page>.ts` exporting `Record<Locale, PageCopy>`
+    for content unique to one page.
+  - One locale-agnostic **`src/components/pages/<Page>Body.astro`** that reads
+    `Astro.currentLocale` and renders from the copy dict — the markup lives once.
+  - Three thin **route files** per page (`src/pages/<path>.astro` for `th`,
+    `src/pages/en/<path>.astro`, `src/pages/zh/<path>.astro`) that only do
+    data-fetching (`getStaticPaths`, collection queries — Astro requires real files
+    per locale, there's no auto-fan-out from one file) and render the Body component.
+  - Every content collection is nested into `th/`/`en/`/`zh/` subfolders, **reusing
+    the same filename per entry across all three** — this is what lets the language
+    switcher and hreflang tags compute the equivalent-locale URL as a pure string
+    operation (`src/lib/i18n/url.ts`'s `localeHref`/`stripLocaleFromPath`) instead of
+    a lookup table. `src/lib/collections.ts` helpers all take a `lang: Locale` first
+    argument and filter on the entry id's locale prefix.
+  - `SITE`'s contact/address/registration data (`src/lib/site.ts`) is **never**
+    localized per CLAUDE.md's content rule — `legalName(locale)`/`addressText(locale, …)`
+    pick which *representation* to show (Thai string vs. the existing structured
+    English address), they don't translate the underlying facts.
 
 ## Design Guidelines
 
 - Should feel trustworthy and professional, fitting a B2B electrical/energy equipment business
 - Fully responsive (the old site worked poorly on mobile)
 - Modern layout, not a generic recycled template look
-- Content is primarily in Thai — structure the codebase so it _could_ support a second language later, but full i18n is not required now
+- The site is trilingual (Thai default, English and Chinese under `/en/` and `/zh/`) — see the i18n section under Code Structure. Thai remains the primary/authoritative language for new content; English and Chinese are AI-generated translations pending native-speaker review (see Todo)
 
 ## Content Guidelines
 
@@ -195,3 +227,17 @@ subcommands, so don't rely on them outside this environment.
 - [ ] ISO/IEC 17025 accrediting body + certificate number for the calibration service
 - [ ] Real product photography still missing — `image` field exists on the products schema, unused
 - [ ] 3 of 4 project case studies (Rayong power plant, Chonburi rooftop, Bangkok AMR) are unverified/likely-fabricated — kept as `status: pending` in the projects collection, no detail page, until real data is supplied
+- [x] Trilingual site (TH/EN/ZH) built 2026-08-21 — Astro i18n routing, all pages and all
+      content-collection entries have English and Chinese versions
+- [ ] **English/Chinese content needs native-speaker or professional-translator review**
+      before being fully trusted — it was AI-generated this session, not professionally
+      reviewed. Highest-stakes area: the `/insights` regulatory articles (Direct PPA, TPA,
+      UGT, Net Billing) — Thailand-specific regulatory terms and figures were translated
+      as literally as possible and flagged with `[pending — verify against ...]` where the
+      Thai source itself already carried that flag, but the translations themselves are
+      unreviewed
+- [ ] Product `specTable` row **values** (numbers/units/standard codes) were deliberately
+      left untranslated/byte-identical across th/en/zh per instruction; a few TH values
+      that are themselves partly Thai-language descriptive sentences (not pure codes) were
+      translated for readability — spot-check `src/content/products/{en,zh}/prometer-100.md`
+      against `th/` if auditing this

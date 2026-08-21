@@ -1,0 +1,69 @@
+---
+import { render } from 'astro:content';
+import type { ArticleEntry } from '../../content.config';
+import { type Locale } from '../../lib/i18n/locales';
+import { localeHref } from '../../lib/i18n/url';
+import { INSIGHT_DETAIL_COPY } from '../../lib/i18n/pages/insight-detail';
+import { UI } from '../../lib/i18n/ui';
+import Breadcrumb from '../ui/Breadcrumb.astro';
+import CTABand from '../ui/CTABand.astro';
+
+interface Props {
+  article: ArticleEntry;
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const t = INSIGHT_DETAIL_COPY[locale];
+const ui = UI[locale];
+
+// Locale-agnostic path — CTABand applies localeHref itself.
+const relatedHref = article.data.relatedSolution
+  ? `/solutions/${article.data.relatedSolution}${
+      article.data.relatedAnchor ? `#${article.data.relatedAnchor}` : ''
+    }`
+  : undefined;
+---
+
+<article class="max-w-3xl mx-auto px-5 py-16 lg:py-24">
+  <Breadcrumb href={localeHref(locale, '/insights')} label={ui.breadcrumb.backToInsights} />
+  <h1 class="mt-6 font-display text-3xl sm:text-4xl font-bold text-ink">{article.data.title}</h1>
+
+  <div class="mt-10 prose prose-neutral max-w-none text-ink-2 leading-relaxed">
+    <Content />
+  </div>
+
+  <div class="mt-12 space-y-6">
+    <h2 class="font-display text-xl font-bold text-ink">{t.faqHeading}</h2>
+    {
+      article.data.faq.map((entry) => (
+        <div>
+          <h3 class="font-display font-semibold text-ink">{entry.question}</h3>
+          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{entry.answer}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    relatedHref && (
+      <CTABand
+        layout="card"
+        heading={t.solutionCtaHeading}
+        body={t.solutionCtaBody}
+        ctaLabel={t.solutionCtaLabel}
+        ctaHref={relatedHref}
+      />
+    )
+  }
+
+  <CTABand
+    layout="card"
+    class="mt-6"
+    heading={t.contactCtaHeading}
+    body={t.contactCtaBody}
+    ctaLabel={t.contactCtaLabel}
+  />
+</article>
