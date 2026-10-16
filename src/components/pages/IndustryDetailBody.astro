@@ -27,6 +27,7 @@ const t = INDUSTRY_DETAIL_COPY[locale];
 const ui = UI[locale];
 
 const SOLUTIONS = [
+  { href: '/solutions/smart-meter', title: ui.nav.smartMeter, desc: t.solutionSmartMeterDesc },
   { href: '/solutions/amr', title: ui.nav.amr, desc: t.solutionAmrDesc },
   { href: '/solutions/billing', title: ui.nav.billing, desc: t.solutionBillingDesc },
 ];
@@ -39,20 +40,37 @@ const SOLUTIONS = [
     <p class="mt-4 max-w-2xl text-ink-2 leading-relaxed">{segment.description[locale]}</p>
   </Section>
 
-  <Section band="surface-y" width="wide">
-    <SectionHeading eyebrow={t.productsEyebrow} heading={t.productsHeading} />
-    {
-      products.length > 0 ? (
+  {
+    products.length > 0 && (
+      <Section band="surface-y" width="wide">
+        <SectionHeading eyebrow={t.productsEyebrow} heading={t.productsHeading} />
         <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
             <ProductCard product={product} headingLevel="h3" showSpecs />
           ))}
         </div>
-      ) : (
-        <p class="mt-6 text-sm text-ink-3">{t.productsEmpty}</p>
-      )
-    }
-  </Section>
+      </Section>
+    )
+  }
+
+  {
+    segment.id === 'solar-renewable' && (
+      <Section width="wide">
+        <SectionHeading eyebrow={t.scenariosEyebrow} heading={t.scenariosHeading} />
+        <div class="mt-10 grid md:grid-cols-3 gap-6">
+          {t.scenarios.map((scenario) => (
+            <Card href={localeHref(locale, scenario.href)} interactive>
+              <h3 class="font-display font-semibold text-lg text-ink">{scenario.title}</h3>
+              <p class="mt-2 text-sm text-ink-2 leading-relaxed">{scenario.desc}</p>
+              <span class="mt-4 inline-block text-sm font-semibold text-accent">
+                {scenario.linkText}
+              </span>
+            </Card>
+          ))}
+        </div>
+      </Section>
+    )
+  }
 
   <Section width="wide">
     <SectionHeading eyebrow={t.servicesEyebrow} heading={t.servicesHeading} />
@@ -99,10 +117,10 @@ const SOLUTIONS = [
     )
   }
 
-  <Section width="wide">
-    <SectionHeading eyebrow={t.articlesEyebrow} heading={t.articlesHeading} />
-    {
-      articles.length > 0 ? (
+  {
+    articles.length > 0 && (
+      <Section width="wide">
+        <SectionHeading eyebrow={t.articlesEyebrow} heading={t.articlesHeading} />
         <div class="mt-10 grid sm:grid-cols-2 gap-6">
           {articles.map((article) => (
             <Card href={localeHref(locale, `/insights/${stripLocale(article.id)}`)} interactive>
@@ -114,17 +132,15 @@ const SOLUTIONS = [
             </Card>
           ))}
         </div>
-      ) : (
-        <p class="mt-6 text-sm text-ink-3">{t.articlesEmpty}</p>
-      )
-    }
-  </Section>
+      </Section>
+    )
+  }
 
   {
     segment.showSolutions && (
       <Section band="surface-y" width="wide">
         <SectionHeading eyebrow={t.solutionsEyebrow} heading={t.solutionsHeading} />
-        <div class="mt-10 grid sm:grid-cols-2 gap-6">
+        <div class="mt-10 grid md:grid-cols-3 gap-6">
           {SOLUTIONS.map((solution) => (
             <Card href={localeHref(locale, solution.href)} interactive>
               <h3 class="font-display font-semibold text-lg text-ink">{solution.title}</h3>

@@ -8,8 +8,13 @@ export interface HomeCopy {
   /** Pre-built with inline `<span class="text-accent">` around the two emphasized words. */
   heroHeadingHtml: string;
   heroLede: string;
-  heroCtaProducts: string;
-  heroCtaConsult: string;
+  heroCtaSmartMeter: string;
+  heroCtaAmr: string;
+  heroCtaBilling: string;
+  routesEyebrow: string;
+  routesHeading: string;
+  /** One card per solution, in hero-CTA order: Smart Meter, AMR, Billing. */
+  routes: { title: string; audience: string; cta: string }[];
   /**
    * Flagship product spotlight. Every string here is condensed from
    * `solutions-billing.ts` — do not claim a capability that page doesn't.
@@ -54,8 +59,28 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       'ระบบ <span class="text-accent">อ่านมิเตอร์</span> และ <span class="text-accent">คิดเงิน</span> อัตโนมัติ จากข้อมูลมิเตอร์จริง',
     heroLede:
       'แพลตฟอร์มอ่านมิเตอร์อัตโนมัติ (AMR) และระบบบิลลิ่งมิเตอร์อัจฉริยะที่คำนวณค่าไฟตามเรท MEA/PEA/TOU และออกบิล PPA จากข้อมูลมิเตอร์จริง สำหรับ Solar Developer, IPP/SPP/VSPP และการไฟฟ้า — พร้อมให้คำปรึกษา ออกแบบและติดตั้ง Energy Meter, Power Quality Meter (PQM) และระบบสื่อสาร สำหรับโรงไฟฟ้า โซลาร์ รูฟท็อป และโซลาร์ฟาร์มลอยน้ำ',
-    heroCtaProducts: 'ดูผลิตภัณฑ์',
-    heroCtaConsult: 'ปรึกษาวิศวกร →',
+    heroCtaSmartMeter: 'ดูโซลูชัน Smart Meter',
+    heroCtaAmr: 'ดูระบบ AMR',
+    heroCtaBilling: 'ดูระบบ Billing สำหรับ Private PPA',
+    routesEyebrow: 'เลือกโซลูชันที่ตรงกับงานของคุณ',
+    routesHeading: 'โซลูชันไหนเหมาะกับคุณ',
+    routes: [
+      {
+        title: 'Smart Meter',
+        audience: 'สำหรับโครงการที่ต้องการจัดหา ติดตั้ง หรือสอบเทียบมิเตอร์และระบบสื่อสาร',
+        cta: 'ดูโซลูชัน Smart Meter →',
+      },
+      {
+        title: 'AMR',
+        audience: 'สำหรับทีมที่ต้องการอ่านและจัดการข้อมูลมิเตอร์หลายไซต์ โดยไม่ต้องส่งคนไปจดหน้างาน',
+        cta: 'ดูระบบ AMR →',
+      },
+      {
+        title: 'Billing',
+        audience: 'สำหรับผู้ให้บริการ Private PPA ที่ต้องออกบิลจากข้อมูลมิเตอร์ตามสัญญาของลูกค้าแต่ละราย',
+        cta: 'ดูระบบ Billing →',
+      },
+    ],
     platformEyebrow: 'ผลิตภัณฑ์ใหม่ · 2026',
     platformHeading: 'แพลตฟอร์มบริหารจัดการพลังงานและออกบิลสำหรับ Private PPA',
     platformLede:
@@ -101,8 +126,28 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       'Automatic <span class="text-accent">meter reading</span> and <span class="text-accent">billing</span> from real meter data',
     heroLede:
       'An AMR platform and smart-meter billing system that reads meters automatically, calculates charges on real MEA/PEA/TOU rates, and issues PPA invoices from actual meter data — for solar developers, IPP/SPP/VSPP operators and utilities. Plus consulting, design and installation of energy meters, power quality meters (PQM) and communication systems for power plant, solar, rooftop and floating solar farm projects.',
-    heroCtaProducts: 'View Products',
-    heroCtaConsult: 'Talk to an Engineer →',
+    heroCtaSmartMeter: 'See Smart Meter Solutions',
+    heroCtaAmr: 'See the AMR System',
+    heroCtaBilling: 'See Billing for Private PPA',
+    routesEyebrow: 'Pick the Solution That Fits Your Work',
+    routesHeading: 'Which Solution Is Right for You',
+    routes: [
+      {
+        title: 'Smart Meter',
+        audience: 'For projects that need meters and communication systems supplied, installed or calibrated.',
+        cta: 'See Smart Meter solutions →',
+      },
+      {
+        title: 'AMR',
+        audience: 'For teams that want to read and manage meter data across many sites without on-site visits.',
+        cta: 'See the AMR system →',
+      },
+      {
+        title: 'Billing',
+        audience: "For Private PPA operators who bill from meter data against each customer's contract.",
+        cta: 'See the Billing system →',
+      },
+    ],
     platformEyebrow: 'New Product · 2026',
     platformHeading: 'Energy Management & Billing Platform for Private PPA',
     platformLede:
@@ -148,8 +193,28 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       '基于真实电表数据的自动<span class="text-accent">抄表</span>与<span class="text-accent">计费</span>系统',
     heroLede:
       '面向太阳能开发商、IPP/SPP/VSPP 运营商与电力公司的 AMR 平台与智能电表计费系统——自动抄表、按 MEA/PEA/TOU 电价计算电费，并基于真实电表数据开具 PPA 账单；同时为发电厂、太阳能、屋顶光伏及浮动太阳能电站项目提供电表、电能质量表（PQM）及通信系统的咨询、设计与安装服务。',
-    heroCtaProducts: '查看产品',
-    heroCtaConsult: '咨询工程师 →',
+    heroCtaSmartMeter: '查看智能电表方案',
+    heroCtaAmr: '查看 AMR 系统',
+    heroCtaBilling: '查看 Private PPA 计费系统',
+    routesEyebrow: '选择适合您工作的方案',
+    routesHeading: '哪种方案适合您',
+    routes: [
+      {
+        title: '智能电表',
+        audience: '适用于需要供应、安装或校准电表及通信系统的项目',
+        cta: '查看智能电表方案 →',
+      },
+      {
+        title: 'AMR',
+        audience: '适用于希望无需现场抄表即可读取并管理多站点电表数据的团队',
+        cta: '查看 AMR 系统 →',
+      },
+      {
+        title: '计费系统',
+        audience: '适用于需要根据电表数据、按每位客户合同开票的 Private PPA 运营商',
+        cta: '查看计费系统 →',
+      },
+    ],
     platformEyebrow: '新产品 · 2026',
     platformHeading: '面向 Private PPA 的能源管理与计费平台',
     platformLede:

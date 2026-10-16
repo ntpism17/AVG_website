@@ -71,6 +71,9 @@ const SERVICE_ICONS = {
   calibration: GaugeIcon,
 } as const;
 
+// Paths for `t.routes`, in the same order as the hero CTAs.
+const SOLUTION_ROUTES = ['/solutions/smart-meter', '/solutions/amr', '/solutions/billing'];
+
 // Hero backgrounds, crossfaded in sequence.
 const heroImages = [heroImage, heroImage2, heroImage3];
 ---
@@ -100,13 +103,34 @@ const heroImages = [heroImage, heroImage2, heroImage3];
     />
     <p class="mt-6 text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">{t.heroLede}</p>
     <div class="mt-10 flex flex-wrap justify-center gap-4">
-      <Button href={localeHref(locale, '/products')} size="lg">{t.heroCtaProducts}</Button>
-      <Button href={localeHref(locale, '/contact')} variant="on-dark" size="lg"
-        >{t.heroCtaConsult}</Button
+      <Button href={localeHref(locale, '/solutions/smart-meter')} size="lg"
+        >{t.heroCtaSmartMeter}</Button
+      >
+      <Button href={localeHref(locale, '/solutions/amr')} variant="on-dark" size="lg"
+        >{t.heroCtaAmr}</Button
+      >
+      <Button href={localeHref(locale, '/solutions/billing')} variant="on-dark" size="lg"
+        >{t.heroCtaBilling}</Button
       >
     </div>
   </div>
 </section>
+
+<!-- Which solution fits which visitor — one line each, no feature lists -->
+<Section width="wide">
+  <SectionHeading eyebrow={t.routesEyebrow} heading={t.routesHeading} />
+  <div class="mt-10 grid md:grid-cols-3 gap-6">
+    {
+      t.routes.map((route, i) => (
+        <Card href={localeHref(locale, SOLUTION_ROUTES[i])} interactive>
+          <h3 class="font-display font-bold text-lg text-ink">{route.title}</h3>
+          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{route.audience}</p>
+          <span class="mt-4 inline-block text-sm font-semibold text-accent">{route.cta}</span>
+        </Card>
+      ))
+    }
+  </div>
+</Section>
 
 <!-- Flagship product spotlight — the platform the hero headline promises.
      Two-column with artwork, deliberately unlike the card grids below it. -->

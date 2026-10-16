@@ -15,6 +15,11 @@ export interface AmrPersona {
   items: string[];
 }
 
+export interface AmrStep {
+  title: string;
+  desc: string;
+}
+
 export interface AmrCopy {
   metaTitle: string;
   metaDescription: string;
@@ -28,6 +33,14 @@ export interface AmrCopy {
   pillarsEyebrow: string;
   pillarsHeading: string;
   pillars: AmrPillar[];
+  workflowEyebrow: string;
+  workflowHeading: string;
+  workflowLede: string;
+  workflow: AmrStep[];
+  failureHeading: string;
+  failureItems: string[];
+  roleNote: string;
+  roleNoteLinkText: string;
   personasEyebrow: string;
   personasHeading: string;
   personas: AmrPersona[];
@@ -54,7 +67,7 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
     billingLinkText: 'คิดเงิน (Billing)',
     heroLedeSuffix: ' หรือ SCADA ของลูกค้าใช้งานต่อได้ทันที',
     heroCtaDemo: 'ขอทดลองใช้งาน Demo →',
-    heroCtaConsult: 'ปรึกษาผู้เชี่ยวชาญ',
+    heroCtaConsult: 'ปรึกษาระบบ AMR',
     pillarsEyebrow: '3 ขาหลักของระบบ',
     pillarsHeading: 'ครบทั้งฝั่งผลิต ฝั่งเก็บข้อมูล และฝั่งจัดการข้อมูล (MDM)',
     pillars: [
@@ -93,6 +106,35 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
         ],
       },
     ],
+    workflowEyebrow: 'ลำดับการทำงาน',
+    workflowHeading: 'ข้อมูลเดินทางจากมิเตอร์ไปถึงระบบปลายทางอย่างไร',
+    workflowLede: 'AMR ทำหน้าที่อ่านและจัดการข้อมูลมิเตอร์ ตั้งแต่รับค่าจากหน้างาน ตรวจสอบ ไปจนถึงส่งต่อให้ระบบที่ใช้งานข้อมูล',
+    workflow: [
+      {
+        title: 'รับข้อมูลจากมิเตอร์',
+        desc: 'อ่านค่าจากมิเตอร์ที่รองรับ (Mk6E, Premier 550, Elite 500) และข้อมูลผลผลิตจากอินเวอร์เตอร์ ตามรอบเวลาที่ตั้งไว้',
+      },
+      {
+        title: 'ส่งผ่านระบบสื่อสาร',
+        desc: 'ข้อมูลส่งเข้าระบบผ่านช่องทางสื่อสารที่ติดตั้งหน้างาน ไม่ต้องส่งคนไปจดมิเตอร์',
+      },
+      {
+        title: 'รวบรวมและตรวจสอบ (MDM)',
+        desc: 'กระทบยอดข้อมูล ตรวจความผิดปกติ และเก็บ Audit trail ของมิเตอร์ทุกจุด',
+      },
+      {
+        title: 'แสดงผลและส่งต่อ',
+        desc: 'แสดงบน Dashboard และส่งข้อมูลที่ตรวจสอบแล้วให้ระบบคิดเงิน (Billing) หรือ SCADA ผ่าน API',
+      },
+    ],
+    failureHeading: 'เมื่ออ่านข้อมูลไม่สำเร็จ',
+    failureItems: [
+      'แจ้งเตือนผ่าน Email และ SMS เมื่อมิเตอร์อ่านค่าไม่ได้หรือข้อมูลผิดปกติ',
+      'เมื่อระบบสื่อสารกลับมาใช้งานได้ ระบบดึงข้อมูลย้อนหลังกลับมาอัตโนมัติ',
+      'MDM ตรวจความผิดปกติของข้อมูลก่อนส่งต่อให้ระบบคิดเงิน',
+    ],
+    roleNote: 'AMR ดูแลการอ่านและจัดการข้อมูลมิเตอร์ ส่วนการคำนวณตามสัญญาและการออกใบแจ้งหนี้เป็นหน้าที่ของระบบ Billing',
+    roleNoteLinkText: 'ดูระบบ Billing →',
     personasEyebrow: 'ออกแบบมาเพื่อใคร',
     personasHeading: '2 บทบาทใน Solar Industry ที่ AMR ตอบโจทย์ที่สุด',
     personas: [
@@ -120,7 +162,7 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
     integrationsLedeMid: ' และ SCADA ของลูกค้า — พร้อมอ่านมิเตอร์ผ่าน AMR รองรับ ',
     integrationsLedeSuffix: '',
     customersHeading: 'ลูกค้าที่ใช้งานระบบ AMR ของเราแล้ว',
-    quoteHeading: 'ขอใบเสนอราคา + ทดลอง Demo',
+    quoteHeading: 'ปรึกษาระบบ AMR + ขอ Demo',
     quoteLede: 'ตอบกลับภายใน 1 วันทำการ · ทดลองใช้งานฟรี 30 วัน ไม่ต้องใช้บัตรเครดิต',
     businessTypes: [
       'Solar Developer / EPC',
@@ -141,7 +183,7 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
     billingLinkText: 'Billing',
     heroLedeSuffix: ' system or your SCADA.',
     heroCtaDemo: 'Request a Demo →',
-    heroCtaConsult: 'Talk to a Specialist',
+    heroCtaConsult: 'Consult on AMR',
     pillarsEyebrow: 'Three Pillars',
     pillarsHeading:
       'Production monitoring, data collection, and data management (MDM) — all in one',
@@ -181,6 +223,35 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
         ],
       },
     ],
+    workflowEyebrow: 'How It Works',
+    workflowHeading: 'How Data Travels from the Meter to Your Systems',
+    workflowLede: 'AMR reads and manages meter data — from receiving values on site, through validation, to handing them on to the systems that use them.',
+    workflow: [
+      {
+        title: 'Receive meter data',
+        desc: 'Reads supported meters (Mk6E, Premier 550, Elite 500) and inverter production data on a configured schedule.',
+      },
+      {
+        title: 'Transmit over the comms link',
+        desc: 'Data flows in over the communication channel installed on site — no one has to visit to read the meter.',
+      },
+      {
+        title: 'Collect and validate (MDM)',
+        desc: 'Reconciles data, checks for anomalies, and keeps an audit trail for every metering point.',
+      },
+      {
+        title: 'Display and hand off',
+        desc: 'Shows data on the dashboard and passes validated data to the Billing system or SCADA via API.',
+      },
+    ],
+    failureHeading: 'When a Reading Fails',
+    failureItems: [
+      'Email and SMS alerts when a meter fails to report or data looks abnormal',
+      'Once the communication link is back, the system automatically backfills the missing data',
+      'MDM checks data for anomalies before it is passed to the Billing system',
+    ],
+    roleNote: 'AMR handles reading and managing meter data; calculating against contracts and issuing invoices is the job of the Billing system.',
+    roleNoteLinkText: 'See the Billing system →',
     personasEyebrow: 'Who It’s For',
     personasHeading: 'Two roles in the solar industry that AMR serves best',
     personas: [
@@ -209,7 +280,7 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
       ' inverters and your SCADA — with automatic meter reading via AMR supporting ',
     integrationsLedeSuffix: '.',
     customersHeading: 'Customers Already Using Our AMR System',
-    quoteHeading: 'Request a Quote + Try the Demo',
+    quoteHeading: 'Consult on AMR + Request a Demo',
     quoteLede: 'Response within 1 business day · Free 30-day trial, no credit card required',
     businessTypes: [
       'Solar Developer / EPC',
@@ -230,7 +301,7 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
     billingLinkText: '计费系统',
     heroLedeSuffix: '或客户的 SCADA 系统，即时可用。',
     heroCtaDemo: '申请试用 Demo →',
-    heroCtaConsult: '咨询专家',
+    heroCtaConsult: '咨询 AMR 系统',
     pillarsEyebrow: '三大核心模块',
     pillarsHeading: '涵盖发电监控、数据采集与数据管理（MDM）',
     pillars: [
@@ -269,6 +340,26 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
         ],
       },
     ],
+    workflowEyebrow: '工作流程',
+    workflowHeading: '数据如何从电表传送到您的系统',
+    workflowLede: 'AMR 负责读取与管理电表数据——从现场接收数值、校验，到交付给使用数据的系统。',
+    workflow: [
+      {
+        title: '接收电表数据',
+        desc: '按设定周期读取受支持的电表（Mk6E、Premier 550、Elite 500）及逆变器发电数据',
+      },
+      { title: '经通信链路传输', desc: '数据通过现场安装的通信方式传入系统，无需派人抄表' },
+      { title: '汇集与校验（MDM）', desc: '核对数据、检查异常，并为每个计量点保留审计记录' },
+      { title: '展示与交付', desc: '在仪表盘上展示，并通过 API 将校验后的数据交付给计费系统或 SCADA' },
+    ],
+    failureHeading: '读数失败时',
+    failureItems: [
+      '电表无法读数或数据异常时，通过邮件与短信告警',
+      '通信恢复后，系统自动回填缺失的数据',
+      'MDM 在交付计费系统前检查数据异常',
+    ],
+    roleNote: 'AMR 负责电表数据的读取与管理；按合同计算与开具发票由计费系统完成。',
+    roleNoteLinkText: '查看计费系统 →',
     personasEyebrow: '适用对象',
     personasHeading: 'AMR 最能满足太阳能行业中的两类角色',
     personas: [
@@ -296,7 +387,7 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
     integrationsLedeMid: ' 逆变器及客户 SCADA 系统——并支持通过 AMR 自动抄表，兼容 ',
     integrationsLedeSuffix: '。',
     customersHeading: '已在使用我们 AMR 系统的客户',
-    quoteHeading: '索取报价 + 申请试用 Demo',
+    quoteHeading: '咨询 AMR 系统 + 申请演示',
     quoteLede: '1 个工作日内回复 · 30 天免费试用，无需信用卡',
     businessTypes: [
       'Solar Developer / EPC',

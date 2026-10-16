@@ -46,6 +46,12 @@ export interface SmartMeterCopy {
   productsEyebrow: string;
   productsHeading: string;
   productsLede: string;
+  scopeEyebrow: string;
+  scopeHeading: string;
+  scopeLede: string;
+  prepareHeading: string;
+  prepareLede: string;
+  prepareItems: string[];
   crossLinkHeading: string;
   crossLinkLedePrefix: string;
   amrLinkText: string;
@@ -68,7 +74,7 @@ export const SMART_METER_COPY: Record<Locale, SmartMeterCopy> = {
     heroHeading: 'สมาร์ทมิเตอร์และ TOU Meter ระดับสากล พร้อมระบบสื่อสารครบวงจร',
     heroLede:
       'จัดหาสมาร์ทมิเตอร์และ TOU Meter จากผู้ผลิตระดับโลก SECURE, EDMI และ CEWE พร้อมออกแบบ ติดตั้ง Meter Box, Communication Box และระบบสื่อสารสมาร์ทมิเตอร์ สำหรับโครงการโรงไฟฟ้า, โซลาร์, รูฟท็อป และโซลาร์ฟาร์มลอยน้ำ — ตั้งแต่จัดหา ติดตั้ง จนถึงทดสอบส่งมอบ ครบในที่เดียว',
-    heroCtaQuote: 'ขอใบเสนอราคา →',
+    heroCtaQuote: 'ขอใบเสนอราคาเครื่องวัด →',
     heroCtaConsult: 'ปรึกษาผู้เชี่ยวชาญ',
     pillarsEyebrow: 'ครบวงจร',
     pillarsHeading: 'จัดหา ออกแบบ ติดตั้ง และสอบเทียบ ครบในที่เดียว',
@@ -132,13 +138,25 @@ export const SMART_METER_COPY: Record<Locale, SmartMeterCopy> = {
     productsEyebrow: 'มิเตอร์ที่เราจัดหา',
     productsHeading: 'สมาร์ทมิเตอร์และ TOU Meter ที่พร้อมส่งมอบ',
     productsLede: 'รุ่นมิเตอร์จาก SECURE และ EDMI ที่ใช้งานจริงในโครงการโรงไฟฟ้า, โซลาร์, อาคาร และอุตสาหกรรม — เปิดหน้าแต่ละรุ่นเพื่อดูสเปกเต็มจาก datasheet',
+    scopeEyebrow: 'ขอบเขตบริการ',
+    scopeHeading: 'AVG ดูแลงานมิเตอร์ส่วนไหนให้คุณได้บ้าง',
+    scopeLede: 'เลือกใช้เฉพาะงานที่ต้องการ หรือให้เราดูแลตั้งแต่ให้คำปรึกษาจนถึงสอบเทียบ',
+    prepareHeading: 'ข้อมูลที่ควรเตรียมเพื่อขอใบเสนอราคา',
+    prepareLede: 'ยิ่งมีข้อมูลครบ ทีมงานยิ่งแนะนำรุ่นมิเตอร์และอุปกรณ์สื่อสารได้ตรงโครงการ',
+    prepareItems: [
+      'ประเภทโครงการ เช่น โรงไฟฟ้า โซลาร์ฟาร์ม โซลาร์รูฟท็อป อาคาร หรือโรงงาน',
+      'จำนวนจุดติดตั้งมิเตอร์ (โดยประมาณ)',
+      'ข้อกำหนดของการไฟฟ้าที่โครงการต้องใช้ (กฟน. / กฟภ. / กฟผ.)',
+      'ระบบสื่อสารที่มีอยู่หรือต้องการ เช่น ต้องการอ่านมิเตอร์ระยะไกลหรือไม่',
+      'แบบ Single Line Diagram หรือแผนผังติดตั้ง (ถ้ามี)',
+    ],
     crossLinkHeading: 'ต่อยอดเป็นระบบอัตโนมัติ',
     crossLinkLedePrefix: 'มิเตอร์และระบบสื่อสารที่เราจัดหาให้ พร้อมเชื่อมต่อกับระบบ',
     amrLinkText: 'AMR',
     crossLinkLedeMid: ' (อ่านมิเตอร์อัตโนมัติ) และระบบ',
     billingLinkText: 'คิดเงิน (Billing)',
     crossLinkLedeSuffix: ' เพื่อมอนิเตอร์ คำนวณค่าไฟ และออกบิลอัตโนมัติจากข้อมูลมิเตอร์จริง',
-    quoteHeading: 'ขอใบเสนอราคามิเตอร์และระบบสื่อสาร',
+    quoteHeading: 'ขอใบเสนอราคาเครื่องวัดและระบบสื่อสาร',
     quoteLede: 'ตอบกลับภายใน 1 วันทำการ — บอกรายละเอียดโครงการ เราจะแนะนำรุ่นมิเตอร์และอุปกรณ์สื่อสารที่เหมาะสม',
     businessTypes: ['โรงไฟฟ้า / Solar Farm', 'Solar Rooftop', 'อาคาร / คอนโดมิเนียม', 'โรงงานอุตสาหกรรม', 'การไฟฟ้า / Utility'],
     meterCountLabel: 'จำนวนจุดติดตั้ง (โดยประมาณ)',
@@ -152,7 +170,7 @@ export const SMART_METER_COPY: Record<Locale, SmartMeterCopy> = {
     heroHeading: 'World-class smart meters and TOU meters, with complete communication systems',
     heroLede:
       'Sourcing of smart meters and TOU meters from global manufacturers SECURE, EDMI, and CEWE, with design and installation of meter boxes, communication boxes, and smart meter communication systems for power plant, solar, rooftop, and floating solar farm projects — from supply through installation to commissioning, all in one place.',
-    heroCtaQuote: 'Request a Quote →',
+    heroCtaQuote: 'Request a Meter Quote →',
     heroCtaConsult: 'Talk to a Specialist',
     pillarsEyebrow: 'End to End',
     pillarsHeading: 'Supply, design, installation, and calibration — all in one place',
@@ -216,6 +234,18 @@ export const SMART_METER_COPY: Record<Locale, SmartMeterCopy> = {
     productsEyebrow: 'The Meters We Supply',
     productsHeading: 'Smart meters and TOU meters, ready to supply',
     productsLede: 'Meters from SECURE and EDMI, proven in power plant, solar, building, and industrial projects — open each model for full datasheet specs.',
+    scopeEyebrow: 'Service Scope',
+    scopeHeading: 'Which Parts of the Metering Work We Can Handle',
+    scopeLede: 'Choose only the work you need, or let us handle everything from consulting to calibration.',
+    prepareHeading: 'What to prepare for a quote',
+    prepareLede: 'The more complete the information, the better we can match meter models and communication equipment to your project.',
+    prepareItems: [
+      'Project type — power plant, solar farm, solar rooftop, building or factory',
+      'Approximate number of metering points',
+      'Utility requirements the project must meet (MEA / PEA / EGAT)',
+      'Existing or required communications — e.g. whether you need remote meter reading',
+      'Single line diagram or installation layout (if available)',
+    ],
     crossLinkHeading: 'Extend into automation',
     crossLinkLedePrefix: 'The meters and communication systems we supply connect straight into the ',
     amrLinkText: 'AMR',
@@ -236,7 +266,7 @@ export const SMART_METER_COPY: Record<Locale, SmartMeterCopy> = {
     heroHeading: '国际级智能电表与 TOU 电表，通信系统一站式配套',
     heroLede:
       '供应来自全球知名制造商 SECURE、EDMI 和 CEWE 的智能电表与 TOU 电表，并提供计量箱、通信箱及智能电表通信系统的设计安装服务，适用于发电厂、太阳能、屋顶光伏及漂浮式太阳能电站项目——从供应、安装到调试交付，一站式完成。',
-    heroCtaQuote: '索取报价 →',
+    heroCtaQuote: '索取电表报价 →',
     heroCtaConsult: '咨询专家',
     pillarsEyebrow: '一站式服务',
     pillarsHeading: '供应、设计、安装与校准，一站式完成',
@@ -300,6 +330,18 @@ export const SMART_METER_COPY: Record<Locale, SmartMeterCopy> = {
     productsEyebrow: '我们供应的电表',
     productsHeading: '可立即供应的智能电表与 TOU 电表',
     productsLede: 'SECURE 与 EDMI 的电表，已应用于发电厂、太阳能、楼宇及工业项目——点击每个型号查看完整数据表规格。',
+    scopeEyebrow: '服务范围',
+    scopeHeading: '我们可以承担哪些电表相关工作',
+    scopeLede: '可只选择所需的部分，也可由我们负责从咨询到校准的全部工作。',
+    prepareHeading: '索取报价需准备的信息',
+    prepareLede: '信息越完整，我们越能为项目推荐合适的电表型号与通信设备。',
+    prepareItems: [
+      '项目类型——电厂、太阳能电站、屋顶光伏、楼宇或工厂',
+      '电表安装点数量（大致）',
+      '项目须符合的电力公司要求（MEA / PEA / EGAT）',
+      '现有或所需的通信方式——例如是否需要远程抄表',
+      '单线图或安装布置图（如有）',
+    ],
     crossLinkHeading: '扩展为自动化系统',
     crossLinkLedePrefix: '我们供应的电表与通信系统可直接对接',
     amrLinkText: 'AMR',

@@ -5,6 +5,7 @@ import { SMART_METER_COPY } from '../../lib/i18n/pages/solutions-smart-meter';
 import { type Locale } from '../../lib/i18n/locales';
 import { localeHref } from '../../lib/i18n/url';
 import { UI } from '../../lib/i18n/ui';
+import { SERVICES } from '../../lib/services';
 import Button from '../ui/Button.astro';
 import Card from '../ui/Card.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
@@ -35,30 +36,8 @@ const ui = UI[locale];
     </div>
 </Section>
 
+<!-- 1. Which meters, and what each suits -->
 <Section band="surface-y" width="wide">
-    <SectionHeading eyebrow={t.pillarsEyebrow} heading={t.pillarsHeading} />
-    <div class="mt-10 grid lg:grid-cols-3 gap-6">
-        {
-            t.pillars.map((pillar) => (
-                <Card as="article" id={pillar.id}>
-                    <h3 class="font-display font-bold text-lg text-ink">{pillar.title}</h3>
-                    <div class="font-en text-sm text-accent">{pillar.sub}</div>
-                    <p class="mt-3 text-sm text-ink-2 leading-relaxed">{pillar.desc}</p>
-                    <ul class="mt-4 space-y-2 text-sm text-ink-2">
-                        {pillar.items.map((item) => (
-                            <li class="flex gap-2">
-                                <span class="text-accent">✓</span>
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-                </Card>
-            ))
-        }
-    </div>
-</Section>
-
-<Section width="wide">
     <SectionHeading eyebrow={t.productsEyebrow} heading={t.productsHeading} lede={t.productsLede} />
     <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((product) => <ProductCard product={product} headingLevel="h3" showSpecs />)}
@@ -86,19 +65,80 @@ const ui = UI[locale];
     </a>
 </Section>
 
-<Section band="surface-y">
-    <h2 class="font-display text-2xl font-bold text-ink text-center">{t.crossLinkHeading}</h2>
-    <p class="mt-3 text-center text-ink-2 max-w-3xl mx-auto">
-        {t.crossLinkLedePrefix}
-        <a
-            href={localeHref(locale, '/solutions/amr')}
-            class="text-accent font-semibold hover:text-accent-deep">{t.amrLinkText}</a
-        >{t.crossLinkLedeMid}
-        <a
-            href={localeHref(locale, '/solutions/billing')}
-            class="text-accent font-semibold hover:text-accent-deep">{t.billingLinkText}</a
-        >{t.crossLinkLedeSuffix}
-    </p>
+<!-- 2. Standards, communications, meter & comms boxes -->
+<Section band="surface-y" width="wide">
+    <SectionHeading eyebrow={t.pillarsEyebrow} heading={t.pillarsHeading} />
+    <div class="mt-10 grid lg:grid-cols-3 gap-6">
+        {
+            t.pillars.map((pillar) => (
+                <Card as="article" id={pillar.id}>
+                    <h3 class="font-display font-bold text-lg text-ink">{pillar.title}</h3>
+                    <div class="font-en text-sm text-accent">{pillar.sub}</div>
+                    <p class="mt-3 text-sm text-ink-2 leading-relaxed">{pillar.desc}</p>
+                    <ul class="mt-4 space-y-2 text-sm text-ink-2">
+                        {pillar.items.map((item) => (
+                            <li class="flex gap-2">
+                                <span class="text-accent">✓</span>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                </Card>
+            ))
+        }
+    </div>
+</Section>
+
+<!-- 3. Service scope — the four core services from lib/services.ts -->
+<Section width="wide">
+    <SectionHeading eyebrow={t.scopeEyebrow} heading={t.scopeHeading} lede={t.scopeLede} />
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {
+            SERVICES.map((service) => (
+                <Card href={localeHref(locale, `/services#${service.id}`)} interactive>
+                    <div class="font-en text-xs text-ink-3">{service.num}</div>
+                    <h3 class="mt-2 font-display font-semibold text-lg text-ink">
+                        {service.title[locale]}
+                    </h3>
+                    <p class="mt-2 text-sm text-ink-2 leading-relaxed">{service.desc[locale]}</p>
+                </Card>
+            ))
+        }
+    </div>
+</Section>
+
+<!-- 4. What to prepare for a quote + where the data goes next -->
+<Section band="surface-y" width="wide">
+    <div class="grid lg:grid-cols-2 gap-6">
+        <Card>
+            <h2 class="font-display text-2xl font-bold text-ink">{t.prepareHeading}</h2>
+            <p class="mt-2 text-sm text-ink-2">{t.prepareLede}</p>
+            <ul class="mt-4 space-y-2 text-sm text-ink-2">
+                {
+                    t.prepareItems.map((item) => (
+                        <li class="flex gap-2">
+                            <span class="text-accent">✓</span>
+                            {item}
+                        </li>
+                    ))
+                }
+            </ul>
+        </Card>
+        <Card>
+            <h2 class="font-display text-2xl font-bold text-ink">{t.crossLinkHeading}</h2>
+            <p class="mt-3 text-ink-2 leading-relaxed">
+                {t.crossLinkLedePrefix}
+                <a
+                    href={localeHref(locale, '/solutions/amr')}
+                    class="text-accent font-semibold hover:text-accent-deep">{t.amrLinkText}</a
+                >{t.crossLinkLedeMid}
+                <a
+                    href={localeHref(locale, '/solutions/billing')}
+                    class="text-accent font-semibold hover:text-accent-deep">{t.billingLinkText}</a
+                >{t.crossLinkLedeSuffix}
+            </p>
+        </Card>
+    </div>
 </Section>
 
 <Section id="quote" width="narrow">

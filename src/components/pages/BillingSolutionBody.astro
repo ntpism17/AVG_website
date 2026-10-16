@@ -3,9 +3,11 @@ import { Image } from 'astro:assets';
 import ContactForm from '../ContactForm.astro';
 import frasersPropertyLogo from '../../assets/customers/frasers-property.png';
 import oneBangkokLogo from '../../assets/customers/onebkk.png';
+import CheckIcon from '../icons/CheckIcon.astro';
 import { type Locale } from '../../lib/i18n/locales';
 import { BILLING_COPY } from '../../lib/i18n/pages/solutions-billing';
 import { UI } from '../../lib/i18n/ui';
+import { localeHref } from '../../lib/i18n/url';
 import Button from '../ui/Button.astro';
 import Card from '../ui/Card.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
@@ -24,6 +26,7 @@ const billingCustomers = [
 ];
 ---
 
+<!-- 1. Hero — audience + what the system handles -->
 <Section width="wide" spacing="lg">
   <Eyebrow>{t.eyebrow}</Eyebrow>
   <h1 class="mt-3 font-display text-4xl sm:text-5xl font-bold leading-tight text-ink">
@@ -32,14 +35,16 @@ const billingCustomers = [
   <p class="mt-5 text-lg text-ink-2 leading-relaxed max-w-3xl">
     {t.heroSub}
   </p>
+  <p class="mt-3 text-sm font-semibold text-ink-3">{t.heroAudience}</p>
   <div class="mt-8 flex flex-wrap gap-4">
     <Button href="#quote">{t.ctaDemo}</Button>
     <Button href="#quote" variant="secondary">{t.ctaConsult}</Button>
   </div>
 </Section>
 
+<!-- 2. Problems the audience faces -->
 <Section band="surface-y" width="default">
-  <SectionHeading eyebrow={t.painsEyebrow} heading={t.painsHeading} lede={t.painsQuote} />
+  <SectionHeading eyebrow={t.painsEyebrow} heading={t.painsHeading} lede={t.painsLede} />
   <div class="mt-8 overflow-x-auto rounded-lg border border-line bg-bg-elev">
     <table class="w-full min-w-[560px] border-collapse text-sm">
       <thead>
@@ -66,12 +71,27 @@ const billingCustomers = [
   </div>
 </Section>
 
-<Section width="default">
-  <SectionHeading eyebrow={t.solutionEyebrow} heading={t.solutionHeading} center />
-  <p class="mt-4 max-w-2xl mx-auto text-center text-ink-2 leading-relaxed">{t.solutionBody}</p>
-  <p class="mt-3 max-w-2xl mx-auto text-center text-sm text-ink-3">{t.solutionNote}</p>
+<!-- 3. Workflow -->
+<Section width="wide">
+  <SectionHeading eyebrow={t.workflowEyebrow} heading={t.workflowHeading} lede={t.workflowLede} />
+  <ol class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {
+      t.workflow.map((step, i) => (
+        <li>
+          <Card class="h-full">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent font-display font-bold text-white">
+              {i + 1}
+            </div>
+            <h3 class="mt-4 font-display font-bold text-ink">{step.title}</h3>
+            <p class="mt-2 text-sm text-ink-2 leading-relaxed">{step.desc}</p>
+          </Card>
+        </li>
+      ))
+    }
+  </ol>
 </Section>
 
+<!-- 4. Capabilities, each with its scope -->
 <Section band="surface-y" width="wide">
   <SectionHeading eyebrow={t.featuresEyebrow} heading={t.featuresHeading} />
   <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -80,44 +100,74 @@ const billingCustomers = [
         <Card as="article" id={feature.id}>
           <h3 class="font-display font-bold text-lg text-ink">{feature.title}</h3>
           <p class="mt-2 text-sm text-ink-2 leading-relaxed">{feature.desc}</p>
+          <p class="mt-3 border-t border-line pt-3 text-xs text-ink-3 leading-relaxed">
+            <span class="font-semibold text-ink-2">{t.featuresScopeLabel}:</span>
+            {feature.scope}
+          </p>
         </Card>
       ))
     }
   </div>
-</Section>
-
-<Section width="default">
-  <SectionHeading eyebrow={t.whyEyebrow} heading={t.whyHeading} center />
-  <div class="mt-10 grid sm:grid-cols-2 gap-6">
+  <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
     {
-      t.whyItems.map((item) => (
-        <div class="rounded-lg border border-line bg-bg-elev p-5">
-          <h3 class="font-display font-bold text-ink">{item.title}</h3>
-          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{item.desc}</p>
+      t.highlights.map((item) => (
+        <div class="rounded-lg border border-line bg-bg-elev p-4">
+          <h3 class="font-display font-bold text-sm text-ink">{item.title}</h3>
+          <p class="mt-1 text-sm text-ink-2 leading-relaxed">{item.desc}</p>
         </div>
       ))
     }
   </div>
 </Section>
 
-<Section band="surface-y" width="default">
-  <SectionHeading eyebrow={t.stepsEyebrow} heading={t.stepsHeading} center />
-  <div class="mt-10 grid sm:grid-cols-3 gap-6">
-    {
-      t.steps.map((step, i) => (
-        <div class="text-center">
-          <div class="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-accent font-display font-bold text-white">
-            {i + 1}
-          </div>
-          <h3 class="mt-4 font-display font-bold text-ink">{step.title}</h3>
-          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{step.desc}</p>
-        </div>
-      ))
-    }
+<!-- 5. Sample screenshots — TODO(AVG): add once AVG approves masked system/invoice images. -->
+
+<!-- 6. Connecting and getting started -->
+<Section width="wide">
+  <SectionHeading eyebrow={t.startEyebrow} heading={t.startHeading} lede={t.startLede} />
+  <div class="mt-10 grid lg:grid-cols-2 gap-6">
+    <Card>
+      <h3 class="font-display font-bold text-lg text-ink">{t.prepareHeading}</h3>
+      <ul class="mt-4 space-y-3">
+        {
+          t.prepareItems.map((item) => (
+            <li class="flex gap-2 text-sm text-ink-2 leading-relaxed">
+              <CheckIcon class="mt-0.5 h-4 w-4 flex-none text-accent" />
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+    </Card>
+    <Card>
+      <h3 class="font-display font-bold text-lg text-ink">{t.onboardingHeading}</h3>
+      <ol class="mt-4 space-y-4">
+        {
+          t.onboarding.map((step, i) => (
+            <li class="flex gap-3">
+              <span class="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-accent text-sm font-bold text-white">
+                {i + 1}
+              </span>
+              <div>
+                <p class="font-semibold text-ink">{step.title}</p>
+                <p class="mt-1 text-sm text-ink-2 leading-relaxed">{step.desc}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </Card>
   </div>
+  <p class="mt-6 text-sm text-ink-2">
+    {t.supportedMetersNote}{' '}
+    <a href={localeHref(locale, '/solutions/amr')} class="font-semibold text-accent hover:underline"
+      >{t.amrLinkText}</a
+    >
+  </p>
 </Section>
 
-<Section width="narrow">
+<!-- 7. Evidence -->
+<Section band="surface-y" width="narrow">
   <h2 class="font-display text-2xl font-bold text-ink text-center">{t.customersHeading}</h2>
   <div class="mt-8 grid grid-cols-2 gap-4">
     {
@@ -137,18 +187,26 @@ const billingCustomers = [
   </div>
 </Section>
 
-<Section band="surface-top" width="default" spacing="sm" innerClass="text-center">
-  <h2 class="font-display text-2xl sm:text-3xl font-bold text-ink">{t.finalCtaHeading}</h2>
-  <p class="mt-3 max-w-xl mx-auto text-ink-2">{t.finalCtaLede}</p>
-  <div class="mt-6 flex flex-wrap justify-center gap-4">
-    <Button href="#quote">{t.finalCtaDemo}</Button>
-    <Button href="#quote" variant="secondary">{t.finalCtaConsult}</Button>
+<!-- 8. FAQ — mirrored into FAQPage JSON-LD by the route file -->
+<Section width="default">
+  <SectionHeading eyebrow={t.faqEyebrow} heading={t.faqHeading} />
+  <div class="mt-8 space-y-6">
+    {
+      t.faq.map((entry) => (
+        <div>
+          <h3 class="font-display font-semibold text-ink">{entry.question}</h3>
+          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{entry.answer}</p>
+        </div>
+      ))
+    }
   </div>
 </Section>
 
-<Section id="quote" width="narrow">
+<!-- 9. Next step + form -->
+<Section id="quote" band="surface-top" width="narrow">
   <h2 class="font-display text-2xl font-bold text-ink text-center">{t.quoteHeading}</h2>
   <p class="mt-2 text-center text-ink-2">{t.quoteLede}</p>
+  <p class="mt-2 text-center text-sm text-ink-3">{t.quoteNextStep}</p>
 
   <ContactForm subject="Billing — Quote request" formId="billing-quote" class="mt-8">
     <div class="grid sm:grid-cols-2 gap-5">

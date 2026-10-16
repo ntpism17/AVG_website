@@ -26,7 +26,7 @@ const breadcrumb = breadcrumbSchema(
   'th'
 );
 const article_ = articleSchema(article, Astro.site, 'th');
-const faq = faqSchema(article);
+const faq = faqSchema(article.data.faq);
 ---
 
 <BaseLayout title={article.data.title} description={article.data.metaDescription} ogType="article">

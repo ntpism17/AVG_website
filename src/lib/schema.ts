@@ -74,12 +74,12 @@ export function articleSchema(article: ArticleEntry, site: URL | undefined, loca
   };
 }
 
-/** FAQPage schema built from an article's frontmatter Q&A pairs. */
-export function faqSchema(article: ArticleEntry) {
+/** FAQPage schema built from visible Q&A pairs (article frontmatter or page copy). */
+export function faqSchema(entries: readonly { question: string; answer: string }[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: article.data.faq.map((entry) => ({
+    mainEntity: entries.map((entry) => ({
       '@type': 'Question',
       name: entry.question,
       acceptedAnswer: { '@type': 'Answer', text: entry.answer },

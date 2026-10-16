@@ -2,10 +2,13 @@
 import BillingSolutionBody from '../../../components/pages/BillingSolutionBody.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { BILLING_COPY } from '../../../lib/i18n/pages/solutions-billing';
+import { faqSchema } from '../../../lib/schema';
 
 const t = BILLING_COPY.zh;
+const faq = faqSchema(t.faq);
 ---
 
 <BaseLayout title={t.metaTitle} description={t.metaDescription}>
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(faq)} />
   <BillingSolutionBody />
 </BaseLayout>
