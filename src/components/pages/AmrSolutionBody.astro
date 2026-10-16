@@ -1,5 +1,7 @@
 ---
 import ContactForm from '../ContactForm.astro';
+import chowEnergyLogo from '../../assets/customers/chow-energy.jpeg';
+import mahidolUniversityLogo from '../../assets/customers/mahidol-university.png';
 import { AMR_COPY } from '../../lib/i18n/pages/solutions-amr';
 import { type Locale } from '../../lib/i18n/locales';
 import { localeHref } from '../../lib/i18n/url';
@@ -8,6 +10,7 @@ import Button from '../ui/Button.astro';
 import Card from '../ui/Card.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Field from '../ui/Field.astro';
+import LogoWall from '../ui/LogoWall.astro';
 import Section from '../ui/Section.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 
@@ -17,6 +20,12 @@ const ui = UI[locale];
 
 const inverterIntegrations = ['Huawei FusionSolar', 'SMA', 'Sungrow', 'SolarEdge'];
 const meterIntegrations = ['Mk6E', 'Premier 550', 'Elite 500'];
+
+// Customers running our AMR system, supplied directly by the client.
+const amrCustomers = [
+  { name: 'Chow Energy', src: chowEnergyLogo },
+  { name: 'Mahidol University', src: mahidolUniversityLogo },
+];
 ---
 
 <Section width="wide" spacing="lg">
@@ -86,10 +95,17 @@ const meterIntegrations = ['Mk6E', 'Premier 550', 'Elite 500'];
       meterIntegrations.join(', ')
     }{t.integrationsLedeSuffix}
   </p>
-  <div class="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-2 font-display font-semibold text-ink-2">
+  <div
+    class="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-2 font-display font-semibold text-ink-2"
+  >
     {inverterIntegrations.map((name) => <span>{name}</span>)}
     {meterIntegrations.map((name) => <span>{name}</span>)}
   </div>
+</Section>
+
+<Section width="narrow">
+  <h2 class="font-display text-2xl font-bold text-ink text-center">{t.customersHeading}</h2>
+  <LogoWall logos={amrCustomers} columns={2} class="mt-8" />
 </Section>
 
 <Section id="quote" width="narrow">

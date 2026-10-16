@@ -1,13 +1,14 @@
 ---
 import HomeBody from '../../components/pages/HomeBody.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getFeaturedProducts } from '../../lib/collections';
+import { getFeaturedProducts, getSortedBrands } from '../../lib/collections';
 import { HOME_COPY } from '../../lib/i18n/pages/home';
 
 const products = await getFeaturedProducts('zh');
+const brands = await getSortedBrands('zh');
 const t = HOME_COPY.zh;
 ---
 
 <BaseLayout title={t.metaTitle} exactTitle description={t.metaDescription}>
-  <HomeBody products={products} />
+  <HomeBody {products} {brands} />
 </BaseLayout>

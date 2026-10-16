@@ -1,7 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import type { BrandEntry } from '../../content.config';
+import solarImage from '../../assets/pexels-michael-pointner-134459625-18306344.jpg';
+import CheckIcon from '../icons/CheckIcon.astro';
 import { type Locale } from '../../lib/i18n/locales';
+import { localeHref } from '../../lib/i18n/url';
 import { ABOUT_COPY } from '../../lib/i18n/pages/about';
 import { legalName } from '../../lib/site';
 import Card from '../ui/Card.astro';
@@ -22,11 +25,29 @@ const t = ABOUT_COPY[locale];
 const PENDING = '[pending]';
 ---
 
-<Section spacing="lg">
-  <Eyebrow>{t.heroEyebrow}</Eyebrow>
-  <h1 class="mt-3 font-display text-4xl sm:text-5xl font-bold text-ink">{t.heroHeading}</h1>
-  <p class="mt-6 text-lg text-ink-2 leading-relaxed">{t.heroParagraph1(legalName(locale))}</p>
-  <p class="mt-4 text-lg text-ink-2 leading-relaxed">{t.heroParagraph2}</p>
+<Section spacing="lg" width="wide">
+  <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
+    <div>
+      <Eyebrow>{t.heroEyebrow}</Eyebrow>
+      <h1 class="mt-3 font-display text-4xl sm:text-5xl font-bold text-ink">{t.heroHeading}</h1>
+      <p class="mt-6 text-lg text-ink-2 leading-relaxed">{t.heroParagraph1(legalName(locale))}</p>
+      <p class="mt-4 text-lg text-ink-2 leading-relaxed">{t.heroParagraph2}</p>
+      <a
+        href={localeHref(locale, '/services')}
+        class="mt-6 inline-block font-semibold text-accent hover:text-accent-deep"
+      >
+        {t.heroSecondaryCta}
+      </a>
+    </div>
+    <Image
+      src={solarImage}
+      alt={t.heroImageAlt}
+      widths={[400, 800, 1200]}
+      sizes="(min-width: 1024px) 40vw, 90vw"
+      class="w-full h-72 sm:h-96 lg:h-[28rem] rounded-2xl border border-line object-cover"
+      loading="eager"
+    />
+  </div>
 </Section>
 
 <Section band="surface-y" spacing="sm">
@@ -35,9 +56,14 @@ const PENDING = '[pending]';
   <div class="mt-8 grid sm:grid-cols-2 gap-6">
     {
       t.principles.map((principle) => (
-        <Card>
-          <h3 class="font-display font-semibold text-ink">{principle.title}</h3>
-          <p class="mt-2 text-sm text-ink-2">{principle.desc}</p>
+        <Card class="flex gap-4">
+          <span class="flex-none flex h-9 w-9 items-center justify-center rounded-full bg-accent/10 text-accent">
+            <CheckIcon class="h-5 w-5" />
+          </span>
+          <div>
+            <h3 class="font-display font-semibold text-ink">{principle.title}</h3>
+            <p class="mt-2 text-sm text-ink-2">{principle.desc}</p>
+          </div>
         </Card>
       ))
     }

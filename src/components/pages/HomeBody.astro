@@ -1,5 +1,5 @@
 ---
-import type { ProductEntry } from '../../content.config';
+import type { BrandEntry, ProductEntry } from '../../content.config';
 import { type Locale } from '../../lib/i18n/locales';
 import { localeHref } from '../../lib/i18n/url';
 import { HOME_COPY } from '../../lib/i18n/pages/home';
@@ -10,25 +10,66 @@ import { Image } from 'astro:assets';
 import heroImage from '../../assets/pexels-quang-nguyen-vinh-222549-14024422.jpg';
 import heroImage2 from '../../assets/pexels-michael-pointner-134459625-18306344.jpg';
 import heroImage3 from '../../assets/pexels-tonywuphotography-10630324.jpg';
+import bGrimmLogo from '../../assets/customers/b-grimm.png';
+import chowEnergyLogo from '../../assets/customers/chow-energy.jpeg';
+import egatLogo from '../../assets/customers/egat.png';
+import frasersPropertyLogo from '../../assets/customers/frasers-property.png';
+import gulfEnergyLogo from '../../assets/customers/gulf-energy.jpg';
+import kmitlLogo from '../../assets/customers/kmitl.webp';
+import mahidolUniversityLogo from '../../assets/customers/mahidol-university.png';
+import meaLogo from '../../assets/customers/mea.png';
+import oneBangkokLogo from '../../assets/customers/onebkk.png';
+import peaLogo from '../../assets/customers/pea.png';
+import pttLogo from '../../assets/customers/ptt.webp';
 import ProductCard from '../ProductCard.astro';
+import HeroMeter from '../illustrations/HeroMeter.astro';
+import BlueprintIcon from '../icons/BlueprintIcon.astro';
+import CheckIcon from '../icons/CheckIcon.astro';
+import ConsultIcon from '../icons/ConsultIcon.astro';
+import GaugeIcon from '../icons/GaugeIcon.astro';
+import WrenchIcon from '../icons/WrenchIcon.astro';
+import ArrowLink from '../ui/ArrowLink.astro';
 import Button from '../ui/Button.astro';
 import Card from '../ui/Card.astro';
 import CTABand from '../ui/CTABand.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import LogoWall from '../ui/LogoWall.astro';
 import Section from '../ui/Section.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 
 interface Props {
   products: ProductEntry[];
+  brands: BrandEntry[];
 }
 
-const { products } = Astro.props;
+const { products, brands } = Astro.props;
 const locale = (Astro.currentLocale ?? 'th') as Locale;
 const t = HOME_COPY[locale];
 const segments = [...SEGMENTS].sort((a, b) => a.order - b.order);
 
-// Brands we distribute, per CLAUDE.md.
-const brands = ['CEWE', 'SECURE', 'EDMI'];
+// Customer logos, supplied directly by the client.
+const customers = [
+  { name: 'Electricity Generating Authority of Thailand (EGAT)', src: egatLogo },
+  { name: 'Metropolitan Electricity Authority (MEA)', src: meaLogo },
+  { name: 'Provincial Electricity Authority (PEA)', src: peaLogo },
+  { name: 'PTT Group', src: pttLogo },
+  { name: 'Gulf Energy', src: gulfEnergyLogo },
+  { name: 'B.Grimm', src: bGrimmLogo },
+  { name: 'Chow Energy', src: chowEnergyLogo },
+  { name: 'Frasers Property', src: frasersPropertyLogo },
+  { name: 'One Bangkok', src: oneBangkokLogo },
+  { name: 'Mahidol University', src: mahidolUniversityLogo },
+  { name: "King Mongkut's Institute of Technology Ladkrabang", src: kmitlLogo },
+];
+
+// Keyed by `SERVICES[].id`, so a new service fails loudly here rather than
+// silently rendering without an icon.
+const SERVICE_ICONS = {
+  consulting: ConsultIcon,
+  design: BlueprintIcon,
+  installation: WrenchIcon,
+  calibration: GaugeIcon,
+} as const;
 
 // Hero backgrounds, crossfaded in sequence.
 const heroImages = [heroImage, heroImage2, heroImage3];
@@ -67,17 +108,38 @@ const heroImages = [heroImage, heroImage2, heroImage3];
   </div>
 </section>
 
-<!-- Brand strip -->
-<div class="border-y border-line bg-surface py-8">
-  <div class="max-w-6xl mx-auto px-5">
-    <p class="text-center font-en text-sm text-ink-3 mb-4">{t.brandStripLabel}</p>
-    <div
-      class="flex flex-wrap justify-center gap-x-10 gap-y-3 font-display font-bold text-xl text-ink-2"
-    >
-      {brands.map((brand) => <span>{brand}</span>)}
+<!-- Flagship product spotlight — the platform the hero headline promises.
+     Two-column with artwork, deliberately unlike the card grids below it. -->
+<Section band="surface-y" width="wide">
+  <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+    <div>
+      <Eyebrow>{t.platformEyebrow}</Eyebrow>
+      <h2 class="mt-3 font-display text-3xl sm:text-4xl font-bold leading-tight text-ink">
+        {t.platformHeading}
+      </h2>
+      <p class="mt-4 text-ink-2 leading-relaxed">{t.platformLede}</p>
+      <ul class="mt-6 space-y-3">
+        {
+          t.platformBullets.map((bullet) => (
+            <li class="flex gap-3 text-sm text-ink-2">
+              <CheckIcon class="mt-1 h-4 w-4 shrink-0 text-accent" />
+              <span>{bullet}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <Button href={localeHref(locale, '/solutions/billing')}>{t.platformCtaDetail}</Button>
+        <Button href={localeHref(locale, '/solutions/billing#quote')} variant="secondary">
+          {t.platformCtaDemo}
+        </Button>
+      </div>
+    </div>
+    <div class="mx-auto w-full max-w-md lg:max-w-none">
+      <HeroMeter />
     </div>
   </div>
-</div>
+</Section>
 
 <!-- Industry segments -->
 <Section width="wide">
@@ -100,63 +162,99 @@ const heroImages = [heroImage, heroImage2, heroImage3];
       ))
     }
   </div>
-  <a
-    href={localeHref(locale, '/industries')}
-    class="mt-8 inline-block font-semibold text-accent hover:text-accent-deep"
-  >
+  <ArrowLink href={localeHref(locale, '/industries')} class="mt-8">
     {t.industriesViewAll}
-  </a>
-</Section>
-
-<!-- About teaser -->
-<Section width="wide">
-  <SectionHeading
-    eyebrow={t.aboutEyebrow}
-    heading={t.aboutHeading}
-    lede={t.aboutLede(legalName(locale))}
-  />
-  <a
-    href={localeHref(locale, '/about')}
-    class="mt-6 inline-block font-semibold text-accent hover:text-accent-deep"
-  >
-    {t.aboutReadMore}
-  </a>
-</Section>
-
-<!-- Services teaser -->
-<Section width="wide">
-  <SectionHeading eyebrow={t.servicesEyebrow} heading={t.servicesHeading} lede={t.servicesLede} />
-  <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    {
-      SERVICES.map((service) => (
-        <Card as="article" interactive>
-          <div class="font-en text-xs text-ink-3">{service.num}</div>
-          <h3 class="mt-2 font-display font-semibold text-lg text-ink">{service.title[locale]}</h3>
-          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{service.desc[locale]}</p>
-        </Card>
-      ))
-    }
-  </div>
-  <a
-    href={localeHref(locale, '/services')}
-    class="mt-8 inline-block font-semibold text-accent hover:text-accent-deep"
-  >
-    {t.servicesViewAll}
-  </a>
+  </ArrowLink>
 </Section>
 
 <!-- Featured products -->
-<Section width="wide">
+<Section band="surface-y" width="wide">
   <SectionHeading eyebrow={t.productsEyebrow} heading={t.productsHeading} />
   <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {products.map((product) => <ProductCard product={product} headingLevel="h3" />)}
   </div>
-  <a
-    href={localeHref(locale, '/products')}
-    class="mt-8 inline-block font-semibold text-accent hover:text-accent-deep"
-  >
-    {t.productsViewAll}
-  </a>
+  <ArrowLink href={localeHref(locale, '/products')} class="mt-8">{t.productsViewAll}</ArrowLink>
+</Section>
+
+<!-- Services -->
+<Section width="wide">
+  <SectionHeading eyebrow={t.servicesEyebrow} heading={t.servicesHeading} lede={t.servicesLede} />
+  <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {
+      SERVICES.map((service) => {
+        const Icon = SERVICE_ICONS[service.id as keyof typeof SERVICE_ICONS];
+        return (
+          <Card
+            as="article"
+            href={localeHref(locale, `/services#${service.id}`)}
+            interactive
+            class="group"
+          >
+            <span class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent-soft text-accent">
+              <Icon class="h-5 w-5" />
+            </span>
+            <h3 class="mt-4 font-display font-semibold text-lg text-ink">
+              {service.title[locale]}
+            </h3>
+            <p class="mt-2 text-sm text-ink-2 leading-relaxed">{service.desc[locale]}</p>
+          </Card>
+        );
+      })
+    }
+  </div>
+  <ArrowLink href={localeHref(locale, '/services')} class="mt-8">{t.servicesViewAll}</ArrowLink>
+</Section>
+
+<!-- Customer proof — who trusts the offering above, before the company story -->
+<Section band="surface-y" width="wide" spacing="sm">
+  <p class="text-center font-en text-sm text-ink-3">{t.trustedByLabel}</p>
+  <LogoWall logos={customers} class="mt-6" />
+</Section>
+
+<!-- About, paired with the brands we distribute -->
+<Section width="wide">
+  <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+    <div>
+      <SectionHeading
+        eyebrow={t.aboutEyebrow}
+        heading={t.aboutHeading}
+        lede={t.aboutLede(legalName(locale))}
+      />
+      <ArrowLink href={localeHref(locale, '/about')} class="mt-6">{t.aboutReadMore}</ArrowLink>
+    </div>
+
+    <div>
+      <p class="font-en text-sm text-ink-3">{t.brandsLabel}</p>
+      <div class="mt-4 grid gap-3">
+        {
+          brands.map((brand) => (
+            <div class="flex items-center gap-4 rounded-lg border border-line bg-surface p-4">
+              <div class="flex h-14 w-28 shrink-0 items-center justify-center rounded-md border border-line bg-bg-elev px-3">
+                {brand.data.logo ? (
+                  <Image
+                    src={brand.data.logo}
+                    alt={brand.data.logoAlt ?? brand.data.name}
+                    widths={[112, 224]}
+                    sizes="112px"
+                    class="max-h-8 w-auto max-w-full object-contain"
+                    loading="lazy"
+                  />
+                ) : (
+                  <span class="font-display font-bold text-ink-2">{brand.data.name}</span>
+                )}
+              </div>
+              <div class="min-w-0">
+                <div class="font-en text-xs uppercase tracking-wide text-ink-3">
+                  {brand.data.highlightLabel}
+                </div>
+                <div class="font-display font-semibold text-ink">{brand.data.highlightValue}</div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
 </Section>
 
 <!-- Contact CTA -->

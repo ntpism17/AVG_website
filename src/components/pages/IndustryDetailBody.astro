@@ -71,27 +71,33 @@ const SOLUTIONS = [
     </div>
   </Section>
 
-  <Section band="surface-y" width="wide">
-    <SectionHeading eyebrow={t.projectsEyebrow} heading={t.projectsHeading} />
-    {
-      projects.length > 0 ? (
-        <div class="mt-10 grid sm:grid-cols-2 gap-6">
-          {projects.map((project) => (
-            <Card href={localeHref(locale, `/projects/${stripLocale(project.id)}`)} interactive>
-              <div class="text-sm font-en font-semibold text-accent">{project.data.location}</div>
-              <h3 class="mt-1 font-display font-semibold text-lg text-ink">{project.data.title}</h3>
-              {project.data.stats && <StatGrid stats={project.data.stats} class="mt-4" />}
-              <span class="mt-4 inline-block text-sm font-semibold text-accent">
-                {ui.card.readStory}
-              </span>
-            </Card>
-          ))}
-        </div>
-      ) : (
-        <p class="mt-6 text-sm text-ink-3">{t.projectsEmpty}</p>
-      )
-    }
-  </Section>
+  {
+    // Customer Stories section hidden on request — data/markup stay in place,
+    // just not rendered for now. Restore by removing this guard.
+    false && (
+      <Section band="surface-y" width="wide">
+        <SectionHeading eyebrow={t.projectsEyebrow} heading={t.projectsHeading} />
+        {projects.length > 0 ? (
+          <div class="mt-10 grid sm:grid-cols-2 gap-6">
+            {projects.map((project) => (
+              <Card href={localeHref(locale, `/projects/${stripLocale(project.id)}`)} interactive>
+                <div class="text-sm font-en font-semibold text-accent">{project.data.location}</div>
+                <h3 class="mt-1 font-display font-semibold text-lg text-ink">
+                  {project.data.title}
+                </h3>
+                {project.data.stats && <StatGrid stats={project.data.stats} class="mt-4" />}
+                <span class="mt-4 inline-block text-sm font-semibold text-accent">
+                  {ui.card.readStory}
+                </span>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <p class="mt-6 text-sm text-ink-3">{t.projectsEmpty}</p>
+        )}
+      </Section>
+    )
+  }
 
   <Section width="wide">
     <SectionHeading eyebrow={t.articlesEyebrow} heading={t.articlesHeading} />

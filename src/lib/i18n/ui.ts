@@ -48,6 +48,8 @@ export interface UiStrings {
     readStory: string;
     viewDetails: string;
     viewSolution: string;
+    /** Fallback label for articles tagged `general` rather than a segment. */
+    generalSegment: string;
   };
   form: {
     name: string;
@@ -105,6 +107,7 @@ export const UI: Record<Locale, UiStrings> = {
       readStory: 'อ่านเรื่องราว →',
       viewDetails: 'ดูรายละเอียด →',
       viewSolution: 'ดูโซลูชัน →',
+      generalSegment: 'ทั่วไป',
     },
     form: {
       name: 'ชื่อ-นามสกุล',
@@ -141,7 +144,8 @@ export const UI: Record<Locale, UiStrings> = {
     requestQuote: 'Request a Quote',
     callLabel: 'Call',
     footer: {
-      tagline: 'Electricity metering and communication systems for industrial-scale projects in Thailand',
+      tagline:
+        'Electricity metering and communication systems for industrial-scale projects in Thailand',
       productsHeading: 'Products',
       servicesHeading: 'Services',
       companyHeading: 'Company',
@@ -160,6 +164,7 @@ export const UI: Record<Locale, UiStrings> = {
       readStory: 'Read the story →',
       viewDetails: 'View details →',
       viewSolution: 'View solution →',
+      generalSegment: 'General',
     },
     form: {
       name: 'Full name',
@@ -215,6 +220,7 @@ export const UI: Record<Locale, UiStrings> = {
       readStory: '阅读案例 →',
       viewDetails: '查看详情 →',
       viewSolution: '查看解决方案 →',
+      generalSegment: '综合',
     },
     form: {
       name: '姓名',

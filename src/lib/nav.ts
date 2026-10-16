@@ -53,7 +53,9 @@ export function getMainNav(locale: Locale): NavItem[] {
         { href: '/solutions/billing', label: t.billing },
       ],
     },
-    { href: '/projects', label: t.customerStories },
+    // Customer Stories nav entry hidden on request — page and content stay in place,
+    // just not linked from nav/footer for now. Re-add this line to bring it back.
+    // { href: '/projects', label: t.customerStories },
     { href: '/insights', label: t.insights },
     { href: '/about', label: t.about },
   ];
@@ -70,11 +72,7 @@ export function getMainNav(locale: Locale): NavItem[] {
 export function getFooterCompanyLinks(locale: Locale): NavChild[] {
   const fromNav = getMainNav(locale)
     .flatMap((item) =>
-      item.children
-        ? item.children
-        : item.href
-          ? [{ href: item.href, label: item.label }]
-          : []
+      item.children ? item.children : item.href ? [{ href: item.href, label: item.label }] : []
     )
     .filter((link) => link.href !== '/products' && link.href !== '/services');
 

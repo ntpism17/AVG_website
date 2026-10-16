@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/**
+ * Row of customer logos, normalised so they read at the same optical size.
+ *
+ * The supplied files run from 8:1 wordmarks (One Bangkok) to 1:1 seals (MEA,
+ * PEA), so a single height cap makes the square ones look about twice as big
+ * as the wide ones. The cap is picked per logo from its aspect ratio instead.
+ *
+ * Tiles stay white (`bg-bg-elev`) even on a tinted band, because two of the
+ * supplied logos are JPEGs with a baked-in white background and would
+ * otherwise show as white rectangles.
+ */
+interface Props {
+  logos: readonly { name: string; src: ImageMetadata }[];
+  /** Tiles per row at the `lg` breakpoint. */
+  columns?: 2 | 4 | 6;
+  class?: string;
+}
+
+const { logos, columns = 6, class: className } = Astro.props;
+
+// flex-wrap rather than a grid, so a final partial row centres itself instead
+// of leaving a hole at the end. Widths subtract the shared `gap-3` (0.75rem).
+const tileWidths = {
+  2: 'w-[calc(50%-0.375rem)]',
+  4: 'w-[calc(50%-0.375rem)] sm:w-[calc(33.333%-0.5rem)] lg:w-[calc(25%-0.5625rem)]',
+  6: 'w-[calc(50%-0.375rem)] sm:w-[calc(33.333%-0.5rem)] lg:w-[calc(16.666%-0.625rem)]',
+} as const;
+
+function heightCap(src: ImageMetadata): string {
+  const ratio = src.width / src.height;
+  if (ratio >= 4) return 'max-h-7';
+  if (ratio >= 2) return 'max-h-9';
+  return 'max-h-12';
+}
+---
+
+<div class:list={['flex flex-wrap justify-center gap-3', className]}>
+  {
+    logos.map((logo) => (
+      <div
+        class:list={[
+          tileWidths[columns],
+          'flex h-24 items-center justify-center rounded-lg border border-line bg-bg-elev px-4',
+        ]}
+      >
+        <Image
+          src={logo.src}
+          alt={logo.name}
+          widths={[200, 400]}
+          sizes="(min-width: 1024px) 16vw, (min-width: 640px) 33vw, 50vw"
+          class:list={['w-auto max-w-full object-contain', heightCap(logo.src)]}
+          loading="lazy"
+        />
+      </div>
+    ))
+  }
+</div>

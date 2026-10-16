@@ -33,7 +33,8 @@ const classes = [
   'rounded-lg',
   tones[tone],
   paddings[padding],
-  interactive && 'hover:shadow-lg transition-shadow',
+  interactive &&
+    'shadow-sm transition hover:shadow-lg hover:-translate-y-0.5 motion-reduce:transform-none',
   className,
 ];
 

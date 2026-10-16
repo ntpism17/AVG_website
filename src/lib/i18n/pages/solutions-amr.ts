@@ -35,6 +35,7 @@ export interface AmrCopy {
   integrationsLedePrefix: string;
   integrationsLedeMid: string;
   integrationsLedeSuffix: string;
+  customersHeading: string;
   quoteHeading: string;
   quoteLede: string;
   businessTypes: string[];
@@ -118,9 +119,15 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
     integrationsLedePrefix: 'API เชื่อมตรงกับอินเวอร์เตอร์ ',
     integrationsLedeMid: ' และ SCADA ของลูกค้า — พร้อมอ่านมิเตอร์ผ่าน AMR รองรับ ',
     integrationsLedeSuffix: '',
+    customersHeading: 'ลูกค้าที่ใช้งานระบบ AMR ของเราแล้ว',
     quoteHeading: 'ขอใบเสนอราคา + ทดลอง Demo',
     quoteLede: 'ตอบกลับภายใน 1 วันทำการ · ทดลองใช้งานฟรี 30 วัน ไม่ต้องใช้บัตรเครดิต',
-    businessTypes: ['Solar Developer / EPC', 'IPP / Solar PPA Operator', 'Asset Manager / O&M', 'ผู้ลงทุน / Investor'],
+    businessTypes: [
+      'Solar Developer / EPC',
+      'IPP / Solar PPA Operator',
+      'Asset Manager / O&M',
+      'ผู้ลงทุน / Investor',
+    ],
     portfolioSizes: ['ต่ำกว่า 500 kWp', '500 kWp – 5 MWp', '5 MWp – 50 MWp', 'มากกว่า 50 MWp'],
   },
   en: {
@@ -136,7 +143,8 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
     heroCtaDemo: 'Request a Demo →',
     heroCtaConsult: 'Talk to a Specialist',
     pillarsEyebrow: 'Three Pillars',
-    pillarsHeading: 'Production monitoring, data collection, and data management (MDM) — all in one',
+    pillarsHeading:
+      'Production monitoring, data collection, and data management (MDM) — all in one',
     pillars: [
       {
         id: undefined,
@@ -197,11 +205,18 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
     ],
     integrationsHeading: 'Connects to the equipment you already have',
     integrationsLedePrefix: 'A direct API integrates with ',
-    integrationsLedeMid: ' inverters and your SCADA — with automatic meter reading via AMR supporting ',
+    integrationsLedeMid:
+      ' inverters and your SCADA — with automatic meter reading via AMR supporting ',
     integrationsLedeSuffix: '.',
+    customersHeading: 'Customers Already Using Our AMR System',
     quoteHeading: 'Request a Quote + Try the Demo',
     quoteLede: 'Response within 1 business day · Free 30-day trial, no credit card required',
-    businessTypes: ['Solar Developer / EPC', 'IPP / Solar PPA Operator', 'Asset Manager / O&M', 'Investor'],
+    businessTypes: [
+      'Solar Developer / EPC',
+      'IPP / Solar PPA Operator',
+      'Asset Manager / O&M',
+      'Investor',
+    ],
     portfolioSizes: ['Under 500 kWp', '500 kWp – 5 MWp', '5 MWp – 50 MWp', 'Over 50 MWp'],
   },
   zh: {
@@ -280,9 +295,15 @@ export const AMR_COPY: Record<Locale, AmrCopy> = {
     integrationsLedePrefix: 'API 可直接对接 ',
     integrationsLedeMid: ' 逆变器及客户 SCADA 系统——并支持通过 AMR 自动抄表，兼容 ',
     integrationsLedeSuffix: '。',
+    customersHeading: '已在使用我们 AMR 系统的客户',
     quoteHeading: '索取报价 + 申请试用 Demo',
     quoteLede: '1 个工作日内回复 · 30 天免费试用，无需信用卡',
-    businessTypes: ['Solar Developer / EPC', 'IPP / Solar PPA Operator', 'Asset Manager / O&M', '投资方 / Investor'],
+    businessTypes: [
+      'Solar Developer / EPC',
+      'IPP / Solar PPA Operator',
+      'Asset Manager / O&M',
+      '投资方 / Investor',
+    ],
     portfolioSizes: ['低于 500 kWp', '500 kWp – 5 MWp', '5 MWp – 50 MWp', '高于 50 MWp'],
   },
 };

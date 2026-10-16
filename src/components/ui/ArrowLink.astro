@@ -1,0 +1,39 @@
+---
+/**
+ * Accent text link with a trailing arrow — the "view all" link that closes a
+ * section grid.
+ *
+ * The arrow lives in markup rather than baked into the copy strings, so each
+ * locale's dictionary carries only the words. Callers that need the arrow
+ * inside a filled button use `Button` instead, where it stays part of the
+ * string.
+ *
+ * Inside an already-linked `Card`, render it as a `span` (the default when no
+ * `href` is given) — nesting an <a> inside an <a> is invalid. The arrow still
+ * animates there, as long as the card carries `class="group"`.
+ */
+interface Props {
+  href?: string;
+  as?: 'a' | 'span';
+  class?: string;
+}
+
+const { href, as: Tag = href ? 'a' : 'span', class: className }: Props = Astro.props;
+---
+
+<Tag
+  href={Tag === 'a' ? href : undefined}
+  class:list={[
+    'group inline-flex items-center gap-1.5 font-semibold text-accent',
+    Tag === 'a' && 'hover:text-accent-deep',
+    className,
+  ]}
+>
+  <slot />
+  <span
+    aria-hidden="true"
+    class="transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none"
+  >
+    →
+  </span>
+</Tag>

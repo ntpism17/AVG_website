@@ -1,0 +1,41 @@
+---
+import type { ArticleEntry } from '../content.config';
+import { stripLocale, type Locale } from '../lib/i18n/locales';
+import { localeHref } from '../lib/i18n/url';
+import { UI } from '../lib/i18n/ui';
+import { SEGMENTS } from '../lib/segments';
+import Card from './ui/Card.astro';
+import Pill from './ui/Pill.astro';
+
+/**
+ * Article summary card, shared by the insights listing and the homepage
+ * teaser — the same split as ProductCard: the listing uses <h2>, the teaser
+ * <h3> and clamps the description so a three-up row stays even.
+ *
+ * Only published articles get a card; the listing renders `pending` entries as
+ * its own dashed placeholder.
+ */
+interface Props {
+  article: ArticleEntry;
+  headingLevel?: 'h2' | 'h3';
+  /** Clamp the description to three lines — for the homepage teaser row. */
+  compact?: boolean;
+}
+
+const { article, headingLevel: Heading = 'h2', compact = false } = Astro.props;
+const locale = (Astro.currentLocale ?? 'th') as Locale;
+const ui = UI[locale];
+const { title, metaDescription, segment } = article.data;
+
+// 'general' is not a segment id, so the lookup misses and falls back by design.
+const segmentLabel = SEGMENTS.find((s) => s.id === segment)?.[locale] ?? ui.card.generalSegment;
+---
+
+<Card href={localeHref(locale, `/insights/${stripLocale(article.id)}`)} interactive>
+  <Pill size="sm">{segmentLabel}</Pill>
+  <Heading class="mt-3 font-display font-semibold text-lg text-ink">{title}</Heading>
+  <p class:list={['mt-2 text-sm text-ink-2 leading-relaxed', compact && 'line-clamp-3']}>
+    {metaDescription}
+  </p>
+  <span class="mt-4 inline-block text-sm font-semibold text-accent">{ui.card.readMore}</span>
+</Card>

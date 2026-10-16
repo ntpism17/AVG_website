@@ -10,7 +10,18 @@ export interface HomeCopy {
   heroLede: string;
   heroCtaProducts: string;
   heroCtaConsult: string;
-  brandStripLabel: string;
+  /**
+   * Flagship product spotlight. Every string here is condensed from
+   * `solutions-billing.ts` — do not claim a capability that page doesn't.
+   */
+  platformEyebrow: string;
+  platformHeading: string;
+  platformLede: string;
+  platformBullets: string[];
+  platformCtaDetail: string;
+  platformCtaDemo: string;
+  /** Quiet label over the customer logo wall, in the closing third of the page. */
+  trustedByLabel: string;
   industriesEyebrow: string;
   industriesHeading: string;
   industriesViewAll: string;
@@ -18,6 +29,8 @@ export interface HomeCopy {
   aboutHeading: string;
   aboutLede: (name: string) => string;
   aboutReadMore: string;
+  /** Label over the brand tiles beside the About copy. */
+  brandsLabel: string;
   servicesEyebrow: string;
   servicesHeading: string;
   servicesLede: string;
@@ -43,25 +56,39 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       'แพลตฟอร์มอ่านมิเตอร์อัตโนมัติ (AMR) และระบบบิลลิ่งมิเตอร์อัจฉริยะที่คำนวณค่าไฟตามเรท MEA/PEA/TOU และออกบิล PPA จากข้อมูลมิเตอร์จริง สำหรับ Solar Developer, IPP/SPP/VSPP และการไฟฟ้า — พร้อมให้คำปรึกษา ออกแบบและติดตั้ง Energy Meter, Power Quality Meter (PQM) และระบบสื่อสาร สำหรับโรงไฟฟ้า โซลาร์ รูฟท็อป และโซลาร์ฟาร์มลอยน้ำ',
     heroCtaProducts: 'ดูผลิตภัณฑ์',
     heroCtaConsult: 'ปรึกษาวิศวกร →',
-    brandStripLabel: 'แบรนด์ระดับโลกที่เราเป็นตัวแทนจัดจำหน่าย',
+    platformEyebrow: 'ผลิตภัณฑ์ใหม่ · 2026',
+    platformHeading: 'แพลตฟอร์มบริหารจัดการพลังงานและออกบิลสำหรับ Private PPA',
+    platformLede:
+      'ดึงข้อมูลจากมิเตอร์อัตโนมัติ คำนวณบิลตามสัญญา Private PPA ของลูกค้าแต่ละราย และให้ลูกค้าตรวจสอบการใช้ไฟฟ้าได้เองแบบ Real-time — ไม่ต้องอ่านมิเตอร์มือ ไม่ต้องคีย์บิลเอง',
+    platformBullets: [
+      'ดึงข้อมูลมิเตอร์อัตโนมัติทุก 15 นาที ไม่ต้องส่งคนไปอ่านมิเตอร์หน้างาน',
+      'ออกใบแจ้งหนี้ตามอัตราในสัญญา — Fix Rate, TOU หรืออัตรา PPA เฉพาะราย',
+      'เว็บพอร์ทัลให้ลูกค้าปลายทางตรวจสอบข้อมูลย้อนหลังได้เอง',
+      'รองรับมิเตอร์ CEWE และ Secure เดิมที่ใช้อยู่ ไม่ต้องเปลี่ยนมิเตอร์',
+    ],
+    platformCtaDetail: 'ดูรายละเอียดระบบ',
+    platformCtaDemo: 'ขอ Demo',
+    trustedByLabel: 'ลูกค้าและองค์กรที่ไว้วางใจเรา',
     industriesEyebrow: 'อุตสาหกรรมที่เราให้บริการ',
     industriesHeading: 'โซลูชันที่ออกแบบมาสำหรับอุตสาหกรรมของคุณ',
-    industriesViewAll: 'ดูอุตสาหกรรมทั้งหมด →',
+    industriesViewAll: 'ดูอุตสาหกรรมทั้งหมด',
     aboutEyebrow: 'เกี่ยวกับเรา',
     aboutHeading: 'วิศวกรรมที่เชื่อถือได้ ตั้งแต่การออกแบบจนถึงการสื่อสาร',
     aboutLede: (name) =>
       `${name} ก่อตั้งขึ้นเพื่อตอบโจทย์อุตสาหกรรมพลังงานของประเทศไทย เราเป็นผู้แทนจำหน่ายอุปกรณ์มิเตอร์ไฟฟ้าและอุปกรณ์สื่อสารระดับโลก พร้อมให้บริการครบวงจร ตั้งแต่ที่ปรึกษา ออกแบบ จัดหา ติดตั้ง และซ่อมบำรุง`,
-    aboutReadMore: 'อ่านเพิ่มเติมเกี่ยวกับเรา →',
+    aboutReadMore: 'อ่านเพิ่มเติมเกี่ยวกับเรา',
+    brandsLabel: 'แบรนด์ระดับโลกที่เราเป็นตัวแทนจัดจำหน่าย',
     servicesEyebrow: 'บริการของเรา',
     servicesHeading: 'บริการครบวงจรสำหรับระบบมิเตอร์ไฟฟ้าและการสื่อสาร',
     servicesLede:
       'ตั้งแต่การให้คำปรึกษา ออกแบบทางวิศวกรรม จัดหาอุปกรณ์ ไปจนถึงการติดตั้ง ทดสอบ และซ่อมบำรุง — เรารับผิดชอบทุกขั้นตอนของโครงการ',
-    servicesViewAll: 'ดูบริการทั้งหมด →',
+    servicesViewAll: 'ดูบริการทั้งหมด',
     productsEyebrow: 'ผลิตภัณฑ์',
     productsHeading: 'Energy Meter และอุปกรณ์สื่อสารระดับโลก',
-    productsViewAll: 'ดูผลิตภัณฑ์ทั้งหมด →',
+    productsViewAll: 'ดูผลิตภัณฑ์ทั้งหมด',
     ctaHeading: 'พร้อมเป็นส่วนหนึ่งของโครงการคุณ',
-    ctaBody: 'ส่งรายละเอียดโครงการของคุณ ทีมวิศวกรของเราจะประเมินขอบเขตงาน และเสนอราคาให้ภายใน 2 วันทำการ',
+    ctaBody:
+      'ส่งรายละเอียดโครงการของคุณ ทีมวิศวกรของเราจะประเมินขอบเขตงาน และเสนอราคาให้ภายใน 2 วันทำการ',
     ctaLabel: 'ติดต่อเรา →',
   },
   en: {
@@ -76,23 +103,36 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       'An AMR platform and smart-meter billing system that reads meters automatically, calculates charges on real MEA/PEA/TOU rates, and issues PPA invoices from actual meter data — for solar developers, IPP/SPP/VSPP operators and utilities. Plus consulting, design and installation of energy meters, power quality meters (PQM) and communication systems for power plant, solar, rooftop and floating solar farm projects.',
     heroCtaProducts: 'View Products',
     heroCtaConsult: 'Talk to an Engineer →',
-    brandStripLabel: 'World-class brands we distribute',
+    platformEyebrow: 'New Product · 2026',
+    platformHeading: 'Energy Management & Billing Platform for Private PPA',
+    platformLede:
+      "Automatically pulls data from your meters, calculates billing against each customer's Private PPA contract, and lets customers check their own electricity usage in real time — no manual meter reading, no manual billing.",
+    platformBullets: [
+      'Pulls meter data automatically every 15 minutes — nobody has to read meters on site',
+      'Invoices on the contracted rate — fixed, TOU, or a per-contract PPA rate',
+      'A web portal where end customers check their own history',
+      'Works with the CEWE and Secure meters already installed — no need to replace them',
+    ],
+    platformCtaDetail: 'See how it works',
+    platformCtaDemo: 'Request a demo',
+    trustedByLabel: 'Customers and organisations that trust us',
     industriesEyebrow: 'Industries We Serve',
     industriesHeading: 'Solutions designed for your industry',
-    industriesViewAll: 'View all industries →',
+    industriesViewAll: 'View all industries',
     aboutEyebrow: 'About Us',
     aboutHeading: 'Reliable engineering, from design through to communication',
     aboutLede: (name) =>
       `${name} was founded to serve Thailand's energy industry. We are a distributor of world-class electricity metering and communication equipment, offering an end-to-end service — from consulting and design to sourcing, installation and maintenance.`,
-    aboutReadMore: 'Read more about us →',
+    aboutReadMore: 'Read more about us',
+    brandsLabel: 'World-class brands we distribute',
     servicesEyebrow: 'Our Services',
     servicesHeading: 'End-to-end services for metering and communication systems',
     servicesLede:
       'From consulting and engineering design to equipment sourcing, installation, testing, and maintenance — we take responsibility for every stage of your project.',
-    servicesViewAll: 'View all services →',
+    servicesViewAll: 'View all services',
     productsEyebrow: 'Products',
     productsHeading: 'World-class energy meters and communication equipment',
-    productsViewAll: 'View all products →',
+    productsViewAll: 'View all products',
     ctaHeading: 'Ready to be part of your project',
     ctaBody:
       'Send us your project details. Our engineering team will assess the scope of work and get back to you with a quote within 2 business days.',
@@ -110,22 +150,35 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       '面向太阳能开发商、IPP/SPP/VSPP 运营商与电力公司的 AMR 平台与智能电表计费系统——自动抄表、按 MEA/PEA/TOU 电价计算电费，并基于真实电表数据开具 PPA 账单；同时为发电厂、太阳能、屋顶光伏及浮动太阳能电站项目提供电表、电能质量表（PQM）及通信系统的咨询、设计与安装服务。',
     heroCtaProducts: '查看产品',
     heroCtaConsult: '咨询工程师 →',
-    brandStripLabel: '我们代理的世界级品牌',
+    platformEyebrow: '新产品 · 2026',
+    platformHeading: '面向 Private PPA 的能源管理与计费平台',
+    platformLede:
+      '自动从电表抓取数据，按每位客户的私人购电协议（Private PPA）计算账单，并让客户可自助实时查看用电情况——无需人工抄表，无需手动开票。',
+    platformBullets: [
+      '每 15 分钟自动采集一次电表数据，无需派人到现场抄表',
+      '按合同约定电价开具账单——固定电价、TOU 或逐份 PPA 合同电价',
+      '终端客户可通过网页门户自行查询历史用电数据',
+      '兼容现场已安装的 CEWE 与 Secure 电表，无需更换',
+    ],
+    platformCtaDetail: '查看系统详情',
+    platformCtaDemo: '申请演示',
+    trustedByLabel: '信赖我们的客户与机构',
     industriesEyebrow: '服务行业',
     industriesHeading: '为您的行业量身定制的解决方案',
-    industriesViewAll: '查看所有行业 →',
+    industriesViewAll: '查看所有行业',
     aboutEyebrow: '关于我们',
     aboutHeading: '值得信赖的工程能力，从设计到通信一以贯之',
     aboutLede: (name) =>
       `${name} 因泰国能源产业的需求而创立，是世界级电力计量与通信设备的经销商，提供从咨询、设计、采购到安装与维护的一站式服务。`,
-    aboutReadMore: '了解更多关于我们 →',
+    aboutReadMore: '了解更多关于我们',
+    brandsLabel: '我们代理的世界级品牌',
     servicesEyebrow: '我们的服务',
     servicesHeading: '电力计量与通信系统的一站式服务',
     servicesLede: '从咨询、工程设计、设备采购，到安装、测试与维护——我们对项目的每个环节负责。',
-    servicesViewAll: '查看所有服务 →',
+    servicesViewAll: '查看所有服务',
     productsEyebrow: '产品',
     productsHeading: '世界级电表与通信设备',
-    productsViewAll: '查看所有产品 →',
+    productsViewAll: '查看所有产品',
     ctaHeading: '期待成为您项目的一部分',
     ctaBody: '发送您的项目详情，我们的工程团队将评估工作范围，并在 2 个工作日内为您提供报价。',
     ctaLabel: '联系我们 →',

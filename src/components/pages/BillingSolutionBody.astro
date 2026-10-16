@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import ContactForm from '../ContactForm.astro';
+import frasersPropertyLogo from '../../assets/customers/frasers-property.png';
+import oneBangkokLogo from '../../assets/customers/onebkk.png';
 import { type Locale } from '../../lib/i18n/locales';
-import { localeHref } from '../../lib/i18n/url';
 import { BILLING_COPY } from '../../lib/i18n/pages/solutions-billing';
 import { UI } from '../../lib/i18n/ui';
 import Button from '../ui/Button.astro';
@@ -14,7 +16,12 @@ import SectionHeading from '../ui/SectionHeading.astro';
 const locale = (Astro.currentLocale ?? 'th') as Locale;
 const t = BILLING_COPY[locale];
 const ui = UI[locale];
-const amrHref = localeHref(locale, '/solutions/amr');
+
+// Customers running our billing system, supplied directly by the client.
+const billingCustomers = [
+  { name: 'One Bangkok', logo: oneBangkokLogo },
+  { name: 'Frasers Property', logo: frasersPropertyLogo },
+];
 ---
 
 <Section width="wide" spacing="lg">
@@ -23,9 +30,7 @@ const amrHref = localeHref(locale, '/solutions/amr');
     {t.heroHeading}
   </h1>
   <p class="mt-5 text-lg text-ink-2 leading-relaxed max-w-3xl">
-    {t.heroLedeBeforeAmr}{' '}
-    <a href={amrHref} class="text-accent font-semibold hover:text-accent-deep">AMR</a>
-    {' '}{t.heroLedeAfterAmr}
+    {t.heroSub}
   </p>
   <div class="mt-8 flex flex-wrap gap-4">
     <Button href="#quote">{t.ctaDemo}</Button>
@@ -33,55 +38,112 @@ const amrHref = localeHref(locale, '/solutions/amr');
   </div>
 </Section>
 
-<Section id="ppa-billing" band="surface-y" width="wide">
-  <SectionHeading eyebrow={t.pillarsEyebrow} heading={t.pillarsHeading} />
-  <div class="mt-10 grid lg:grid-cols-2 gap-6">
+<Section band="surface-y" width="default">
+  <SectionHeading eyebrow={t.painsEyebrow} heading={t.painsHeading} lede={t.painsQuote} />
+  <div class="mt-8 overflow-x-auto rounded-lg border border-line bg-bg-elev">
+    <table class="w-full min-w-[560px] border-collapse text-sm">
+      <thead>
+        <tr class="border-b border-line bg-surface text-left">
+          <th scope="col" class="w-1/2 py-3 px-4 font-display font-bold text-ink"
+            >{t.painsProblemLabel}</th
+          >
+          <th scope="col" class="w-1/2 py-3 px-4 font-display font-bold text-ink"
+            >{t.painsImpactLabel}</th
+          >
+        </tr>
+      </thead>
+      <tbody>
+        {
+          t.pains.map((row) => (
+            <tr class="border-b border-line last:border-b-0 align-top">
+              <td class="py-3 px-4 text-ink-2">{row.problem}</td>
+              <td class="py-3 px-4 text-ink-2">{row.impact}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</Section>
+
+<Section width="default">
+  <SectionHeading eyebrow={t.solutionEyebrow} heading={t.solutionHeading} center />
+  <p class="mt-4 max-w-2xl mx-auto text-center text-ink-2 leading-relaxed">{t.solutionBody}</p>
+  <p class="mt-3 max-w-2xl mx-auto text-center text-sm text-ink-3">{t.solutionNote}</p>
+</Section>
+
+<Section band="surface-y" width="wide">
+  <SectionHeading eyebrow={t.featuresEyebrow} heading={t.featuresHeading} />
+  <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {
-      t.pillars.map((pillar) => (
-        <Card as="article" id={pillar.id}>
-          <h3 class="font-display font-bold text-lg text-ink">{pillar.title}</h3>
-          <div class="font-en text-sm text-accent">{pillar.sub}</div>
-          <p class="mt-3 text-sm text-ink-2 leading-relaxed">{pillar.desc}</p>
-          <ul class="mt-4 space-y-2 text-sm text-ink-2">
-            {pillar.items.map((item) => (
-              <li class="flex gap-2">
-                <span class="text-accent">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
+      t.features.map((feature) => (
+        <Card as="article" id={feature.id}>
+          <h3 class="font-display font-bold text-lg text-ink">{feature.title}</h3>
+          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{feature.desc}</p>
         </Card>
       ))
     }
   </div>
 </Section>
 
-<Section width="wide">
-  <SectionHeading eyebrow={t.personasEyebrow} heading={t.personasHeading} />
-  <div class="mt-10 grid lg:grid-cols-2 gap-6">
+<Section width="default">
+  <SectionHeading eyebrow={t.whyEyebrow} heading={t.whyHeading} center />
+  <div class="mt-10 grid sm:grid-cols-2 gap-6">
     {
-      t.personas.map((persona) => (
-        <Card as="article">
-          <h3 class="font-display font-bold text-lg text-ink">{persona.title}</h3>
-          <p class="mt-3 text-sm text-ink-2 leading-relaxed">{persona.desc}</p>
-          <ul class="mt-4 space-y-2 text-sm text-ink-2 list-disc list-inside">
-            {persona.items.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        </Card>
+      t.whyItems.map((item) => (
+        <div class="rounded-lg border border-line bg-bg-elev p-5">
+          <h3 class="font-display font-bold text-ink">{item.title}</h3>
+          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{item.desc}</p>
+        </div>
       ))
     }
   </div>
 </Section>
 
-<Section band="surface-y">
-  <h2 class="font-display text-2xl font-bold text-ink text-center">{t.crossLinkHeading}</h2>
-  <p class="mt-3 text-center text-ink-2">
-    {t.crossLinkLedeBeforeAmr}{' '}
-    <a href={amrHref} class="text-accent font-semibold hover:text-accent-deep">AMR</a>
-    {' '}{t.crossLinkLedeAfterAmr}
-  </p>
+<Section band="surface-y" width="default">
+  <SectionHeading eyebrow={t.stepsEyebrow} heading={t.stepsHeading} center />
+  <div class="mt-10 grid sm:grid-cols-3 gap-6">
+    {
+      t.steps.map((step, i) => (
+        <div class="text-center">
+          <div class="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-accent font-display font-bold text-white">
+            {i + 1}
+          </div>
+          <h3 class="mt-4 font-display font-bold text-ink">{step.title}</h3>
+          <p class="mt-2 text-sm text-ink-2 leading-relaxed">{step.desc}</p>
+        </div>
+      ))
+    }
+  </div>
+</Section>
+
+<Section width="narrow">
+  <h2 class="font-display text-2xl font-bold text-ink text-center">{t.customersHeading}</h2>
+  <div class="mt-8 grid grid-cols-2 gap-4">
+    {
+      billingCustomers.map((customer) => (
+        <div class="flex items-center justify-center rounded-lg border border-line bg-bg-elev p-4 h-28">
+          <Image
+            src={customer.logo}
+            alt={customer.name}
+            widths={[200, 400]}
+            sizes="(min-width: 640px) 40vw, 50vw"
+            class="max-h-16 w-auto max-w-full object-contain"
+            loading="lazy"
+          />
+        </div>
+      ))
+    }
+  </div>
+</Section>
+
+<Section band="surface-top" width="default" spacing="sm" innerClass="text-center">
+  <h2 class="font-display text-2xl sm:text-3xl font-bold text-ink">{t.finalCtaHeading}</h2>
+  <p class="mt-3 max-w-xl mx-auto text-ink-2">{t.finalCtaLede}</p>
+  <div class="mt-6 flex flex-wrap justify-center gap-4">
+    <Button href="#quote">{t.finalCtaDemo}</Button>
+    <Button href="#quote" variant="secondary">{t.finalCtaConsult}</Button>
+  </div>
 </Section>
 
 <Section id="quote" width="narrow">

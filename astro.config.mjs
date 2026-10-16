@@ -25,7 +25,9 @@ export default defineConfig({
   // the /insights articles, which get fresh content over time).
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/contact/thank-you'),
+      // Customer Stories (/projects) is hidden from the live site for now —
+      // pages/content stay in the repo, just excluded from the sitemap.
+      filter: (page) => !page.includes('/contact/thank-you') && !page.includes('/projects'),
       serialize(item) {
         const url = new URL(item.url);
         const path = url.pathname.replace(/^\/(en|zh)(?=\/|$)/, '');
